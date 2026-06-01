@@ -1,0 +1,28 @@
+/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1/lib/python3.10/site-packages/huggingface_hub/file_download.py:949: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[robosuite WARNING] No private macro file found! (__init__.py:7)
+[robosuite WARNING] It is recommended to use a private macro file (__init__.py:8)
+[robosuite WARNING] To setup, run: python /rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/robosuite/scripts/setup_macros.py (__init__.py:9)
+Traceback (most recent call last):
+  File "libero_client_4tasks.py", line 13, in <module>
+    from libero.libero.envs import OffScreenRenderEnv
+  File "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/Evo-1/LIBERO_evaluation/LIBERO/libero/libero/envs/__init__.py", line 1, in <module>
+    from .bddl_base_domain import TASK_MAPPING
+  File "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/Evo-1/LIBERO_evaluation/LIBERO/libero/libero/envs/bddl_base_domain.py", line 3, in <module>
+    import robosuite.utils.transform_utils as T
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/robosuite/__init__.py", line 11, in <module>
+    from robosuite.environments.base import make
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/robosuite/environments/__init__.py", line 1, in <module>
+    from .base import REGISTERED_ENVS, MujocoEnv
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/robosuite/environments/base.py", line 12, in <module>
+    from robosuite.utils.binding_utils import MjRenderContextOffscreen, MjSim
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/robosuite/utils/binding_utils.py", line 12, in <module>
+    import mujoco
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/mujoco/__init__.py", line 48, in <module>
+    from mujoco.gl_context import *
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/mujoco/gl_context.py", line 41, in <module>
+    from mujoco.egl import GLContext as _GLContext
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/mujoco/egl/__init__.py", line 26, in <module>
+    raise ImportError(
+ImportError: Cannot use EGL rendering platform. The PYOPENGL_PLATFORM environment variable is set to {!r} (should be either unset or 'egl').

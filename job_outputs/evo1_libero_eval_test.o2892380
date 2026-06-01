@@ -1,0 +1,34 @@
+/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib:/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1/lib:
+Sat May 30 12:41:18 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.82.07              Driver Version: 580.82.07      CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L40S                    On  |   00000000:1A:00.0 Off |                    0 |
+| N/A   31C    P8             33W /  350W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+=== EGL DEBUG START ===
+	libEGL_nvidia.so.0 (libc6,x86-64) => /lib64/libEGL_nvidia.so.0
+	libEGL_nvidia.so.0 (libc6) => /lib/libEGL_nvidia.so.0
+=== EGL DEBUG END ===
+
+====================================
+CPU Time used: 00:00:05
+CPU Percent: 11%
+Memory usage: 401768kb
+Approx Power usage: 0.0
+Walltime usage: 00:01:21
+
+====================================

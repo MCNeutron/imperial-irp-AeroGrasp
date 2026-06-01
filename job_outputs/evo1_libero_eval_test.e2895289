@@ -1,0 +1,43 @@
+[robosuite WARNING] No private macro file found! (__init__.py:7)
+[robosuite WARNING] It is recommended to use a private macro file (__init__.py:8)
+[robosuite WARNING] To setup, run: python /rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/robosuite/scripts/setup_macros.py (__init__.py:9)
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+2026-05-30 23:41:54,579 [INFO] ===========================Start task suite libero_spatial========================
+2026-05-30 23:41:59,852 [INFO] 
+========= Start task1: pick up the black bowl between the plate and the ramekin and place it on the plate =========
+2026-05-30 23:42:51,895 [INFO] Task 0 | Episode 1: ❌ Fail
+2026-05-30 23:43:39,913 [INFO] Task 0 | Episode 2: ❌ Fail
+2026-05-30 23:44:27,343 [INFO] Task 0 | Episode 3: ❌ Fail
+2026-05-30 23:45:15,557 [INFO] Task 0 | Episode 4: ❌ Fail
+2026-05-30 23:46:03,327 [INFO] Task 0 | Episode 5: ❌ Fail
+2026-05-30 23:46:51,364 [INFO] Task 0 | Episode 6: ❌ Fail
+2026-05-30 23:47:38,992 [INFO] Task 0 | Episode 7: ❌ Fail
+2026-05-30 23:48:27,261 [INFO] Task 0 | Episode 8: ❌ Fail
+2026-05-30 23:49:14,850 [INFO] Task 0 | Episode 9: ❌ Fail
+2026-05-30 23:50:03,043 [INFO] Task 0 | Episode 10: ❌ Fail
+2026-05-30 23:50:03,043 [INFO] ========= Task 1 Summary: 0/10 Successful =========
+2026-05-30 23:50:03,695 [INFO] 
+========= Start task2: pick up the black bowl next to the ramekin and place it on the plate =========
+2026-05-30 23:50:51,786 [INFO] Task 1 | Episode 1: ❌ Fail
+2026-05-30 23:51:39,582 [INFO] Task 1 | Episode 2: ❌ Fail
+2026-05-30 23:52:27,579 [INFO] Task 1 | Episode 3: ❌ Fail
+2026-05-30 23:53:14,985 [INFO] Task 1 | Episode 4: ❌ Fail
+2026-05-30 23:53:38,761 [INFO] Task 1 | Episode 5: ✅ Success
+2026-05-30 23:54:27,198 [INFO] Task 1 | Episode 6: ❌ Fail
+2026-05-30 23:55:15,971 [INFO] Task 1 | Episode 7: ❌ Fail
+2026-05-30 23:56:04,362 [INFO] Task 1 | Episode 8: ❌ Fail
+2026-05-30 23:56:51,467 [INFO] Task 1 | Episode 9: ❌ Fail
+2026-05-30 23:57:38,877 [INFO] Task 1 | Episode 10: ❌ Fail
+2026-05-30 23:57:38,878 [INFO] ========= Task 2 Summary: 1/10 Successful =========
+2026-05-30 23:57:39,507 [INFO] 
+========= Start task3: pick up the black bowl from table center and place it on the plate =========
+2026-05-30 23:58:27,580 [INFO] Task 2 | Episode 1: ❌ Fail
+2026-05-30 23:59:14,512 [INFO] Task 2 | Episode 2: ❌ Fail
+2026-05-31 00:00:02,541 [INFO] Task 2 | Episode 3: ❌ Fail
+2026-05-31 00:00:50,743 [INFO] Task 2 | Episode 4: ❌ Fail
+2026-05-31 00:01:38,181 [INFO] Task 2 | Episode 5: ❌ Fail
+2026-05-31 00:02:25,066 [INFO] Task 2 | Episode 6: ❌ Fail
+2026-05-31 00:03:12,692 [INFO] Task 2 | Episode 7: ❌ Fail
+2026-05-31 00:04:00,523 [INFO] Task 2 | Episode 8: ❌ Fail

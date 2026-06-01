@@ -1,0 +1,91 @@
+[robosuite WARNING] No private macro file found! (__init__.py:7)
+[robosuite WARNING] It is recommended to use a private macro file (__init__.py:8)
+[robosuite WARNING] To setup, run: python /rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/robosuite/scripts/setup_macros.py (__init__.py:9)
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+2026-05-31 17:56:42,600 [INFO] ===========================Start task suite libero_spatial========================
+2026-05-31 17:56:48,332 [INFO] 
+========= Start task1: pick up the black bowl between the plate and the ramekin and place it on the plate =========
+2026-05-31 17:57:46,606 [INFO] Task 0 | Episode 1: ❌ Fail
+2026-05-31 17:58:38,381 [INFO] Task 0 | Episode 2: ❌ Fail
+2026-05-31 17:59:30,107 [INFO] Task 0 | Episode 3: ❌ Fail
+2026-05-31 18:00:22,886 [INFO] Task 0 | Episode 4: ❌ Fail
+2026-05-31 18:01:15,099 [INFO] Task 0 | Episode 5: ❌ Fail
+2026-05-31 18:02:07,238 [INFO] Task 0 | Episode 6: ❌ Fail
+2026-05-31 18:03:00,668 [INFO] Task 0 | Episode 7: ❌ Fail
+2026-05-31 18:03:53,176 [INFO] Task 0 | Episode 8: ❌ Fail
+2026-05-31 18:04:46,044 [INFO] Task 0 | Episode 9: ❌ Fail
+2026-05-31 18:05:38,971 [INFO] Task 0 | Episode 10: ❌ Fail
+2026-05-31 18:05:38,971 [INFO] ========= Task 1 Summary: 0/10 Successful =========
+2026-05-31 18:05:39,755 [INFO] 
+========= Start task2: pick up the black bowl next to the ramekin and place it on the plate =========
+2026-05-31 18:06:32,299 [INFO] Task 1 | Episode 1: ❌ Fail
+2026-05-31 18:07:26,244 [INFO] Task 1 | Episode 2: ❌ Fail
+2026-05-31 18:08:19,492 [INFO] Task 1 | Episode 3: ❌ Fail
+2026-05-31 18:09:12,793 [INFO] Task 1 | Episode 4: ❌ Fail
+2026-05-31 18:10:06,163 [INFO] Task 1 | Episode 5: ❌ Fail
+2026-05-31 18:11:00,311 [INFO] Task 1 | Episode 6: ❌ Fail
+2026-05-31 18:11:52,389 [INFO] Task 1 | Episode 7: ❌ Fail
+2026-05-31 18:12:42,702 [INFO] Task 1 | Episode 8: ❌ Fail
+2026-05-31 18:13:35,993 [INFO] Task 1 | Episode 9: ❌ Fail
+2026-05-31 18:14:29,444 [INFO] Task 1 | Episode 10: ❌ Fail
+2026-05-31 18:14:29,444 [INFO] ========= Task 2 Summary: 0/10 Successful =========
+2026-05-31 18:14:30,421 [INFO] 
+========= Start task3: pick up the black bowl from table center and place it on the plate =========
+2026-05-31 18:15:24,927 [INFO] Task 2 | Episode 1: ❌ Fail
+2026-05-31 18:16:18,872 [INFO] Task 2 | Episode 2: ❌ Fail
+2026-05-31 18:17:13,727 [INFO] Task 2 | Episode 3: ❌ Fail
+2026-05-31 18:18:07,758 [INFO] Task 2 | Episode 4: ❌ Fail
+2026-05-31 18:19:00,772 [INFO] Task 2 | Episode 5: ❌ Fail
+2026-05-31 18:19:55,583 [INFO] Task 2 | Episode 6: ❌ Fail
+2026-05-31 18:20:49,611 [INFO] Task 2 | Episode 7: ❌ Fail
+2026-05-31 18:21:43,020 [INFO] Task 2 | Episode 8: ❌ Fail
+2026-05-31 18:22:38,074 [INFO] Task 2 | Episode 9: ❌ Fail
+2026-05-31 18:23:31,948 [INFO] Task 2 | Episode 10: ❌ Fail
+2026-05-31 18:23:31,948 [INFO] ========= Task 3 Summary: 0/10 Successful =========
+2026-05-31 18:23:33,005 [INFO] 
+========= Start task4: pick up the black bowl on the cookie box and place it on the plate =========
+2026-05-31 18:24:26,570 [INFO] Task 3 | Episode 1: ❌ Fail
+2026-05-31 18:25:22,198 [INFO] Task 3 | Episode 2: ❌ Fail
+2026-05-31 18:26:17,546 [INFO] Task 3 | Episode 3: ❌ Fail
+2026-05-31 18:27:12,631 [INFO] Task 3 | Episode 4: ❌ Fail
+2026-05-31 18:28:08,142 [INFO] Task 3 | Episode 5: ❌ Fail
+2026-05-31 18:29:03,639 [INFO] Task 3 | Episode 6: ❌ Fail
+2026-05-31 18:29:57,921 [INFO] Task 3 | Episode 7: ❌ Fail
+2026-05-31 18:30:54,429 [INFO] Task 3 | Episode 8: ❌ Fail
+2026-05-31 18:31:49,369 [INFO] Task 3 | Episode 9: ❌ Fail
+2026-05-31 18:32:44,933 [INFO] Task 3 | Episode 10: ❌ Fail
+2026-05-31 18:32:44,933 [INFO] ========= Task 4 Summary: 0/10 Successful =========
+2026-05-31 18:32:45,847 [INFO] 
+========= Start task5: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate =========
+2026-05-31 18:33:41,443 [INFO] Task 4 | Episode 1: ❌ Fail
+2026-05-31 18:34:36,917 [INFO] Task 4 | Episode 2: ❌ Fail
+2026-05-31 18:35:32,892 [INFO] Task 4 | Episode 3: ❌ Fail
+2026-05-31 18:36:31,893 [INFO] Task 4 | Episode 4: ❌ Fail
+2026-05-31 18:37:29,385 [INFO] Task 4 | Episode 5: ❌ Fail
+2026-05-31 18:38:27,010 [INFO] Task 4 | Episode 6: ❌ Fail
+2026-05-31 18:39:24,302 [INFO] Task 4 | Episode 7: ❌ Fail
+2026-05-31 18:40:20,979 [INFO] Task 4 | Episode 8: ❌ Fail
+2026-05-31 18:41:19,510 [INFO] Task 4 | Episode 9: ❌ Fail
+2026-05-31 18:42:16,976 [INFO] Task 4 | Episode 10: ❌ Fail
+2026-05-31 18:42:16,976 [INFO] ========= Task 5 Summary: 0/10 Successful =========
+2026-05-31 18:42:17,914 [INFO] 
+========= Start task6: pick up the black bowl on the ramekin and place it on the plate =========
+2026-05-31 18:43:14,678 [INFO] Task 5 | Episode 1: ❌ Fail
+2026-05-31 18:44:11,563 [INFO] Task 5 | Episode 2: ❌ Fail
+2026-05-31 18:45:08,992 [INFO] Task 5 | Episode 3: ❌ Fail
+2026-05-31 18:46:05,880 [INFO] Task 5 | Episode 4: ❌ Fail
+2026-05-31 18:46:59,819 [INFO] Task 5 | Episode 5: ❌ Fail
+2026-05-31 18:47:53,067 [INFO] Task 5 | Episode 6: ❌ Fail
+2026-05-31 18:48:47,473 [INFO] Task 5 | Episode 7: ❌ Fail
+2026-05-31 18:49:44,343 [INFO] Task 5 | Episode 8: ❌ Fail
+2026-05-31 18:50:41,693 [INFO] Task 5 | Episode 9: ❌ Fail
+2026-05-31 18:51:37,884 [INFO] Task 5 | Episode 10: ❌ Fail
+2026-05-31 18:51:37,884 [INFO] ========= Task 6 Summary: 0/10 Successful =========
+2026-05-31 18:51:38,595 [INFO] 
+========= Start task7: pick up the black bowl next to the cookie box and place it on the plate =========
+2026-05-31 18:52:33,990 [INFO] Task 6 | Episode 1: ❌ Fail
+2026-05-31 18:53:30,494 [INFO] Task 6 | Episode 2: ❌ Fail
+2026-05-31 18:54:28,062 [INFO] Task 6 | Episode 3: ❌ Fail
+=>> PBS: job killed: walltime 3616 exceeded limit 3600

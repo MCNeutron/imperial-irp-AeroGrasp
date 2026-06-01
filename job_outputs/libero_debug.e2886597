@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/OpenGL/EGL/__init__.py", line 2, in <module>
+    from OpenGL.raw.EGL._types import *
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/OpenGL/raw/EGL/_types.py", line 87, in <module>
+    raw_eglQueryString = _p.PLATFORM.EGL.eglQueryString
+AttributeError: 'NoneType' object has no attribute 'eglQueryString'

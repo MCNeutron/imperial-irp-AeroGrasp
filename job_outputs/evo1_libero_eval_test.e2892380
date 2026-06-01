@@ -1,0 +1,40 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/OpenGL/EGL/__init__.py", line 2, in <module>
+    from OpenGL.raw.EGL._types import *
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/OpenGL/raw/EGL/_types.py", line 87, in <module>
+    raw_eglQueryString = _p.PLATFORM.EGL.eglQueryString
+AttributeError: 'NoneType' object has no attribute 'eglQueryString'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/ctypes/__init__.py", line 373, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: libEGL.so.1: cannot open shared object file: No such file or directory
+/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1/lib/python3.10/site-packages/huggingface_hub/file_download.py:949: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Traceback (most recent call last):
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/robosuite/__init__.py", line 2, in <module>
+    from robosuite.macros_private import *
+ModuleNotFoundError: No module named 'robosuite.macros_private'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "libero_client_4tasks.py", line 13, in <module>
+    from libero.libero.envs import OffScreenRenderEnv
+  File "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/Evo-1/LIBERO_evaluation/LIBERO/libero/libero/envs/__init__.py", line 1, in <module>
+    from .bddl_base_domain import TASK_MAPPING
+  File "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/Evo-1/LIBERO_evaluation/LIBERO/libero/libero/envs/bddl_base_domain.py", line 3, in <module>
+    import robosuite.utils.transform_utils as T
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/robosuite/__init__.py", line 5, in <module>
+    from robosuite.utils.log_utils import ROBOSUITE_DEFAULT_LOGGER
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/robosuite/utils/log_utils.py", line 94, in <module>
+    ROBOSUITE_DEFAULT_LOGGER = DefaultLogger(
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/site-packages/robosuite/utils/log_utils.py", line 71, in __init__
+    fh = logging.FileHandler("/tmp/robosuite.log")
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/logging/__init__.py", line 1147, in __init__
+    StreamHandler.__init__(self, self._open())
+  File "/rds/general/user/ll1225/home/miniconda3/envs/extended_evo1_libero/lib/python3.8/logging/__init__.py", line 1176, in _open
+    return open(self.baseFilename, self.mode, encoding=self.encoding)
+PermissionError: [Errno 13] Permission denied: '/tmp/robosuite.log'

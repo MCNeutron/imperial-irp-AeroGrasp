@@ -1,0 +1,47 @@
+=== TMP DEBUG START ===
+drwxrwxrwt. 17 root root 4096 May 30 16:58 /tmp
+touch succeeded
+-rw-r--r--. 1 ll1225 hpc-kmikolaj 0 May 30 16:58 /tmp/testfile
+=== TMP DEBUG END ===
+=== ROBOSUITE LOG DEBUG ===
+-rw-r--r--. 1 ll1225 hpc-kmikolaj 2400 May 30 15:29 /tmp/robosuite.log
+can create robosuite.log
+=== END DEBUG ===
+/usr/lib/x86_64-linux-gnu:/usr/lib64:/usr/lib/x86_64-linux-gnu:/usr/lib64:
+Sat May 30 16:59:34 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.82.07              Driver Version: 580.82.07      CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L40S                    On  |   00000000:19:00.0 Off |                    0 |
+| N/A   30C    P8             33W /  350W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+=== EGL DEBUG START ===
+	libEGL_nvidia.so.0 (libc6,x86-64) => /lib64/libEGL_nvidia.so.0
+	libEGL_nvidia.so.0 (libc6) => /lib/libEGL_nvidia.so.0
+EGL import OK
+libEGL loaded OK
+=== EGL DEBUG END ===
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Numbers of tasks: 10
+
+====================================
+CPU Time used: 00:00:00
+CPU Percent: 0%
+Memory usage: 0b
+Approx Power usage: 0.0
+Walltime usage: 00:01:36
+
+====================================

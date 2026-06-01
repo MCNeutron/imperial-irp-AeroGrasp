@@ -1,0 +1,38 @@
+/usr/lib/x86_64-linux-gnu:/usr/lib64:/usr/lib/x86_64-linux-gnu:/usr/lib64:
+Sat May 30 15:28:57 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.82.07              Driver Version: 580.82.07      CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L40S                    On  |   00000000:33:00.0 Off |                    0 |
+| N/A   29C    P8             32W /  350W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+=== EGL DEBUG START ===
+	libEGL_nvidia.so.0 (libc6,x86-64) => /lib64/libEGL_nvidia.so.0
+	libEGL_nvidia.so.0 (libc6) => /lib/libEGL_nvidia.so.0
+EGL import OK
+libEGL loaded OK
+=== EGL DEBUG END ===
+[info] using task orders [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Numbers of tasks: 10
+
+====================================
+CPU Time used: 00:00:08
+CPU Percent: 10%
+Memory usage: 643796kb
+Approx Power usage: 0.0
+Walltime usage: 00:01:30
+
+====================================
