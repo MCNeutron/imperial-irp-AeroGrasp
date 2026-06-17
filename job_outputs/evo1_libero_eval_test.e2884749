@@ -1,8 +1,0 @@
-The cache for model files in Transformers v4.22.0 has been updated. Migrating your old cache. This is a one-time only operation. You can interrupt this and resume the migration later on by calling `transformers.utils.move_cache()`.
-0it [00:00, ?it/s]0it [00:00, ?it/s]
-Traceback (most recent call last):
-  File "libero_client_4tasks.py", line 12, in <module>
-    from libero.libero import benchmark, get_libero_path
-  File "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/Evo-1/LIBERO_evaluation/LIBERO/libero/libero/__init__.py", line 69, in <module>
-    answer = input(
-EOFError: EOF when reading a line

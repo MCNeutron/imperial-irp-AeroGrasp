@@ -4,3 +4,4 @@ tmp/
 training_data_cache/
 Evo-1/LIBERO_evaluation/video_log_file/
 Evo-1/MetaWorld_evaluation/episode_videos/
+job_outputs/
