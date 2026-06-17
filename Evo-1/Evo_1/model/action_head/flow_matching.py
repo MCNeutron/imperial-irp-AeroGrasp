@@ -4,6 +4,13 @@ import torch.nn as nn
 import torch.nn.functional as F
 import logging
 
+### ADDED for debugging
+# Define debug directory and create debug file
+import os
+debug_file = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/debug.txt"
+os.makedirs(os.path.dirname(debug_file), exist_ok=True)
+###
+
 class SinusoidalPositionalEncoding(nn.Module):
     def __init__(self, dim: int, max_len: int = 1000):
         super().__init__()
@@ -219,6 +226,10 @@ class FlowmatchingActionHead(nn.Module):
                                                                horizon=horizon,
                                                                num_categories=num_categories)
 
+        ### ADDED
+        self.debug_f = open(debug_file, "a") # Open debug file, and set it to append mode
+        ###
+
     def forward(self, fused_tokens: torch.Tensor, state: torch.Tensor = None,
                 actions_gt: torch.Tensor = None, embodiment_id: torch.LongTensor = None, 
                 state_mask: torch.Tensor = None, action_mask: torch.Tensor = None):
@@ -400,6 +411,15 @@ class FlowmatchingActionHead(nn.Module):
                 action_seq = action.view(B, self.horizon, per_action_dim)
             else:
                 action_seq = action.view(B, 1, per_action_dim)
+
+        ### ADDED
+        f = self.debug_f
+        f.write(">> FROM flow_matching.py, get_action() <<\n")
+        f.write(f"action first 10: {action[0, :10].detach().cpu().tolist()}\n")
+        f.write(f"action mean: {action.mean().item()}\n")
+        f.write(f"action std: {action.std().item()}\n")
+        f.flush()
+        ###
       
         return action
 

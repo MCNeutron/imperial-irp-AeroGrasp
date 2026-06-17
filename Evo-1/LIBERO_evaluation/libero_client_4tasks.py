@@ -11,7 +11,7 @@ import random
 
 from libero.libero import benchmark, get_libero_path
 from libero.libero.envs import OffScreenRenderEnv
-os.environ["MUJOCO_GL"] = "osmesa"#"egl"#"osmes"
+os.environ["MUJOCO_GL"] = "egl"#"osmesa"#"osmes"
 
 LIBERO_DUMMY_ACTION = [0.0] * 6 + [0.0]
 
@@ -23,7 +23,7 @@ class Args():
     #SERVER_URL = "ws://0.0.0.0:9000"
     SERVER_URL = "ws://127.0.0.1:9000" ### ADDED
     #ckpt_name = f"Evo1_libero_all"  
-    ckpt_name = f"Evo1_libero_all_test_29may" ### ADDED
+    ckpt_name = f"Evo1_metaworld_hpc_retrain_test_11june" ### ADDED
     task_suites = ["libero_spatial", "libero_object", "libero_goal", "libero_10"] 
     log_file = f"./log_file/{ckpt_name}.txt"
     num_episodes = 10
@@ -145,21 +145,47 @@ async def run(SERVER_URL: str, max_steps: int = None, num_episodes: int = None, 
 
                 obs = env.set_init_state(initial_states[ep])
                 ### ADDED
-                print("agentview shape:", obs["agentview_image"].shape,
-                        "dtype:", obs["agentview_image"].dtype,
-                        "min/max:", obs["agentview_image"].min(),
-                        obs["agentview_image"].max(),
-                        "mean/std:", obs["agentview_image"].mean(),
-                        obs["agentview_image"].std())
+                import time
+                import os
 
-                print("wrist shape:", obs["robot0_eye_in_hand_image"].shape,
-                        "dtype:", obs["robot0_eye_in_hand_image"].dtype)
+                debug_folder = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug"
+                time_log_dir = f"{debug_folder}/timing_logs/{args.ckpt_name}/{task_suite_name}"
+                os.makedirs(time_log_dir, exist_ok=True)
+
+                time_log_path = f"{time_log_dir}/task{task_id}_ep{ep}.txt"
+
+                time_log = open(time_log_path, "w")
+                time_log.write("step,horizon_i,wall_time,dt\n")
+
+                raw_action_log_path = time_log_path.replace(".txt", "_raw_actions.txt")
+                raw_action_log = open(raw_action_log_path, "w")
+
+                # Send/recieve debugging
+                import time  # put this at top of file ideally, not here
+
+                step_time_log_path = f"{debug_folder}/ws_step_timing_{task_suite_name}_task{task_id}_ep{ep}.txt"
+                step_time_log = open(step_time_log_path, "w")
+                step_time_log.write("step,t_send,t_recv,dt,send_gap\n")
+                step_time_log.flush()
                 ###
                 t = 0
                 while t < 10:
                         obs, reward, done, info = env.step(LIBERO_DUMMY_ACTION)
                         t += 1
                         
+                ### ADDED
+                # # For checking rendering backend
+                # from OpenGL.GL import glGetString, GL_RENDERER
+
+                # renderer = glGetString(GL_RENDERER)
+                # if renderer is not None:
+                #     renderer = renderer.decode()
+
+                # print("=== Client OpenGL RENDERER ===", renderer)
+                # print("MUJOCO_GL requested:", os.environ.get("MUJOCO_GL"))#mujoco.GLContext())
+
+                prev_send = None
+                ###
 
                 prompt = str(task_description)
                 print(prompt)
@@ -170,20 +196,55 @@ async def run(SERVER_URL: str, max_steps: int = None, num_episodes: int = None, 
                 for step in range(max_steps):
                     max_step += 1
 
+                    ### ADDED
+                    t_send = time.time()
+
+                    if prev_send is not None:
+                        send_gap = t_send - prev_send
+                    else:
+                        send_gap = 0.0
+
+                    prev_send = t_send
+                    ###
+
                     send_data = obs_to_json_dict(obs, prompt)
                     await ws.send(json.dumps(send_data))
-                    print(f"[Step {step}] Send observation")
+                    #print(f"[Step {step}] Send observation") ### COMMENTED OUT
+                    ### ADDED
+                    print(f"[Step {step}] SEND @ {t_send:.6f}")
+                    ###
 
                     result = await ws.recv()
+                    ### ADDED
+                    t_recv = time.time()
+
+                    dt = t_recv - t_send
+
+                    print(f"[Step {step}] RECV @ {t_recv:.6f} dt={dt:.4f}")
+
+                    # Log to file
+                    step_time_log.write(f"{step},{t_send},{t_recv},{dt},{send_gap}\n")
+                    step_time_log.flush()
+                    ###
                     try:
                         action_list = json.loads(result)
                         actions = np.array(action_list)
                         print(f"[Step {step}] recivied actions (shape={actions[0][6]})")
+
+                        ### ADDED
+                        # Raw action logging
+                        raw_action_log.write(f"\nSTEP {step}\n")
+                        raw_action_log.write(json.dumps(action_list) + "\n")
+                        raw_action_log.flush()
+                        ###
                     except Exception as e:
                         print(f"❌ Action parsing failed: {e}, content: {result}")
                         break
 
                     
+                    ### ADDED
+                    prev_time = None
+                    ###
                     for i in range(horizon):
                         action = actions[i].tolist()
                         print(action[:7])
@@ -197,6 +258,22 @@ async def run(SERVER_URL: str, max_steps: int = None, num_episodes: int = None, 
                         print(f"gripper action", action[6])
                         try:
                             obs, reward, done, info = env.step(action[:7])
+
+                            ### ADDED
+                            now = time.time()
+
+                            if prev_time is None:
+                                prev_time = now
+
+                            dt = now - prev_time
+
+                            time_log.write(f"{step},{i},{now:.6f},{dt:.6f}\n")
+                            time_log.flush()
+
+                            prev_time = now
+
+                            raw_action_log.write(f"step={step}, horizon={i}, action={actions[i].tolist()}\n")
+                            ###
                         except ValueError as ve:
                             print(f"❌ the action is not valid: {ve}")
                             episode_done = False
@@ -222,6 +299,11 @@ async def run(SERVER_URL: str, max_steps: int = None, num_episodes: int = None, 
 
                 
                 save_video(frames, f"task{task_id+1}_episode{ep+1}.mp4", fps=30, save_dir=f"./video_log_file/{args.ckpt_name}/{task_suite_name}")
+
+                ### ADDED
+                time_log.close()
+                raw_action_log.close()
+                ###
 
                 if episode_done:
                     log.info(f"Task {task_id} | Episode {ep+1}: ✅ Success")

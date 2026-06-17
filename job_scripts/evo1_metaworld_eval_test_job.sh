@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -N evo1_libero_eval_test
+#PBS -N evo1_metaworld_eval_test
 #PBS -l select=1:ncpus=8:ngpus=1:mem=32gb
 #PBS -l walltime=00:30:00
 
@@ -56,18 +56,18 @@ done
     module load Mesa
     module load libglvnd
 
-    # Activate Evo-1 LIBERO conda env
+    # Activate Evo-1 MetaWorld conda env
     eval "$(/rds/general/user/ll1225/home/miniconda3/bin/conda shell.bash hook)"
-    conda activate extended_evo1_libero
+    conda activate extended_evo1_metaworld
 
     # Set up headless environment
     export MUJOCO_GL=egl
     export PYOPENGL_PLATFORM=egl
 
-    cd /rds/general/user/ll1225/home/imperial_irp/extended_evo1/Evo-1/LIBERO_evaluation # Go to LIBERO evaluation dir
+    cd /rds/general/user/ll1225/home/imperial_irp/extended_evo1/Evo-1/MetaWorld_evaluation # Go to MetaWorld evaluation dir
 
-    python libero_client_4tasks.py # Run client script
-) #> debug/libero_client.log 2>&1
+    python mt50_evo1_client_prompt.py # Run client script
+) #> debug/metaworld_client.log 2>&1
 
 CLIENT_EXIT=$? # Track client PID
 

@@ -5,6 +5,9 @@ import os
 from typing import List, Optional, Dict, Set
 
 import cv2
+### ADDED
+#os.environ["MUJOCO_GL"] = "osmesa"
+###
 import gymnasium as gym
 import metaworld  # noqa: F401
 import numpy as np
@@ -71,7 +74,10 @@ TASKS_JSONL_PATH = "tasks.jsonl"
 # ==================================================================
 
 # Headless GL by default; switch to 'glfw' on a desktop if you want
-os.environ.setdefault("MUJOCO_GL", "egl")
+os.environ.setdefault("MUJOCO_GL", "egl") ### COMMENTED OUT
+### ADDED
+#os.environ["MUJOCO_GL"] = "osmesa"
+###
 gym.logger.min_level = gym.logger.ERROR
 
 
@@ -108,6 +114,9 @@ def center_crop_keep_ratio(rgb: np.ndarray, keep_ratio: float) -> np.ndarray:
 def render_single_bgr(env) -> np.ndarray:
   
     rgb = env.render()                               
+    ### ADDED for image debugging
+    print("[RAW]", rgb.shape, rgb.mean(), rgb.std())
+    ###
     rgb = np.ascontiguousarray(rgb, dtype=np.uint8)   
 
    
@@ -308,6 +317,24 @@ async def eval_mt50_with_groups(server_url: str,
     ordered_indices, groups, idx_to_slug = load_order_and_groups(total_envs)
     ordered_indices = [i for i in ordered_indices if 0 <= i < total_envs]
 
+    ### ADDED for DEBUGGING
+    print("\n=== ZERO-ACTION DEBUG ===")
+
+    sub = envs.envs[ordered_indices[0]]
+
+    obs, _ = sub.reset(seed=SEED)
+
+    for i in range(30):
+        action = np.zeros(sub.action_space.shape, dtype=np.float32)
+        obs, _, _, _, info = sub.step(action)
+
+        if i % 5 == 0:
+            print(f"step {i}: qpos[0:3] =",
+                sub.unwrapped.data.qpos[:3])
+
+    print("=== DONE ===\n")
+    ###
+
     
     if TARGET_LEVEL.lower() != "all":
         allowed_slugs = groups.get(TARGET_LEVEL.lower(), set())
@@ -381,6 +408,17 @@ async def eval_mt50_with_groups(server_url: str,
                         saved_this_episode = True
 
                     state_vec = obs_to_state(obs)
+
+                    ### ADDED for image debugging
+                    if steps % 20 == 0:
+                        print(f"[STEP {steps}]")
+                        print("img:", img_bgr.shape, float(img_bgr.mean()), float(img_bgr.std()), img_bgr.min(), img_bgr.max())
+                        
+                        state_arr = np.array(state_vec)
+                        print("state len:", len(state_vec))
+                        print("state mean/std:", state_arr.mean(), state_arr.std())
+                        print("state first 5:", state_arr[:5])
+                    ###
 
                  
                     actions = await evo1_infer(ws, img_bgr, state_vec, prompt=task_prompt)

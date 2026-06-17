@@ -15,6 +15,13 @@ import logging
 IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)
 
+### ADDED for debugging
+# Define debug directory and create debug file
+import os
+debug_file = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/debug.txt"
+os.makedirs(os.path.dirname(debug_file), exist_ok=True)
+###
+
 # === Image Transformations ===
 def build_transform(input_size):
     return T.Compose([
@@ -100,6 +107,10 @@ class InternVL3Embedder(nn.Module):
 
         if hasattr(self.model, "vision_model") and hasattr(self.model.vision_model, "encoder"):
             self.model.vision_model.encoder.gradient_checkpointing = False
+
+        ### ADDED
+        self.debug_f = open(debug_file, "a") # Open debug file, and set it to append mode
+        ###
         
 
     def _preprocess_images(
@@ -218,6 +229,17 @@ class InternVL3Embedder(nn.Module):
         torch.set_printoptions(profile="full", threshold=float('inf'))
      
         torch.set_printoptions(profile="default")
+        ### ADDED
+        f = self.debug_f
+        f.write(">> FROM internvl3_embedder.py, _prepare_and_fuse_embeddings() <<\n")
+        f.write(f"input_ids first 50: {input_ids[:50].tolist()}\n")
+        f.write(f"input_embeds first 20: {input_embeds[0, 0, :10].detach().cpu().tolist()}\n")
+        f.write(f"input_embeds mean: {input_embeds.mean().item()}\n")
+        f.write(f"input_embeds std: {input_embeds.std().item()}\n")
+        f.write(f"attention_mask sum: {attention_mask.sum().item()}\n")
+        f.write(f"attention_mask first 50: {attention_mask[0, :50].tolist()}\n")
+        f.flush()
+        ###
         return input_embeds, attention_mask
 
 
@@ -249,5 +271,17 @@ class InternVL3Embedder(nn.Module):
             return_dict=True,
         )
         fused_hidden = outputs.hidden_states[-1].to(torch.float32)
+
+        ### ADDED
+        f = self.debug_f
+        f.write(">> FROM internvl3_embedder.py, from get_fused_image_text_embedding...() <<\n")
+        f.write(f"pixel_values mean: {pixel_values.mean().item()}\n")
+        f.write(f"pixel_values std: {pixel_values.std().item()}\n")
+        debug_output = fused_hidden[:, 0, :] if return_cls_only else fused_hidden
+        f.write(f"fused_hidden: {debug_output[0, :5].detach().cpu().tolist()}\n")
+        f.write(f"fused_hidden mean: {debug_output.mean().item()}\n")
+        f.write(f"fused_hidden std: {debug_output.std().item()}\n")
+        f.flush()
+        ###
 
         return fused_hidden[:, 0, :] if return_cls_only else fused_hidden
