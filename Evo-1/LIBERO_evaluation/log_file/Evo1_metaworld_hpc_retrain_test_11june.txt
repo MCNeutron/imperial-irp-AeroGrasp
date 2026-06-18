@@ -1,0 +1,25 @@
+2026-06-17 22:24:22,265 [INFO] ===========================Start task suite libero_spatial========================
+2026-06-18 11:25:53,147 [INFO] ===========================Start task suite libero_spatial========================
+2026-06-18 11:28:10,974 [INFO] ===========================Start task suite libero_spatial========================
+2026-06-18 11:30:48,508 [INFO] ===========================Start task suite libero_spatial========================
+2026-06-18 11:31:00,540 [INFO] 
+========= Start task1: pick up the black bowl between the plate and the ramekin and place it on the plate =========
+2026-06-18 11:34:36,577 [INFO] ===========================Start task suite libero_spatial========================
+2026-06-18 11:34:41,728 [INFO] 
+========= Start task1: pick up the black bowl between the plate and the ramekin and place it on the plate =========
+2026-06-18 11:58:55,299 [INFO] ===========================Start task suite libero_spatial========================
+2026-06-18 12:00:49,167 [INFO] ===========================Start task suite libero_spatial========================
+2026-06-18 12:00:54,105 [INFO] 
+========= Start task1: pick up the black bowl between the plate and the ramekin and place it on the plate =========
+2026-06-18 12:36:28,639 [INFO] ===========================Start task suite libero_spatial========================
+2026-06-18 12:36:34,826 [INFO] 
+========= Start task1: pick up the black bowl between the plate and the ramekin and place it on the plate =========
+2026-06-18 12:37:30,286 [INFO] Task 0 | Episode 1: ❌ Fail
+2026-06-18 12:38:19,922 [INFO] Task 0 | Episode 2: ❌ Fail
+2026-06-18 12:39:09,012 [INFO] Task 0 | Episode 3: ❌ Fail
+2026-06-18 12:39:59,110 [INFO] Task 0 | Episode 4: ❌ Fail
+2026-06-18 12:40:47,915 [INFO] Task 0 | Episode 5: ❌ Fail
+2026-06-18 12:41:37,354 [INFO] Task 0 | Episode 6: ❌ Fail
+2026-06-18 12:42:26,756 [INFO] Task 0 | Episode 7: ❌ Fail
+2026-06-18 12:43:16,518 [INFO] Task 0 | Episode 8: ❌ Fail
+2026-06-18 12:44:05,682 [INFO] Task 0 | Episode 9: ❌ Fail

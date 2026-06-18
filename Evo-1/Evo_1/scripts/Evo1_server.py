@@ -147,8 +147,8 @@ async def handle_request(websocket, model, normalizer):
 # === 启动服务 ===
 if __name__ == "__main__":
     #ckpt_dir = "Your/Path/To/Checkpoint"
-    #ckpt_dir = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/evo1_libero_test_weights" ### ADDED - For LIBERO
-    ckpt_dir = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/evo1_metaworld_test_weights" ### ADDED - For METAWORLD
+    ckpt_dir = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/evo1_libero_test_weights" ### ADDED - For LIBERO
+    #ckpt_dir = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/evo1_metaworld_test_weights" ### ADDED - For METAWORLD
     #ckpt_dir = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/checkpoints/hpc_retrain/stage1/step_best" ### ADDED for MetaWorld stage 1 HPC retrain
     #ckpt_dir = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/checkpoints/hpc_retrain/stage2/step_65000" ### ADDED for MetaWorld stage 2 HPC retrain
     #ckpt_dir = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/checkpoints/hpc_retrain/stage2_resume1/step_120000" ### ADDED for MetaWorld stage 2 resume 1 HPC retrain

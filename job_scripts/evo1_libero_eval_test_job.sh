@@ -52,10 +52,6 @@ done
 
 # Run client
 (
-    # Load modules
-    module load Mesa
-    module load libglvnd
-
     # Activate Evo-1 LIBERO conda env
     eval "$(/rds/general/user/ll1225/home/miniconda3/bin/conda shell.bash hook)"
     conda activate extended_evo1_libero
@@ -63,6 +59,7 @@ done
     # Set up headless environment
     export MUJOCO_GL=egl
     export PYOPENGL_PLATFORM=egl
+    export CUDA_VISIBLE_DEVICES=0
 
     cd /rds/general/user/ll1225/home/imperial_irp/extended_evo1/Evo-1/LIBERO_evaluation # Go to LIBERO evaluation dir
 
