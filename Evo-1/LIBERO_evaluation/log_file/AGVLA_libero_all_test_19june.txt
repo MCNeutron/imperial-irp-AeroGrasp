@@ -1,0 +1,115 @@
+2026-06-20 03:13:02,995 [INFO] ===========================Start task suite libero_spatial========================
+2026-06-20 03:13:08,244 [INFO] 
+========= Start task1: pick up the black bowl between the plate and the ramekin and place it on the plate =========
+2026-06-20 03:13:31,003 [INFO] Task 0 | Episode 1: ✅ Success
+2026-06-20 03:13:44,795 [INFO] Task 0 | Episode 2: ✅ Success
+2026-06-20 03:13:56,655 [INFO] Task 0 | Episode 3: ✅ Success
+2026-06-20 03:14:10,224 [INFO] Task 0 | Episode 4: ✅ Success
+2026-06-20 03:14:22,184 [INFO] Task 0 | Episode 5: ✅ Success
+2026-06-20 03:14:34,139 [INFO] Task 0 | Episode 6: ✅ Success
+2026-06-20 03:14:46,191 [INFO] Task 0 | Episode 7: ✅ Success
+2026-06-20 03:14:59,944 [INFO] Task 0 | Episode 8: ✅ Success
+2026-06-20 03:15:13,646 [INFO] Task 0 | Episode 9: ✅ Success
+2026-06-20 03:15:25,439 [INFO] Task 0 | Episode 10: ✅ Success
+2026-06-20 03:15:25,439 [INFO] ========= Task 1 Summary: 10/10 Successful =========
+2026-06-20 03:15:26,096 [INFO] 
+========= Start task2: pick up the black bowl next to the ramekin and place it on the plate =========
+2026-06-20 03:15:43,227 [INFO] Task 1 | Episode 1: ✅ Success
+2026-06-20 03:15:58,756 [INFO] Task 1 | Episode 2: ✅ Success
+2026-06-20 03:16:16,151 [INFO] Task 1 | Episode 3: ✅ Success
+2026-06-20 03:16:31,771 [INFO] Task 1 | Episode 4: ✅ Success
+2026-06-20 03:17:18,223 [INFO] Task 1 | Episode 5: ❌ Fail
+2026-06-20 03:17:35,750 [INFO] Task 1 | Episode 6: ✅ Success
+2026-06-20 03:18:22,264 [INFO] Task 1 | Episode 7: ❌ Fail
+2026-06-20 03:18:37,981 [INFO] Task 1 | Episode 8: ✅ Success
+2026-06-20 03:19:04,754 [INFO] Task 1 | Episode 9: ✅ Success
+2026-06-20 03:19:21,998 [INFO] Task 1 | Episode 10: ✅ Success
+2026-06-20 03:19:21,998 [INFO] ========= Task 2 Summary: 8/10 Successful =========
+2026-06-20 03:19:22,728 [INFO] 
+========= Start task3: pick up the black bowl from table center and place it on the plate =========
+2026-06-20 03:19:38,250 [INFO] Task 2 | Episode 1: ✅ Success
+2026-06-20 03:19:53,981 [INFO] Task 2 | Episode 2: ✅ Success
+2026-06-20 03:20:09,453 [INFO] Task 2 | Episode 3: ✅ Success
+2026-06-20 03:20:25,031 [INFO] Task 2 | Episode 4: ✅ Success
+2026-06-20 03:20:40,719 [INFO] Task 2 | Episode 5: ✅ Success
+2026-06-20 03:20:54,935 [INFO] Task 2 | Episode 6: ✅ Success
+2026-06-20 03:21:08,862 [INFO] Task 2 | Episode 7: ✅ Success
+2026-06-20 03:21:24,639 [INFO] Task 2 | Episode 8: ✅ Success
+2026-06-20 03:21:40,117 [INFO] Task 2 | Episode 9: ✅ Success
+2026-06-20 03:21:55,703 [INFO] Task 2 | Episode 10: ✅ Success
+2026-06-20 03:21:55,703 [INFO] ========= Task 3 Summary: 10/10 Successful =========
+2026-06-20 03:21:56,335 [INFO] 
+========= Start task4: pick up the black bowl on the cookie box and place it on the plate =========
+2026-06-20 03:22:10,487 [INFO] Task 3 | Episode 1: ✅ Success
+2026-06-20 03:22:24,264 [INFO] Task 3 | Episode 2: ✅ Success
+2026-06-20 03:22:36,298 [INFO] Task 3 | Episode 3: ✅ Success
+2026-06-20 03:22:50,016 [INFO] Task 3 | Episode 4: ✅ Success
+2026-06-20 03:23:36,874 [INFO] Task 3 | Episode 5: ❌ Fail
+2026-06-20 03:23:50,825 [INFO] Task 3 | Episode 6: ✅ Success
+2026-06-20 03:24:04,437 [INFO] Task 3 | Episode 7: ✅ Success
+2026-06-20 03:24:18,300 [INFO] Task 3 | Episode 8: ✅ Success
+2026-06-20 03:24:32,140 [INFO] Task 3 | Episode 9: ✅ Success
+2026-06-20 03:24:46,030 [INFO] Task 3 | Episode 10: ✅ Success
+2026-06-20 03:24:46,030 [INFO] ========= Task 4 Summary: 9/10 Successful =========
+2026-06-20 03:24:46,649 [INFO] 
+========= Start task5: pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate =========
+2026-06-20 03:25:04,216 [INFO] Task 4 | Episode 1: ✅ Success
+2026-06-20 03:25:23,854 [INFO] Task 4 | Episode 2: ✅ Success
+2026-06-20 03:25:43,239 [INFO] Task 4 | Episode 3: ✅ Success
+2026-06-20 03:26:02,753 [INFO] Task 4 | Episode 4: ✅ Success
+2026-06-20 03:26:22,134 [INFO] Task 4 | Episode 5: ✅ Success
+2026-06-20 03:26:41,726 [INFO] Task 4 | Episode 6: ✅ Success
+2026-06-20 03:27:01,285 [INFO] Task 4 | Episode 7: ✅ Success
+2026-06-20 03:27:20,876 [INFO] Task 4 | Episode 8: ✅ Success
+2026-06-20 03:27:40,440 [INFO] Task 4 | Episode 9: ✅ Success
+2026-06-20 03:28:00,119 [INFO] Task 4 | Episode 10: ✅ Success
+2026-06-20 03:28:00,119 [INFO] ========= Task 5 Summary: 10/10 Successful =========
+2026-06-20 03:28:00,778 [INFO] 
+========= Start task6: pick up the black bowl on the ramekin and place it on the plate =========
+2026-06-20 03:28:14,952 [INFO] Task 5 | Episode 1: ✅ Success
+2026-06-20 03:28:30,825 [INFO] Task 5 | Episode 2: ✅ Success
+2026-06-20 03:28:44,858 [INFO] Task 5 | Episode 3: ✅ Success
+2026-06-20 03:29:32,874 [INFO] Task 5 | Episode 4: ❌ Fail
+2026-06-20 03:29:46,788 [INFO] Task 5 | Episode 5: ✅ Success
+2026-06-20 03:30:00,663 [INFO] Task 5 | Episode 6: ✅ Success
+2026-06-20 03:30:16,674 [INFO] Task 5 | Episode 7: ✅ Success
+2026-06-20 03:30:31,005 [INFO] Task 5 | Episode 8: ✅ Success
+2026-06-20 03:30:45,163 [INFO] Task 5 | Episode 9: ✅ Success
+2026-06-20 03:31:04,942 [INFO] Task 5 | Episode 10: ✅ Success
+2026-06-20 03:31:04,942 [INFO] ========= Task 6 Summary: 9/10 Successful =========
+2026-06-20 03:31:05,581 [INFO] 
+========= Start task7: pick up the black bowl next to the cookie box and place it on the plate =========
+2026-06-20 03:31:21,447 [INFO] Task 6 | Episode 1: ✅ Success
+2026-06-20 03:31:37,220 [INFO] Task 6 | Episode 2: ✅ Success
+2026-06-20 03:31:52,763 [INFO] Task 6 | Episode 3: ✅ Success
+2026-06-20 03:32:08,352 [INFO] Task 6 | Episode 4: ✅ Success
+2026-06-20 03:32:24,147 [INFO] Task 6 | Episode 5: ✅ Success
+2026-06-20 03:32:47,479 [INFO] Task 6 | Episode 6: ✅ Success
+2026-06-20 03:33:06,950 [INFO] Task 6 | Episode 7: ✅ Success
+2026-06-20 03:33:22,764 [INFO] Task 6 | Episode 8: ✅ Success
+2026-06-20 03:34:10,562 [INFO] Task 6 | Episode 9: ❌ Fail
+2026-06-20 03:34:26,432 [INFO] Task 6 | Episode 10: ✅ Success
+2026-06-20 03:34:26,433 [INFO] ========= Task 7 Summary: 9/10 Successful =========
+2026-06-20 03:34:27,073 [INFO] 
+========= Start task8: pick up the black bowl on the stove and place it on the plate =========
+2026-06-20 03:34:45,381 [INFO] Task 7 | Episode 1: ✅ Success
+2026-06-20 03:35:01,596 [INFO] Task 7 | Episode 2: ✅ Success
+2026-06-20 03:35:19,665 [INFO] Task 7 | Episode 3: ✅ Success
+2026-06-20 03:35:36,142 [INFO] Task 7 | Episode 4: ✅ Success
+2026-06-20 03:35:52,308 [INFO] Task 7 | Episode 5: ✅ Success
+2026-06-20 03:36:10,193 [INFO] Task 7 | Episode 6: ✅ Success
+2026-06-20 03:36:26,455 [INFO] Task 7 | Episode 7: ✅ Success
+2026-06-20 03:36:44,053 [INFO] Task 7 | Episode 8: ✅ Success
+2026-06-20 03:37:32,006 [INFO] Task 7 | Episode 9: ❌ Fail
+2026-06-20 03:37:50,149 [INFO] Task 7 | Episode 10: ✅ Success
+2026-06-20 03:37:50,149 [INFO] ========= Task 8 Summary: 9/10 Successful =========
+2026-06-20 03:37:50,857 [INFO] 
+========= Start task9: pick up the black bowl next to the plate and place it on the plate =========
+2026-06-20 03:38:05,022 [INFO] Task 8 | Episode 1: ✅ Success
+2026-06-20 03:38:52,548 [INFO] Task 8 | Episode 2: ❌ Fail
+2026-06-20 03:39:08,174 [INFO] Task 8 | Episode 3: ✅ Success
+2026-06-20 03:39:23,784 [INFO] Task 8 | Episode 4: ✅ Success
+2026-06-20 03:39:39,511 [INFO] Task 8 | Episode 5: ✅ Success
+2026-06-20 03:39:57,653 [INFO] Task 8 | Episode 6: ✅ Success
+2026-06-20 03:40:45,383 [INFO] Task 8 | Episode 7: ❌ Fail
+2026-06-20 03:41:03,121 [INFO] Task 8 | Episode 8: ✅ Success

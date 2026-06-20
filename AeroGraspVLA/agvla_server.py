@@ -19,12 +19,7 @@ from helpers.Normaliser import Normalizer
 PORT = 9000
 
 # Define model checkpoint directory
-CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/evo1_libero_test_weights" ### ADDED - For LIBERO
-#CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/evo1_metaworld_test_weights" ### ADDED - For METAWORLD
-#CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/checkpoints/hpc_retrain/stage1/step_best" ### ADDED for MetaWorld stage 1 HPC retrain
-#CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/checkpoints/hpc_retrain/stage2/step_65000" ### ADDED for MetaWorld stage 2 HPC retrain
-#CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/checkpoints/hpc_retrain/stage2_resume1/step_120000" ### ADDED for MetaWorld stage 2 resume 1 HPC retrain
-#CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/hpc_retrain/stage2_resume2/step_best" ### ADDED for MetaWorld stage 2 resume 2 HPC retrain
+CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/agvla_libero_evo1_weights" ### ADDED - For LIBERO
 
 ### Function for loading model and normaliser ###
 # Specifically for inference
