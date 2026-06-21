@@ -1,0 +1,102 @@
+# These function definitions convert:
+# HabitatSim outputs --> Evo1-format inputs
+# Evo1-format ouputs --> HabitatSim-format outputs
+# According to this code structure (from model_runner.py):
+###############################################################################
+# # Build model input
+# example = {
+#     "observation/image": img_array, # Current observation
+#     "observation/ref_image": self.ref_image_array, # Start observation
+#     "observation/state": state, # Current state
+#     "task": self.instruction # Natural language instruction
+# }
+
+# # Run model inference
+# output_all = infer(policy, example)
+# output = output_all[9] # Get last predicted action
+# new_coords = output[:4].tolist() # Extract first four outputs as coordinates
+###############################################################################
+
+### Import packages ###
+import numpy as np
+import cv2
+
+### Function for converting HabitatSim outputs to Evo1-format inputs ###
+def habitatsim_out_to_evo1_in(habitatsim_out):
+    # Extract HabitatSim inputs
+    curr_obs_img = habitatsim_out["observation/image"] # Current observation image
+    curr_ref_img = habitatsim_out["observation/ref_image"] # Current reference image
+    curr_state = habitatsim_out["observation/state"] # Current state
+    task = habitatsim_out["task"] # Current text prompt
+
+    ####################
+    # Transform HabitatSim images into Evo1 image input format (i.e. a list of images, each a numpy array of uint8)
+    # FORMATS:
+    #   HabitatSim output image format: np array, shape = (H, W, 3), uint8, RGB
+    #   Evo1 input image format: np array, shape = (H, W, 3), uint8, BGR
+    # NOTE: No need to convert each image to a list first (reducing unecessary overhead), as decode_image_from_list() converts them back to numpy arrays, and images from HabitatSim are already numpy arrays.
+    ####################
+    # Convert HabitatSim images from RGB to BGR (for feeding into Evo1 pipeline, i.e. into decode_image_from_list())
+    curr_obs_img = cv2.cvtColor(curr_obs_img, cv2.COLOR_RGB2BGR)
+    curr_ref_img = cv2.cvtColor(curr_ref_img, cv2.COLOR_RGB2BGR)
+
+    # Construct the images list for outputting into Evo1 pipeline
+    images = [
+        curr_obs_img,
+        curr_ref_img,
+        curr_obs_img
+    ]
+
+    #####################
+    # Transform HabitatSim stage into Evo1 state input format
+    # FORMATS:
+    #   HabitatSim output state format: np array, len = 4, float32
+    #   Evo1 input state format: np array, len = anything smaller or equal to 24, float32-compatible (i.e. dtype that is able to safely be converted into float32)
+    #####################
+    state = curr_state
+
+    ####################
+    # Transform HabitatSim task into Evo1 input prompt format
+    # FORMAT:
+    #   HabitatSim output task format: String
+    #   Evo1 input prompt format: String
+    ####################
+    prompt = task
+
+    # Define the image_mask and action_mask
+    image_mask = [1, 1, 0] # Only use first two images
+    action_mask = [1] * 7 + [0] * 17 # Only use first 7 action entries
+
+    # Construct Evo1-format input dictionary
+    evo1_in = {
+        "images": images,
+        "image_mask": image_mask,
+        "prompt": prompt,
+        "state_input": state,
+        "action_mask": action_mask
+    }
+
+    return evo1_in
+
+
+### Function for converting Evo1-format outputs to HabitatSim inputs ###
+def evo1_out_to_habitatsim_in(evo1_out):
+    # Get the last action from Evo1 output horizon
+    final_evo1_out = evo1_out[-1]
+    # TODO: Check if final_evo1_out (evo1 output) is a list of numpy arrays, and if this type of indexing is allowed
+
+    # TODO: Some inverse kinematics code that converts Evo1 7-dim action output to HabitatSim 4-dim coordinate input
+    # NOTE there is a hard threshold of 0.5 for the gripper that they convert in libero_client_4tasks.py
+
+    # Construct HabitatSim-format input dictionary
+    # Since HabitatSim pipeline obtains last output from a 10 horizon length action output, insert 9 dummy action outputs before the actual output
+    # TODO: Check if HabitatSim input is supposed to be a list of np arrays, with type float32
+    # TODO: Also, do I need to do something with the normaliser, to normalise data? CHECK THIS!
+    habitatsim_in = np.array([
+        final_evo1_out[0],
+        final_evo1_out[1],
+        final_evo1_out[2],
+        final_evo1_out[3]
+    ], dtype=np.float32)
+
+    return habitatsim_in

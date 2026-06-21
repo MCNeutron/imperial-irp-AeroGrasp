@@ -127,7 +127,7 @@ class ModelService:
             if len(coordinates) < 4:
                 coordinates = coordinates + [0.0] * (4 - len(coordinates))
 
-            state = np.array(coordinates[:4], dtype=np.float32) # Convert to float32
+            state = np.array(coordinates[:4], dtype=np.float32) # Convert from list to np array of float32
 
             # Build model input
             example = {
