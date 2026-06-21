@@ -7,6 +7,7 @@ from PIL import Image
 
 ### Import modules ###
 import agvla_server as agvla
+import adapters
 
 ### Script definitions ###
 # Define model checkpoint directory
@@ -28,16 +29,18 @@ CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/agv
 #     return policy_config.create_trained_policy(config, checkpoint_dir)
 
 ### Function for inference wrapper ###
-def infer(policy, inputs):
-    # TODO: Adapter for converting HabitatSim inputs to Evo1 inputs
-    
-    evo1_format_actions = agvla.infer_from_json_dict(evo1_format_inputs, policy, normalizer) # Run inference (likely output shape: [T, 24])
+def infer(policy, habitat_format_out):
+    # Convert HabitatSim outputs to Evo1-format inputs
+    evo1_format_in = adapters.habitatsim_out_to_evo1_in(habitat_format_out)
 
-    # TODO: Adapter for converting Evo1 action outputs to HabitatSim actions
-    # First just make a dummy output adapter, just to see if things run
+    # Run inference (likely output shape: [T, 24])
+    evo1_format_actions = agvla.infer_from_json_dict(evo1_format_in, policy, normalizer)
+
+    # Convert Evo1-format action outputs to HabitatSim actions
+    habitat_format_actions = adapters.evo1_out_to_habitatsim_in(evo1_format_actions)
 
     #return policy.infer(inputs)["actions"]
-    return actions
+    return habitat_format_actions
 
 ### Load model immediately ###
 # Import at module level
