@@ -1,17 +1,28 @@
 ### Import packages ###
 import os
+import sys
 import json
 import time
 import numpy as np
 from PIL import Image
 
 ### Import modules ###
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..")) # Obtain the project root
+sys.path.append(PROJECT_ROOT) # Append project root to current path (allowing agvla_server.py to be discoverable)
+print("PROJECT_ROOT: ", PROJECT_ROOT, flush=True) # DEBUGGING: Print project root to check
 import agvla_server as agvla
 import adapters
 
 ### Script definitions ###
 # Define model checkpoint directory
 CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/agvla_libero_evo1_weights" ### ADDED - For LIBERO
+
+# Define DEBUGGING directories
+DEBUG_FOLDER_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/agvla_habitat" # Define debug folder directory
+os.makedirs(DEBUG_FOLDER_DIR, exist_ok=True) # Ensure the debug directory exists
+RUN_TIMESTAMP = time.strftime("%Y%m%d_%H%M%S")
+DEBUG_FILE_DIR = os.path.join(DEBUG_FOLDER_DIR, f"adapter_debug_{RUN_TIMESTAMP}.txt") # Define debug file directory
+print(f"model_runner.py debug log: {DEBUG_FILE_DIR}", flush=True) # Print debug file directory for ease of identification
 
 
 ### Function for initialising the trained model/policy ###
@@ -29,7 +40,8 @@ CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/agv
 #     return policy_config.create_trained_policy(config, checkpoint_dir)
 
 ### Function for inference wrapper ###
-def infer(policy, habitat_format_out):
+#def infer(policy, habitat_format_out):
+def infer(policy, normalizer, habitat_format_out): # ADDED
     # Convert HabitatSim outputs to Evo1-format inputs
     evo1_format_in = adapters.habitatsim_out_to_evo1_in(habitat_format_out)
 
@@ -39,17 +51,56 @@ def infer(policy, habitat_format_out):
     # Convert Evo1-format action outputs to HabitatSim actions
     habitat_format_actions = adapters.evo1_out_to_habitatsim_in(evo1_format_actions)
 
+    # DEBUGGING
+    ####################
+    with open(DEBUG_FILE_DIR, "a") as f:
+        f.write("\n" + "=" * 80 + "\n") # Separator
+
+        # Log Evo1-format inputs
+        f.write(">> EVO1-FORMAT INPUTS <<\n")
+        f.write(
+            f"prompt: {evo1_format_in['prompt']}\n"
+            f"state_input: {evo1_format_in['state_input']}\n"
+            f"image_mask: {evo1_format_in['image_mask']}\n"
+            f"action_mask: {evo1_format_in['action_mask']}\n"
+        )
+        for i, img in enumerate(evo1_format_in["images"]):
+            f.write(
+                f"image[{i}]: "
+                f"type={type(img)}, "
+                f"shape={img.shape}, "
+                f"dtype={img.dtype}\n"
+            )
+        f.write("\n")
+
+        f.write(
+            ">> EVO1-FORMAT ACTIONS <<\n"
+            f"type={type(evo1_format_actions)}\n"
+            f"shape={np.asarray(evo1_format_actions).shape}\n"
+            f"value=\n{evo1_format_actions}\n\n"
+        )
+
+        f.write(
+            f">> HABITATSIM ACTIONS <<\n"
+            f"type={type(habitat_format_actions)}\n"
+            f"shape={habitat_format_actions.shape}\n"
+            f"dtype={habitat_format_actions.dtype}\n"
+        )
+        f.write(f"value={habitat_format_actions}\n")
+    ####################
+
     #return policy.infer(inputs)["actions"]
     return habitat_format_actions
 
 ### Load model immediately ###
 # Import at module level
 #policy = init_model()
-policy, normalizer = agvla.load_model_and_normalizer(CKPT_DIR)
+#policy, normalizer = agvla.load_model_and_normalizer(CKPT_DIR) # ATTEMPT to move it to main
 
 ### Define shared-folder architecture ###
 # Shared folder holds simulator inputs and outputs, for communication between model and simulator
-SHARED_FOLDER = "shared_folder"
+#SHARED_FOLDER = "shared_folder"
+SHARED_FOLDER = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/shared_folder" ### ADDED
 MODEL_INPUT_DIR = os.path.join(SHARED_FOLDER, "model_input") # Observations from controller received here
 MODEL_OUTPUT_DIR = os.path.join(SHARED_FOLDER, "model_output") # Model predictions written here
 INSTRUCTIONS_DIR = os.path.join(SHARED_FOLDER, "instructions") # Instructions for current episode stored here
@@ -59,7 +110,13 @@ os.makedirs(INSTRUCTIONS_DIR, exist_ok=True)
 
 ### Definition for class that manages inference ###
 class ModelService:
-    def __init__(self):
+    #def __init__(self):
+    ### ADDED/CHANGED
+    def __init__(self, policy, normalizer):
+        # Set policy/model and normalizer (as model/policy and normalizer is now defined in main, not globally)
+        self.policy = policy
+        self.normalizer = normalizer
+    ###
         self.current_episode = None
         self.instruction = None # Language instruction
         self.end_coords = None # Goal coordinates, for evaluation
@@ -141,7 +198,8 @@ class ModelService:
             }
 
             # Run model inference
-            output_all = infer(policy, example)
+            #output_all = infer(policy, example)
+            output_all = infer(self.policy, self.normalizer, example) # ADDED
             output = output_all[9] # Get last predicted action
             new_coords = output[:4].tolist() # Extract first four outputs as coordinates
             
@@ -167,8 +225,15 @@ class ModelService:
 
 ### Function for main loop ###
 def main():
+    ### ADDED
+    # Load model
+    policy, normalizer = agvla.load_model_and_normalizer(CKPT_DIR)
+    print(">> Model loaded successfully")
+    ###
+    
     print("模型推理服务启动...")
-    model_service = ModelService()
+    #model_service = ModelService()
+    model_service = ModelService(policy, normalizer) # ADDED
 
     try:
         while True:
