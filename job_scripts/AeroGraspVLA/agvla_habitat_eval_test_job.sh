@@ -17,7 +17,8 @@ module list # DEBUG: Check modules loaded
 
 (
 # Change working directory to activate uv virtual environment (for openpi)
-cd /rds/general/user/ll1225/home/imperial_irp/openpi_test/openpi
+#cd /rds/general/user/ll1225/home/imperial_irp/openpi_test/openpi
+cd /rds/general/user/ll1225/home/imperial_irp/indoorUAV_test/IndoorUAV-Agent/openpi
 source .venv/bin/activate # Activate uv virtual environment
 
 ## Change working directory (back, for running the scripts)
