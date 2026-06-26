@@ -1,7 +1,7 @@
 #!/bin/bash
 #PBS -N agvla_habitat_eval_test
 #PBS -l select=1:ncpus=8:ngpus=1:mem=32gb
-#PBS -l walltime=00:10:00
+#PBS -l walltime=01:00:00
 
 # Go to current working directory
 cd $PBS_O_WORKDIR
