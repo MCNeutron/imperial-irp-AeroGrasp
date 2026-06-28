@@ -85,7 +85,9 @@ def evo1_out_to_habitatsim_in(evo1_out):
     final_evo1_out = evo1_out[-1]
     # TODO: Check if final_evo1_out (evo1 output) is a list of numpy arrays, and if this type of indexing is allowed
 
-    # TODO: Some inverse kinematics code that converts Evo1 7-dim action output to HabitatSim 4-dim coordinate input
+    # TODO: Some code that converts Evo1 7-dim action output to HabitatSim 4-dim coordinate input
+    # Since HabitatSim inputs are just delta_x, delta_y, delta_z, delta_yaw, can probably just obtain the change in coordinates by just getting the
+    # change in x, y, z, and yaw compared to the previous timestep from the Evo1 outputs (and ignore change in roll, pitch, and gripper).
     # NOTE there is a hard threshold of 0.5 for the gripper that they convert in libero_client_4tasks.py
 
     # Construct HabitatSim-format input dictionary
@@ -95,10 +97,10 @@ def evo1_out_to_habitatsim_in(evo1_out):
     dummy_zeros = np.zeros((9, 4), dtype=np.float32)
     
     habitatsim_in = np.array([[
-        final_evo1_out[0],
-        final_evo1_out[1],
-        final_evo1_out[2],
-        final_evo1_out[3]
+        final_evo1_out[0], # The first output is the change in x, so should be directly usable?
+        final_evo1_out[1], # The second output is the change in y, so should be directly usable?
+        final_evo1_out[2], # The third output is the change in z, so should be directly usable?
+        final_evo1_out[5] # The fifth output is the change in yaw, so should be directly usable?
     ]], dtype=np.float32) # Make this shape (1,4)
 
     habitatsim_in = np.vstack((dummy_zeros, habitatsim_in))
