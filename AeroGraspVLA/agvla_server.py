@@ -65,6 +65,11 @@ def infer_from_json_dict(data: dict, model, normalizer):
     images = [decode_image_from_list(img) for img in data["image"]]
     assert len(images) == 3, "Must provide exactly 3 images." # Verify number of camera images (must be 3)
     for img in images: # Verify each image size (3x448x448)
+        ### ADDED for DEBUGGING
+        print(">> agvla_server.py IMG DEBUGGING <<\n", flush=True)
+        print(f"imges length: {len(images)}\n", flush=True)
+        print(f"img shape: {img.shape}\n", flush=True)
+        ###
         assert img.shape == (3, 448, 448), "image_size must be (3,448,448)"
 
     # Process robot state

@@ -1,7 +1,7 @@
 #!/bin/bash
 #PBS -N agvla_habitat_eval_test
 #PBS -l select=1:ncpus=8:ngpus=1:mem=32gb
-#PBS -l walltime=01:00:00
+#PBS -l walltime=00:10:00
 
 # Go to current working directory
 cd $PBS_O_WORKDIR
@@ -16,25 +16,25 @@ export DISPLAY=:99
 module list # DEBUG: Check modules loaded
 
 (
-# Change working directory to activate uv virtual environment (for openpi)
-#cd /rds/general/user/ll1225/home/imperial_irp/openpi_test/openpi
-cd /rds/general/user/ll1225/home/imperial_irp/indoorUAV_test/IndoorUAV-Agent/openpi
-source .venv/bin/activate # Activate uv virtual environment
+## Change working directory to activate uv virtual environment (for openpi)
+##cd /rds/general/user/ll1225/home/imperial_irp/openpi_test/openpi
+#cd /rds/general/user/ll1225/home/imperial_irp/indoorUAV_test/IndoorUAV-Agent/openpi
+#source .venv/bin/activate # Activate uv virtual environment
 
-## Change working directory (back, for running the scripts)
-cd /rds/general/user/ll1225/home/imperial_irp/indoorUAV_test/IndoorUAV-Agent
+### Change working directory (back, for running the scripts)
+#cd /rds/general/user/ll1225/home/imperial_irp/indoorUAV_test/IndoorUAV-Agent
 
 ### Run model_runner.py ###
-#python /rds/general/user/ll1225/home/imperial_irp/indoorUAV_test/IndoorUAV-Agent/online_eval/vla_eval/model_runner.py
-python -u /rds/general/user/ll1225/home/imperial_irp/indoorUAV_test/IndoorUAV-Agent/online_eval/vla_eval/model_runner_agvla_test.py
+##python /rds/general/user/ll1225/home/imperial_irp/indoorUAV_test/IndoorUAV-Agent/online_eval/vla_eval/model_runner.py
+#python -u /rds/general/user/ll1225/home/imperial_irp/indoorUAV_test/IndoorUAV-Agent/online_eval/vla_eval/model_runner_agvla_test.py
 
-    ## Activate Evo-1 conda env ADD BACK "
-    #eval $(/rds/general/user/ll1225/home/miniconda3/bin/conda shell.bash hook)"
-    #conda activate extended_evo1
+    # Activate Evo-1 conda env
+    eval "$(/rds/general/user/ll1225/home/miniconda3/bin/conda shell.bash hook)"
+    conda activate extended_evo1
 
-    #cd /rds/general/user/ll1225/home/imperial_irp/extended_evo1/AeroGraspVLA/IndoorUAV_eval # Go to scripts dir
+    cd /rds/general/user/ll1225/home/imperial_irp/extended_evo1/AeroGraspVLA/IndoorUAV_eval # Go to scripts dir
 
-    #python model_runner.py # Run the model_runner script
+    python -u model_runner.py # Run the model_runner script
 ) > debug/agvla_habitat_server.log 2>&1 &
 
 MODEL_PID=$! # Track model_runner.py PID

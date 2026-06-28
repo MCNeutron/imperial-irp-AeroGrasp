@@ -43,13 +43,22 @@ print(f"model_runner.py debug log: {DEBUG_FILE_DIR}", flush=True) # Print debug 
 #def infer(policy, habitat_format_out):
 def infer(policy, normalizer, habitat_format_out): # ADDED
     # Convert HabitatSim outputs to Evo1-format inputs
+    print("BEFORE input adapter...", flush=True)
     evo1_format_in = adapters.habitatsim_out_to_evo1_in(habitat_format_out)
+    print(f"Input adapter outputs: {evo1_format_in}", flush=True)
+    print("AFTER input adapter...", flush=True)
 
     # Run inference (likely output shape: [T, 24])
+    print("BEFORE evo1 infer...", flush=True)
     evo1_format_actions = agvla.infer_from_json_dict(evo1_format_in, policy, normalizer)
+    print(f"Evo1 infer outputs: {evo1_format_actions}", flush=True)
+    print("AFTER evo1 infer...", flush=True)
 
     # Convert Evo1-format action outputs to HabitatSim actions
+    print("BEFORE output adapter...", flush=True)
     habitat_format_actions = adapters.evo1_out_to_habitatsim_in(evo1_format_actions)
+    print(f"Output adapter outputs: {habitat_format_actions}", flush=True)
+    print("AFTER output adapter...", flush=True)
 
     # DEBUGGING
     ####################
@@ -60,11 +69,11 @@ def infer(policy, normalizer, habitat_format_out): # ADDED
         f.write(">> EVO1-FORMAT INPUTS <<\n")
         f.write(
             f"prompt: {evo1_format_in['prompt']}\n"
-            f"state_input: {evo1_format_in['state_input']}\n"
+            f"state: {evo1_format_in['state']}\n"
             f"image_mask: {evo1_format_in['image_mask']}\n"
             f"action_mask: {evo1_format_in['action_mask']}\n"
         )
-        for i, img in enumerate(evo1_format_in["images"]):
+        for i, img in enumerate(evo1_format_in["image"]):
             f.write(
                 f"image[{i}]: "
                 f"type={type(img)}, "
@@ -228,7 +237,7 @@ def main():
     ### ADDED
     # Load model
     policy, normalizer = agvla.load_model_and_normalizer(CKPT_DIR)
-    print(">> Model loaded successfully")
+    print(">> Model loaded successfully", flush=True)
     ###
     
     print("模型推理服务启动...")

@@ -69,10 +69,10 @@ def habitatsim_out_to_evo1_in(habitatsim_out):
 
     # Construct Evo1-format input dictionary
     evo1_in = {
-        "images": images,
+        "image": images,
         "image_mask": image_mask,
         "prompt": prompt,
-        "state_input": state,
+        "state": state,
         "action_mask": action_mask
     }
 
@@ -92,11 +92,15 @@ def evo1_out_to_habitatsim_in(evo1_out):
     # Since HabitatSim pipeline obtains last output from a 10 horizon length action output, insert 9 dummy action outputs before the actual output
     # TODO: Check if HabitatSim input is supposed to be a list of np arrays, with type float32
     # TODO: Also, do I need to do something with the normaliser, to normalise data? CHECK THIS!
-    habitatsim_in = np.array([
+    dummy_zeros = np.zeros((9, 4), dtype=np.float32)
+    
+    habitatsim_in = np.array([[
         final_evo1_out[0],
         final_evo1_out[1],
         final_evo1_out[2],
         final_evo1_out[3]
-    ], dtype=np.float32)
+    ]], dtype=np.float32) # Make this shape (1,4)
+
+    habitatsim_in = np.vstack((dummy_zeros, habitatsim_in))
 
     return habitatsim_in
