@@ -56,7 +56,7 @@ def infer(policy, normalizer, habitat_format_out): # ADDED
 
     # Convert Evo1-format action outputs to HabitatSim actions
     print("BEFORE output adapter...", flush=True)
-    habitat_format_actions = adapters.evo1_out_to_habitatsim_in(evo1_format_actions)
+    habitat_format_actions = adapters.evo1_out_to_habitatsim_in(evo1_format_actions, habitat_format_out) # Also pass in habitat_format_out to calculate new state coordinates as actions in HabitatSim
     print(f"Output adapter outputs: {habitat_format_actions}", flush=True)
     print("AFTER output adapter...", flush=True)
 
