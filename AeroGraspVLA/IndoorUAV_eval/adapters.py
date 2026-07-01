@@ -21,34 +21,10 @@
 import numpy as np
 import cv2
 
-### Function for converting HabitatSim outputs to Evo1-format inputs ###
-def habitatsim_out_to_evo1_in(habitatsim_out):
-    # Extract HabitatSim inputs
-    curr_obs_img = habitatsim_out["observation/image"] # Current observation image
-    curr_ref_img = habitatsim_out["observation/ref_image"] # Current reference image
-    curr_state = habitatsim_out["observation/state"] # Current state
-    task = habitatsim_out["task"] # Current text prompt
-
-    ####################
-    # Transform HabitatSim images into Evo1 image input format (i.e. a list of images, each a numpy array of uint8)
-    # FORMATS:
-    #   HabitatSim output image format: np array, shape = (H, W, 3), uint8, RGB
-    #   Evo1 input image format: np array, shape = (H, W, 3), uint8, BGR
-    # NOTE: No need to convert each image to a list first (reducing unecessary overhead), as decode_image_from_list() converts them back to numpy arrays, and images from HabitatSim are already numpy arrays.
-    ####################
-    # Convert HabitatSim images from RGB to BGR (for feeding into Evo1 pipeline, i.e. into decode_image_from_list())
-    curr_obs_img = cv2.cvtColor(curr_obs_img, cv2.COLOR_RGB2BGR)
-    curr_ref_img = cv2.cvtColor(curr_ref_img, cv2.COLOR_RGB2BGR)
-
-    # Construct the images list for outputting into Evo1 pipeline
-    images = [
-        curr_obs_img,
-        curr_ref_img,
-        curr_obs_img
-    ]
-
+### Function for converting HabitatSim STATES to Evo1-format STATES ###
+def process_hs_to_evo1_states(hs_state):
     #####################
-    # Transform HabitatSim stage into Evo1 state input format
+    # Transform HabitatSim states into Evo1 state input format
     # FORMATS:
     #   HabitatSim output state format: np array, len = 4, float32
     #   Evo1 input state format: np array, len = anything smaller or equal to 24, float32-compatible (i.e. dtype that is able to safely be converted into float32)
@@ -69,15 +45,54 @@ def habitatsim_out_to_evo1_in(habitatsim_out):
     #   gripper1: Position/state of left finger
     #   gripper2: Position/state of right finger
     #####################
-    #state = curr_state
     # Extract HabitatSim states
-    hs_x, hs_y, hs_z, hs_yaw = curr_state
+    hs_x, hs_y, hs_z, hs_yaw = hs_state # NOTE: this unpacking works whether input is a list, tuple, or numpy array (with EXACTLY 4 elements)
 
     # Convert HabitatSim yaw values from deg to rad (which Evo1-format expects)
     hs_yaw = np.deg2rad(hs_yaw)
 
     # Build Evo1-format states
-    state = np.array([hs_x, hs_y, hs_z, 0.0, 0.0, hs_yaw, 0.0, 0.0], dtype=np.float32)
+    evo1_states = np.array([hs_x, hs_y, hs_z, 0.0, 0.0, hs_yaw, 0.0, 0.0], dtype=np.float32)
+
+    return evo1_states
+
+
+### Function for converting HabitatSim IMAGES to Evo1-format IMAGES ###
+def process_hs_to_evo1_imgs(hs_img):
+    ####################
+    # Transform HabitatSim images into Evo1 image input format (i.e. a list of images, each a numpy array of uint8)
+    # FORMATS:
+    #   HabitatSim output image format: np array, shape = (H, W, 3), uint8, RGB
+    #   Evo1 input image format: np array, shape = (H, W, 3), uint8, BGR
+    # NOTE: No need to convert each image to a list first (reducing unecessary overhead), as decode_image_from_list() converts them back to numpy arrays, and images from HabitatSim are already numpy arrays.
+    ####################
+    # Convert HabitatSim images from RGB to BGR (for feeding into Evo1 pipeline, i.e. into decode_image_from_list())
+    evo1_img = cv2.cvtColor(hs_img, cv2.COLOR_RGB2BGR)
+
+    return evo1_img
+
+### Function for converting HabitatSim outputs to Evo1-format inputs ###
+def habitatsim_out_to_evo1_in(habitatsim_out):
+    # Extract HabitatSim inputs
+    curr_obs_img = habitatsim_out["observation/image"] # Current observation image
+    curr_ref_img = habitatsim_out["observation/ref_image"] # Current reference image
+    curr_state = habitatsim_out["observation/state"] # Current state
+    task = habitatsim_out["task"] # Current text prompt
+
+    # Convert HabitatSim images to Evo1-format images
+    curr_obs_img = process_hs_to_evo1_imgs(curr_obs_img)
+    curr_ref_img = process_hs_to_evo1_imgs(curr_ref_img)
+
+    # Construct the images list for outputting into Evo1 pipeline
+    images = [
+        curr_obs_img,
+        curr_ref_img,
+        curr_obs_img
+    ]
+
+    # Transform HabitatSim states into Evo1 state input format
+    #state = curr_state
+    state = process_hs_to_evo1_states(curr_state)
 
     ####################
     # Transform HabitatSim task into Evo1 input prompt format
