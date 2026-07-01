@@ -113,6 +113,7 @@ def evo1_out_to_habitatsim_in(evo1_out, habitatsim_out):
     # Discard the Evo1-format roll, pitch and gripper action outputs (especially since in HabitatSim, drone/'agent' is always flat, so no roll or pitch changes ever)
     ####################
     # Get the last action from Evo1 output horizon
+    # NOTE that these actions are already denormalised from infer_from_json_dict(), so these outputs should be real-world deltas (not normalised deltas), and can be directly added to HabitatSim states
     final_evo1_out = evo1_out[-1]
     # TODO: Check if final_evo1_out (evo1 output) is a list of numpy arrays, and if this type of indexing is allowed
 
@@ -128,11 +129,7 @@ def evo1_out_to_habitatsim_in(evo1_out, habitatsim_out):
     # Construct HabitatSim-format input dictionary, calcualte the new HabitatSim state coordinates, as action inputs into HabitatSim
     # Since HabitatSim pipeline obtains last output from a 10 horizon length action output, insert 9 dummy action outputs before the actual output
     # TODO: Check if HabitatSim input is supposed to be a list of np arrays, with type float32
-    # TODO: Also, do I need to do something with the normaliser, to normalise data? CHECK THIS!
     dummy_zeros = np.zeros((9, 4), dtype=np.float32) # Make dummy actions to fill the first 9 actions in the predicted horizon (which are not used anyways)
-
-    # TODO: ISSUE with Evo1-format outputs, in that they are likely NORMALISED outputs, and not directly the actual distance/angle changes. Must UNNORMALISE them first, before adding to HS states
-    # i.e. REVERSE TRAINING NORMALISATION, though check if it is already done downstream? Maybe unnormalise here, add, then normalise again for unnormalising again downstream?
     
     # Construct HabitatSim action input
     habitatsim_in = np.array([[
