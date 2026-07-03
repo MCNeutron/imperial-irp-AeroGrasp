@@ -31,6 +31,8 @@ import numpy as np
 from pathlib import Path
 from dataclasses import dataclass
 from typing import List
+from PIL import Image
+from lerobot.datasets.lerobot_dataset import LeRobotDataset
 
 ### Import modules ###
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..")) # Obtain the project root
@@ -40,6 +42,7 @@ import IndoorUAV_eval.adapters as adapters
 
 ### Script definitions ###
 DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV/hm3d_14/1Rg1SS1dRpG/traj_9" # Dataset directory
+CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV/converted/hm3d_14/1Rg1SS1dRpG/traj_9" # Converted dataset directory
 
 #########################
 ### Class definitions ###
@@ -243,7 +246,8 @@ def load_scene_group(scene_group_dir):
                 traj_dir,
                 scene_group = scene_group,
                 scene_id = scene_id,
-                traj_id = traj_id)
+                traj_id = traj_id
+            )
             
             trajectories_data.append(traj_data) # Add current trajectory information to the list of all trajectories in current scene
         
@@ -258,8 +262,195 @@ def load_scene_group(scene_group_dir):
     # Return all scenes data in current scene group
     return scenes_data
 
-### Form data/ ###
 
-### Form meta/ ###
+### Function for computing dataset normalisation statistics (mean, standard deviation) for all states and actions in a dataset ###
+# Computes global norm stats (not per-trajectory stats), by aggregating all states and actions from all trajectories, and computes per-dimension mean and std
+# Used for pre- and post-processing of data
+# INPUTS: All trajectory data of all scenes in a scene group
+# OUTPUTS: A dictionary of the dataset normalisation statistics
+def compute_dataset_stats(scene_group_data):
+    # Create empty states and actions lists to store all states and actions from entire dataset
+    states = []
+    actions = []
 
-### Form videos/ ###
+    # Loop over all trajectories in all scenes in scene group
+    for scene in scene_group_data:
+        for traj in scene.trajectories:
+            # Collect all states and actions of all trajectories
+            # extend() adds each element of each entry individually (e.g. each x state of every trajectory is added up)
+            # Resulting states and actions will still be same dim as a single entry
+            states.extend(traj.states)
+            actions.extend(traj.actions)
+    
+    # Convert to numpy arrays (giving shape: total timesteps x state/action dim)
+    states = np.asarray(states)
+    actions = np.asarray(actions)
+
+    # Compute normalisation stats
+    # Compute statistics column-/feature-wise (axis=0), to calc states per state dim
+    stats = {
+        "state_mean": states.mean(axis=0),
+        "state_std": states.std(axis=0),
+        "action_mean": actions.mean(axis=0),
+        "action_std": actions.std(axis=0),
+    }
+
+    return stats
+
+####################
+# LeRobot writer functions
+####################
+### Function for creating an EMPTY LeRobot dataset ###
+# Defines what dataset will contain, but doesn't add any data yet
+# INPUTS: Directory were converted dataset will be stored locally
+# OUTPUTS: A structured dataset
+def create_lerobot_dataset(output_dir):
+    # Create dataset object
+    dataset = LeRobotDataset.create(
+        #repo_id = "IndoorUAV/hm3d_evo1", # Dataset's name on HuggingFace Hub
+
+        root = output_dir, # Define where to write converted dataset files to (where episodes, videos, metadata, etc. will go)
+
+        fps = 10, # Frame rate (sampling rate for each trajectory) in frames per second. Important for syncing video and actions
+
+        use_videos = True, # Flag to store images as videos (instead of sequence of images), which is more efficient
+
+        # Feature schema - define structure of each timestep
+        features = {
+            "observation.images.image": { # RGB observations - image
+                "dtype": "video", # Store as video frames (each timestep contains an image)
+                "shape": (720, 1280, 3), # Height x Width x Channels (RGB)
+                "names": ["height", "width", "rgb"],
+            },
+
+            "observation.images.ref_image": { # RGB observations - image
+                "dtype": "video", # Store as video frames (each timestep contains an image)
+                "shape": (720, 1280, 3), # Height x Width x Channels (RGB)
+                "names": ["height", "width", "rgb"],
+            },
+
+            "observation.state": { # Robot state
+                "dtype": "float32",
+                "shape": (8,), # 8D state vector
+                "names": {
+                    "motors": [
+                        "x", "y", "z",
+                        "axis_angle1", "axis_angle2", "axis_angle3",
+                        "gripper1", "gripper2"
+                    ]
+                },
+            },
+
+            "action": { # Agent action (at each timestep)
+                "dtype": "float32",
+                "shape": (7,),
+            },
+
+            "task.language_instruction": { # Task description (per episode)
+                "dtype": "string",
+            },
+
+            # Required v2.1 bookkeeping fields
+            "timestamp": {"dtype": "float32", "shape": (1,)},
+            "frame_index": {"dtype": "int64", "shape": (1,)},
+            "episode_index": {"dtype": "int64", "shape": (1,)},
+        },
+    )
+
+    return dataset
+
+
+### Function for writing one trajectory file ###
+# Writes one trajectory as one LeRobot episode, writing it into the LeRobot dataset frame by frame
+#   Function iterates through every timestep of a trajectory, loads each image, pairs it with corrsponding state, action, and task instruction,
+#   adds each timestep (frame) to current LeRobot episode, and then saves completed episode to the dataset.
+# INPUTS:
+#   dataset - A LeRobotDataset object
+#   trajectory - A trajectory object containing: images, states, actions, instruction
+# OUTPUTS: Writes one complete LeRobot episode
+def write_trajectory(dataset, trajectory):
+    # Loop through every trajectory timestep (zip combined all three lists together, where each iter processes the image, state, and action from the same timestep). Guarantees synchronisation
+    # The inputs lists (images, states, actions) MUST have same length, otherwise zip will stop at the shortest list
+    for image_path, state, action in zip(
+        trajectory.images,
+        trajectory.states,
+        trajectory.actions,
+    ):
+        
+        # Load image through input path, convert to RGB, then convert to numpy (matching dataset schema defined in adapters and generally LeRobot image format)
+        image = np.asarray(Image.open(image_path).convert("RGB"))
+
+        # Add one frame (append one timestep to current episode)
+        # Dictionary contains every observation at that timestep
+        dataset.add_frame(
+            {
+                "observation.image": image,
+                "observation.state": state.astype(np.float32),
+                "action": action.astype(np.float32),
+                "task": trajectory.instruction, # Every frame gets the same instruction (as every frame needs to know what task agent is performing)
+            }
+        )
+
+    # Save episode (after all frames/timesteps from trajectory are added)
+    # This command finalises metadata, writes video (MP4), stores states/actions, increments episode counter, and prepares for the next episode (without this, LeRobot will assume still adding frames to current episode)
+    dataset.save_episode()
+
+
+### Function for writing whole dataset (i.e. whole scene group) ###
+# Function creates a LeRobot dataset, writes every trajectory from every scene in a scene group as a separate episode, then finalises dataset
+# INPUTS:
+#   scene_group_data - A collection of Scene objects (from the input scene group)
+#   output_dir - Directory to save the converted LeRobot dataset
+# OUTPUTS: Writes LeRobot dataset for all trajectories in all scenes in a scene group
+def write_scene_group(scene_group_data, output_dir):
+    # Create an empty LeRobot dataset (with schema observation.image, observation.state, action, task)
+    dataset = create_lerobot_dataset(output_dir)
+
+    # Create counter for number of episodes written
+    num_episodes = 0
+
+    # Loop over every scene in current scene group
+    for scene in scene_group_data:
+        # Print which scene is being processed
+        print(f"Processing scene {scene.scene_id}")
+
+        # Loop over every trajectory in the current scene
+        for trajectory in scene.trajectories:
+            # Print current trajectory ID
+            print(f"    Writing {trajectory.traj_id}")
+
+            # Write the current trajectory (every trajectory becomes one episode)
+            write_trajectory(
+                dataset,
+                trajectory,
+            )
+
+            # Increment episode count
+            num_episodes += 1
+        
+    # Finalise dataset (after every trajectory in every scene has been written)
+    #   Writes metadata files, build indexes, finalises video files, computes dataset stats, and makes dataset ready for loading and training
+    #   May cause dataset to be incomplete or miss metadata if not called
+    dataset.consolidate()
+
+    # Print final number of written episodes
+    print(f"Wrote {num_episodes} episodes.")
+
+
+#####################
+### MAIN FUNCTION ###
+#####################
+# def main():
+#     # Load all trajectory data from all scenes of scene group
+#     scenes = load_scene_group(DATASET_DIR)
+
+#     # Convert all loaded scene data into LeRobot format, and write to the output directory
+#     # Iterates over all trajectories in all scenes, and writes each trajectory as a LeRobot episode
+#     write_scene_group(
+#         scenes,
+#         output_dir = CONVERTED_DATASET_DIR,
+#     )
+
+# ### Prevent code execution if loaded as a module ###
+# if __name__ == "__main__":
+#     main()
