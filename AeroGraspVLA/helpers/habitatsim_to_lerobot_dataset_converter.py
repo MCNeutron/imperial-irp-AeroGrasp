@@ -29,6 +29,7 @@
 ### Import packages ###
 import os
 import sys
+from datetime import datetime
 import json
 import numpy as np
 from pathlib import Path
@@ -44,14 +45,17 @@ print("PROJECT_ROOT: ", PROJECT_ROOT, flush=True) # DEBUGGING: Print project roo
 import IndoorUAV_eval.adapters as adapters
 
 ### Script definitions ###
-DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV/hm3d_14/1Rg1SS1dRpG/traj_-3" # Dataset directory
-VLA_INS_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV/vla_ins/hm3d_14/1Rg1SS1dRpG/traj_-3" # vla_ins directory
-CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV/converted/hm3d_14/1Rg1SS1dRpG/traj_9" # Converted dataset directory
+DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV/hm3d_14" # Dataset directory
+VLA_INS_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV/vla_ins/hm3d_14" # vla_ins directory
+CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV/converted/hm3d_14" # Converted dataset directory
+DEBUG_LOG_PATH = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/dataset_converter.log" # DEBUG text file directory
+with open(DEBUG_LOG_PATH, "w") as f: f.write("") # Clear debug text file
 
 #########################
 ### Class definitions ###
 #########################
-### Trajectory container class definition ###
+### TrajectorySegment container class definition ###
+# Container class for storing data of a segment (a vla_ins segment) for a trajectory
 # TODO: Check if the variable type definitions are correct here!!!
 @dataclass
 class TrajectorySegment:
@@ -66,13 +70,22 @@ class TrajectorySegment:
     states: list[np.ndarray]
     actions: list[np.ndarray]
 
+### Trajectory container class definition ###
+# Container class for storing all vla_ins segments for a trajectory
+@dataclass
+class Trajectory:
+    scene_group: str # Scene group, e.g. "hm3d_14"
+    scene_id: str # Scene ID, e.g. "1Rg1SS1dRpG"
+    traj_id: str # Trajectory ID, e.g. "traj_9"
+    segments: List[TrajectorySegment]
+
 ### Scene dataclass definition ###
 # This dataclass stores the trajectory information in each scene, and their corresponding scene IDs for use
 @dataclass
 class Scene:
     scene_group: str # Scene group, e.g. "hm3d_14"
     scene_id : str # Scene ID, e.g. "1Rg1SS1dRpG"
-    trajectories: List[List[TrajectorySegment]] # NOTE: Trajectory must be defined before this class, otherwise use forward referencing: "Trajectory"
+    trajectories: List[Trajectory] # NOTE: Trajectory must be defined before this class, otherwise use forward referencing: "Trajectory"
 
 
 ########################
@@ -94,8 +107,8 @@ def load_images(image_dir):
         key=lambda x: int(x.stem) # Get filename without .png extension, and convert to int
     )
 
-    # Return each image Path object as a string path
-    return [str(i) for i in images]
+    # Return each image Path object (images here is a list of Path objects)
+    return images
 
 
 ### Load instruction corresponding to current trajectory ###
@@ -126,13 +139,31 @@ def load_states(posture_path):
     return states
 
 
-### Compute actions corresponding to current trajectory ###
-# Function converts state trajectory into actions taken, via: action[t] = state[t+1] - state[t]
+### Helper function to format LIBERO states for computing LIBERO-format delta actions ###
+# Formats LIBERO states for calculating LIBERO-format actions, i.e. [delta_x, delta_y, delta_z, delta_angle1, delta_angle2, delta_angle3, delta_gripper]
+# So this function changes the 8D states ([x, y, z, angle1, angle2, angle3, gripper1, gripper2]) to [x, y, z, angle1, angle2, angle3, gripper] format
+#   gripper1 and gripper2 should always be the same magnitude and opposite in sign, ALTHOUGH during navigation in HabitatSim, they are both actually always 0, so just merge into a single 0
+#   angle1, angle2 and gripper are always 0, as in HabitatSim agent does not pitch/roll or have a gripper
+# Angles here are already in rad, so no need to convert
+def format_libero_states(states):
+    s = np.asarray(states, dtype=np.float32) # Convert hs_states for easier indexing
+    return np.array([s[0], s[1], s[2], s[3], s[4], s[5], 0.0], dtype=np.float32) # Format and return states
+
+
+### Compute actions corresponding to current trajectory segment (a vla_ins) ###
+# Function converts states of trajectory segment into actions taken, via: action[t] = state[t+1] - state[t]
 # This conversion changes ABSOLUTE TRAJECTORY into RELATIVE MOTION
-# Inputs: States throughout current trajectory - Input is a list of state vectors, state = [s0, s1, s2, ..., sT], where each state is something like [x, y, z, yaw]
-# Outputs: Actions taken between each trajectory timestep - Is a list of numpy arrays, [(s1-s0), (s2-s1), ..., 0]
-def compute_delta_actions(states):
-    actions = [] # Initialise empty list to store computed delta actions for current trajectory
+# Inputs: States throughout current trajectory segment - Input is a list of state vectors, state = [s0, s1, s2, ..., sT], where each state is something like [x, y, z, angle1, angle2, angle3, gripper1, gripper2]
+#   NOTE States are NOT [x, y, z, yaw] as the states fed into this function have already been converted to LIBERO 8D states (and angles from deg to rad) in load_states().
+# Outputs: Actions taken between each trajectory segment timestep - Is a list of numpy arrays, [(s1-s0), (s2-s1), ..., 0]
+# NOTE that outputs are also converted to LIBERO outputs format, i.e. [delta_x, delta_y, delta_z, delta_angle1, delta_angle2, delta_angle3, delta_gripper]
+# ALTHOUGH delta_angle1, delta_angle2, and delta_gripper will always be 0 as HabitatSim agent is always flat against horizontal (no pitch/roll), and it doesn't use gripper during navigation
+# ALSO HabitatSim angles are in degrees, but LIBERO uses radian angles
+def compute_delta_actions(states_raw):
+    actions = [] # Initialise empty list to store computed delta actions for current trajectory segment
+
+    # Format LIBERO states for calculating delta actions
+    states = [format_libero_states(s) for s in states_raw]
 
     # Loop over all timesteps/frames EXCEPT last frame (as each step needs a next state to compute delta actions)
     for t in range(len(states) - 1):
@@ -203,16 +234,25 @@ def load_vla_segments(vla_ins_dir):
 
     # Loop through all vla_ins instruction files, sorted
     for vla_file in sorted(Path(vla_ins_dir).glob("vla_ins_*.json")):
-        with open(vla_file, "r") as f: # Read one vla_ins instruction file
-            data = json.load(f) # Read JSON contents
+        print(f"Reading vla_ins: {vla_file}", flush=True) # DEBUGGING
 
-        # Extract relevant fields of JSON file, and append to segments
-        segments.append({
-            "instruction": data["instruction"],
-            "start_frame": data["source"][0],
-            "end_frame": data["source"][1],
-            "file_name": vla_file.stem, # E.g. "vla_ins_1"
-        })
+        # NOTE: Some files contain corrupted, non-UTF-8 characters, which cause json.load to fail. Skip these files
+        try:
+            with open(vla_file, "r") as f: # Read one vla_ins instruction file
+                data = json.load(f) # Read JSON contents
+
+            # Extract relevant fields of JSON file, and append to segments
+            segments.append({
+                "instruction": data["instruction"],
+                "start_frame": data["source"][0],
+                "end_frame": data["source"][1],
+                "file_name": vla_file.stem, # E.g. "vla_ins_1"
+            })
+        # IF file threw an error
+        except Exception as e:
+            print(f"    SKIPPED: {vla_file} | {type(e).__name__}: {e}", flush=True) # Print out error for skipping the file
+            with open(DEBUG_LOG_PATH, "a") as f: f.write(f"SKIPPED vla_ins: {vla_file} | {type(e).__name__}: {e}\n") # Write to DEBUG file
+            continue
     
     return segments
 
@@ -225,8 +265,8 @@ def load_vla_segments(vla_ins_dir):
 #   actions,
 # associated with each vla_in segment corresponding to that trajectory file
 ####################
-# Inputs: Trajectory directory, vla_ins_*.json directory, and the trajectory's scene group, scene ID, and trajectory ID
-# Outputs: Trajectory's information (instruction, images, states, actions), and its scene group, scene ID, and trajectory ID, in a dataclass
+# INPUTS: Trajectory directory, vla_ins_*.json directory, and the trajectory's scene group, scene ID, and trajectory ID
+# OUTPUTS: List[TrajectorySegment] - Trajectory's information (instruction, images, states, actions), and its scene group, scene ID, and trajectory ID, in a dataclass
 def load_trajectory(traj_dir, vla_ins_dir, scene_group, scene_id, traj_id):
     traj_dir = Path(traj_dir) # Convert the input trajectory directory to a PATH object
     
@@ -298,6 +338,7 @@ def load_trajectory(traj_dir, vla_ins_dir, scene_group, scene_id, traj_id):
 def load_scene_group(scene_group_dir, scene_group_vla_ins_dir):
     scenes_data = [] # Initialise empty list to store all loaded trajectories (all trajectories in each scene in a scene group)
     scene_group_dir = Path(scene_group_dir) # Convert scene group directory to a Path object
+    scene_group_vla_ins_dir = Path(scene_group_vla_ins_dir) # Convert scene group vla_ins directory to a Path object
     scene_group = scene_group_dir.name # Get the scene group ID of scene group being processed for scenes (e.g. "hm3d_14")
 
     # Loop over all scenes in the scene group (sorted)
@@ -317,19 +358,29 @@ def load_scene_group(scene_group_dir, scene_group_vla_ins_dir):
             # Check if current trajectory exists as a directory in vla_ins folder for corresponding scene
             curr_vla_ins_dir = scene_group_vla_ins_dir / scene_id / traj_id # Construct corresponding vla_ins directory for current trajectory (e.g. vla_ins/hm3d_14/1Rg1SS1dRpG/traj_-1)
             if not curr_vla_ins_dir.is_dir(): # Skip trajectories that have no corresponding vla_ins directory
-                print(f"Skipping {scene_group}/{scene_id}/{traj_id}: No corresponding vla_ins directory")
+                print(f"Skipping {scene_group}/{scene_id}/{traj_id}: No corresponding vla_ins directory", flush=True)
+                with open(DEBUG_LOG_PATH, "a") as f: f.write(f"SKIPPED traj file: {scene_group}/{scene_id}/{traj_id} | No corresponding vla_ins directory\n") # Write to DEBUG file
                 continue
 
-            traj_segs = load_trajectory( # Load current trajectory information (i.e. all segments in traj)
+            # Load current trajectory information (i.e. all segments in traj)
+            traj_segs = load_trajectory(
                 traj_dir,
                 curr_vla_ins_dir, # The vla_ins folder directory for current trajectory
                 scene_group = scene_group,
                 scene_id = scene_id,
                 traj_id = traj_id
             )
+
+            # Place current trajectory information into a Trajectory dataclass
+            trajectory = Trajectory(
+                scene_group = scene_group,
+                scene_id = scene_id,
+                traj_id = traj_id,
+                segments = traj_segs
+            )
             
-            trajectories_data.append(traj_segs) # Add current trajectory segments information to the list of all trajectory segments in current scene
-            # NOTE: append() here (instead of extend()) keeps the segments in the same trajectory grouped together in a list
+            trajectories_data.append(trajectory) # Add current trajectory segments information to the list of all trajectory segments in current scene
+            # NOTE: trajectories_data here is a list of Trajectory dataclass objects
         
         scenes_data.append( # Add current scene data (i.e. data all trajectory segments in current scene) to list of all scene data
             Scene(
@@ -356,11 +407,12 @@ def compute_dataset_stats(scene_group_data):
     # Loop over all trajectories in all scenes in scene group
     for scene in scene_group_data:
         for traj in scene.trajectories:
-            # Collect all states and actions of all trajectories
-            # extend() adds each element of each entry individually (e.g. each x state of every trajectory is added up)
-            # Resulting states and actions will still be same dim as a single entry
-            states.extend(traj.states)
-            actions.extend(traj.actions)
+            for segment in traj.segments:
+                # Collect all states and actions of all trajectories
+                # extend() adds each element of each entry individually (e.g. each x state of every trajectory is added up)
+                # Resulting states and actions will still be same dim as a single entry
+                states.extend(segment.states)
+                actions.extend(segment.actions)
     
     # Convert to numpy arrays (giving shape: total timesteps x state/action dim)
     states = np.asarray(states)
@@ -387,7 +439,7 @@ def compute_dataset_stats(scene_group_data):
 def create_lerobot_dataset(output_dir):
     # Create dataset object
     dataset = LeRobotDataset.create(
-        #repo_id = "IndoorUAV/hm3d_evo1", # Dataset's name on HuggingFace Hub
+        repo_id = "IndoorUAV/indooruav-vla", # Dataset's name on HuggingFace Hub
 
         root = output_dir, # Define where to write converted dataset files to (where episodes, videos, metadata, etc. will go)
 
@@ -470,7 +522,7 @@ def write_trajectory_seg(dataset, trajectory_seg):
                 "observation.images.ref_image": ref_image,
                 "observation.state": state.astype(np.float32),
                 "action": action.astype(np.float32),
-                "task": trajectory_seg.instruction, # Every frame gets the same instruction (as every frame needs to know what task agent is performing)
+                "task.language_instruction": trajectory_seg.instruction, # Every frame gets the same instruction (as every frame needs to know what task agent is performing)
             }
         )
 
@@ -495,15 +547,15 @@ def write_scene_group(scene_group_data, output_dir):
     # Loop over every scene in current scene group
     for scene in scene_group_data:
         # Print which scene is being processed
-        print(f"Processing scene {scene.scene_id}")
+        print(f"Processing scene {scene.scene_id}", flush=True)
 
         # Loop over every trajectory in the current scene
         for trajectory in scene.trajectories:
             # Print current trajectory ID
-            print(f"    Writing {trajectory.traj_id}")
+            print(f"    Writing {trajectory.traj_id}", flush=True)
 
             # Loop over every segment in the current trajectory
-            for trajectory_seg in trajectory:
+            for trajectory_seg in trajectory.segments:
                 # Write the current trajectory (every trajectory becomes one episode)
                 write_trajectory_seg(
                     dataset,
@@ -519,23 +571,32 @@ def write_scene_group(scene_group_data, output_dir):
     dataset.consolidate()
 
     # Print final number of written episodes
-    print(f"Wrote {num_episodes} episodes.")
+    print(f"Wrote {num_episodes} episodes.", flush=True)
 
 
 #####################
 ### MAIN FUNCTION ###
 #####################
-# def main():
-#     # Load all trajectory data from all scenes of scene group
-#     scenes = load_scene_group(DATASET_DIR)
+def main():
+    # Load all trajectory data from all scenes of scene group
+    with open(DEBUG_LOG_PATH, "a") as f: f.write(f"Run: [{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}]\n>> LOADING SCENE GROUP DATA <<\n") # Write to DEBUG file for indicating start of scene group data loading
+    scenes = load_scene_group(DATASET_DIR, VLA_INS_DIR)
 
-#     # Convert all loaded scene data into LeRobot format, and write to the output directory
-#     # Iterates over all trajectories in all scenes, and writes each trajectory as a LeRobot episode
-#     write_scene_group(
-#         scenes,
-#         output_dir = CONVERTED_DATASET_DIR,
-#     )
+    # DEBUGGING: Take only first scene, and only first trajectory in scene
+    scenes = scenes[:1]
+    for scene in scenes:
+        scene.trajectories = scene.trajectories[:1]
 
-# ### Prevent code execution if loaded as a module ###
-# if __name__ == "__main__":
-#     main()
+        for traj in scene.trajectories:
+            traj.segments = traj.segments[:1]
+
+    # Convert all loaded scene data into LeRobot format, and write to the output directory
+    # Iterates over all trajectories in all scenes, and writes each trajectory as a LeRobot episode
+    write_scene_group(
+        scenes,
+        output_dir = CONVERTED_DATASET_DIR,
+    )
+
+### Prevent code execution if loaded as a module ###
+if __name__ == "__main__":
+    main()
