@@ -30,6 +30,7 @@
 import os
 import sys
 from datetime import datetime
+import shutil
 import json
 import numpy as np
 from pathlib import Path
@@ -447,6 +448,8 @@ def create_lerobot_dataset(output_dir):
 
         use_videos = True, # Flag to store images as videos (instead of sequence of images), which is more efficient
 
+        robot_type = "indooruav", # Robot type specification, just used for metadata only
+
         # Feature schema - define structure of each timestep
         features = {
             "observation.images.image": { # RGB observations - image
@@ -475,12 +478,20 @@ def create_lerobot_dataset(output_dir):
 
             "action": { # Agent action (at each timestep)
                 "dtype": "float32",
-                "shape": (7,),
+                "shape": (7,), # 7D action vector
+                "names": {
+                    "motors": [
+                        "x", "y", "z",
+                        "axis_angle1", "axis_angle2", "axis_angle3",
+                        "gripper"
+                    ]
+                }
             },
 
-            "task.language_instruction": { # Task description (per episode)
-                "dtype": "string",
-            },
+            # "task": { # Task description (per episode)
+            #     "dtype": "string",
+            #     "shape": (1,),
+            # },
 
             # Required v2.1 bookkeeping fields
             "timestamp": {"dtype": "float32", "shape": (1,)},
@@ -522,7 +533,7 @@ def write_trajectory_seg(dataset, trajectory_seg):
                 "observation.images.ref_image": ref_image,
                 "observation.state": state.astype(np.float32),
                 "action": action.astype(np.float32),
-                "task.language_instruction": trajectory_seg.instruction, # Every frame gets the same instruction (as every frame needs to know what task agent is performing)
+                "task": trajectory_seg.instruction, # Every frame gets the same instruction (as every frame needs to know what task agent is performing)
             }
         )
 
@@ -568,7 +579,7 @@ def write_scene_group(scene_group_data, output_dir):
     # Finalise dataset (after every trajectory in every scene has been written)
     #   Writes metadata files, build indexes, finalises video files, computes dataset stats, and makes dataset ready for loading and training
     #   May cause dataset to be incomplete or miss metadata if not called
-    dataset.consolidate()
+    # dataset.consolidate()
 
     # Print final number of written episodes
     print(f"Wrote {num_episodes} episodes.", flush=True)
@@ -578,6 +589,12 @@ def write_scene_group(scene_group_data, output_dir):
 ### MAIN FUNCTION ###
 #####################
 def main():
+    # FOR DEBUGGING: Clear converted dataset destination directory for clean conversion run (as LeRobot dataset creation expects a completely fresh directory)
+    # Comment out at the end though, to prevent accidental dataset rewriting (i.e. requires manual deletion of existing dataset for this script to work)
+    if os.path.exists(CONVERTED_DATASET_DIR):
+        print(f"Clearing converted dataset destination directory: {CONVERTED_DATASET_DIR}", flush=True)
+        shutil.rmtree(CONVERTED_DATASET_DIR)
+    
     # Load all trajectory data from all scenes of scene group
     with open(DEBUG_LOG_PATH, "a") as f: f.write(f"Run: [{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}]\n>> LOADING SCENE GROUP DATA <<\n") # Write to DEBUG file for indicating start of scene group data loading
     scenes = load_scene_group(DATASET_DIR, VLA_INS_DIR)
