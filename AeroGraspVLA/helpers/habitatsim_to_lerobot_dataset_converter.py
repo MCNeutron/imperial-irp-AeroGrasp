@@ -533,8 +533,9 @@ def write_trajectory_seg(dataset, trajectory_seg):
                 "observation.images.ref_image": ref_image,
                 "observation.state": state.astype(np.float32),
                 "action": action.astype(np.float32),
-                "task": trajectory_seg.instruction, # Every frame gets the same instruction (as every frame needs to know what task agent is performing)
-            }
+                # "task": trajectory_seg.instruction, # Every frame gets the same instruction (as every frame needs to know what task agent is performing) # NOTE: FOR LeRobot 0.4.4
+            },
+            task=trajectory_seg.instruction, # NOTE: For LeRobot 0.3.3
         )
 
     # Save episode (after all frames/timesteps from trajectory are added)
