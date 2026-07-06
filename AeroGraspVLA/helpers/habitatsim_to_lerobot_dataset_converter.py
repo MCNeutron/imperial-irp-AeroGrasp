@@ -444,7 +444,7 @@ def create_lerobot_dataset(output_dir):
 
         root = output_dir, # Define where to write converted dataset files to (where episodes, videos, metadata, etc. will go)
 
-        fps = 10, # Frame rate (sampling rate for each trajectory) in frames per second. Important for syncing video and actions
+        fps = 20, # Frame rate (sampling rate for each trajectory) in frames per second. Important for syncing video and actions
 
         use_videos = True, # Flag to store images as videos (instead of sequence of images), which is more efficient
 
@@ -471,7 +471,7 @@ def create_lerobot_dataset(output_dir):
                     "motors": [
                         "x", "y", "z",
                         "axis_angle1", "axis_angle2", "axis_angle3",
-                        "gripper1", "gripper2"
+                        "gripper", "gripper"
                     ]
                 },
             },
