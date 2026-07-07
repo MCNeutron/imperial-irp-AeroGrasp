@@ -46,9 +46,9 @@ print("PROJECT_ROOT: ", PROJECT_ROOT, flush=True) # DEBUGGING: Print project roo
 import IndoorUAV_eval.adapters as adapters
 
 ### Script definitions ###
-DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV/hm3d_14" # Dataset directory
-VLA_INS_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV/vla_ins/hm3d_14" # vla_ins directory
-CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV/converted/hm3d_14" # Converted dataset directory
+DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted" # Dataset directory
+VLA_INS_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted/vla_ins" # vla_ins directory
+CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot" # Converted dataset directory
 DEBUG_LOG_PATH = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/dataset_converter.log" # DEBUG text file directory
 with open(DEBUG_LOG_PATH, "w") as f: f.write("") # Clear debug text file
 
@@ -590,30 +590,72 @@ def write_scene_group(scene_group_data, output_dir):
 ### MAIN FUNCTION ###
 #####################
 def main():
-    # FOR DEBUGGING: Clear converted dataset destination directory for clean conversion run (as LeRobot dataset creation expects a completely fresh directory)
-    # Comment out at the end though, to prevent accidental dataset rewriting (i.e. requires manual deletion of existing dataset for this script to work)
-    if os.path.exists(CONVERTED_DATASET_DIR):
-        print(f"Clearing converted dataset destination directory: {CONVERTED_DATASET_DIR}", flush=True)
-        shutil.rmtree(CONVERTED_DATASET_DIR)
+    with open(DEBUG_LOG_PATH, "a") as f: f.write(f"Run: [{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}]\n") # Write to DEBUG file to indicate script running
+
+    # Loop over every scene group
+    for scene_group_dir in sorted(Path(DATASET_DIR).iterdir()):
+        # Skip all non-directories (as all datasets are in folders/directories)
+        if not scene_group_dir.is_dir():
+            continue
+
+        # Get current scene group
+        scene_group = scene_group_dir.name
+
+        # Skip all folders that are not actual datasets (i.e. the vla_ins/, scene_datasets/, and without_screenshot/ folders)
+        if scene_group in {
+            "vla_ins",
+            "scene_datasets",
+            "without_screenshot",
+        }:
+            continue
+
+        # DEBUGGING: For just converting a single scene group
+        if not scene_group in {
+            "hm3d_1",
+        }:
+            continue
+
+        # Construct vla_ins/ directory for current scene group (vla_ins/ directory has same directory structure as datasets, but with vla_ins/ before the actual scene group folder)
+        vla_ins_dir = Path(VLA_INS_DIR) / scene_group
+
+        # Skip scene groups that do NOT have corresponding VLA instructions
+        if not vla_ins_dir.is_dir():
+            print(f"Skipping {scene_group}: No corresponding vla_ins folder")
+            with open(DEBUG_LOG_PATH, "a") as f: f.write(f"Skipped {scene_group}: No corresponding vla_ins folder\n") # Write to DEBUG file the skipped scene group
+            continue
+
+        # Construct output directory
+        converted_output_dir = Path(CONVERTED_DATASET_DIR) / scene_group
+        
+        # FOR DEBUGGING: Clear converted dataset destination directory for clean conversion run (as LeRobot dataset creation expects a completely fresh directory)
+        # Comment out at the end though, to prevent accidental dataset rewriting (i.e. requires manual deletion of existing dataset for this script to work)
+        if os.path.exists(converted_output_dir):
+            print(f"Clearing converted dataset destination directory: {converted_output_dir}", flush=True)
+            shutil.rmtree(converted_output_dir)
+
+        ### Start data conversion ###
+        print(f"\n>> Processing {scene_group} <<\n")
     
-    # Load all trajectory data from all scenes of scene group
-    with open(DEBUG_LOG_PATH, "a") as f: f.write(f"Run: [{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}]\n>> LOADING SCENE GROUP DATA <<\n") # Write to DEBUG file for indicating start of scene group data loading
-    scenes = load_scene_group(DATASET_DIR, VLA_INS_DIR)
+        # Load all trajectory data from all scenes of scene group
+        with open(DEBUG_LOG_PATH, "a") as f: f.write(f"[LOADING] SCENE GROUP DATA: {scene_group}\n") # Write to DEBUG file for indicating start of scene group data loading
+        scenes = load_scene_group(scene_group_dir, vla_ins_dir)
 
-    # DEBUGGING: Take only first scene, and only first trajectory in scene
-    scenes = scenes[:1]
-    for scene in scenes:
-        scene.trajectories = scene.trajectories[:1]
+        # # DEBUGGING: Take only first scene, and only first trajectory in scene
+        # scenes = scenes[:1]
+        # for scene in scenes:
+        #     scene.trajectories = scene.trajectories[:1]
 
-        for traj in scene.trajectories:
-            traj.segments = traj.segments[:1]
+        #     for traj in scene.trajectories:
+        #         traj.segments = traj.segments[:1]
 
-    # Convert all loaded scene data into LeRobot format, and write to the output directory
-    # Iterates over all trajectories in all scenes, and writes each trajectory as a LeRobot episode
-    write_scene_group(
-        scenes,
-        output_dir = CONVERTED_DATASET_DIR,
-    )
+        # Convert all loaded scene data into LeRobot format, and write to the output directory
+        # Iterates over all trajectories in all scenes, and writes each trajectory as a LeRobot episode
+        with open(DEBUG_LOG_PATH, "a") as f: f.write(f"[WRITING] SCENE GROUP DATA: {scene_group}\n") # Write to DEBUG file for indicating writing scene group data
+        write_scene_group(
+            scenes,
+            output_dir = converted_output_dir,
+        )
+        with open(DEBUG_LOG_PATH, "a") as f: f.write(f"[WRITING] FINISHED SCENE GROUP DATA: {scene_group}\n") # Write to DEBUG file for indicating finished writing scene group data
 
 ### Prevent code execution if loaded as a module ###
 if __name__ == "__main__":
