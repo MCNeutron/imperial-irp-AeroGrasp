@@ -18,48 +18,58 @@ data_groups:
 
 
   # This is an example of how to configure the dataset path and view mapping for MetaWorld
-  metaworld_sawyer:
-    Evo1_MetaWorld:
-      #path: /home/dell/code/lintao/Evo_1/Evo1_training_dataset/Evo1_MetaWorld_Dataset
-      path: /rds/general/user/ll1225/home/datasets/evo1_test_training_dataset/Evo1_MetaWorld_Dataset ### ADDED
-      view_map:
-        image_1: observation.images.image
+  # metaworld_sawyer:
+  #   Evo1_MetaWorld:
+  #     #path: /home/dell/code/lintao/Evo_1/Evo1_training_dataset/Evo1_MetaWorld_Dataset
+  #     path: /rds/general/user/ll1225/home/datasets/evo1_test_training_dataset/Evo1_MetaWorld_Dataset ### ADDED
+  #     view_map:
+  #       image_1: observation.images.image
 
 
 
   # This is an example of how to configure multi-task training for LIBERO.
   # The libero dataset is from https://huggingface.co/collections/IPEC-COMMUNITY/libero-benchmark-dataset
 
-  libero_franka:
-    libero_spatial_no_noops_1.0.0_lerobot:
-      # path: /share/taolin/datasets/libero/libero_spatial_no_noops_1.0.0_lerobot
-      path: /rds/general/user/ll1225/home/datasets/evo1_libero_datasets/libero_spatial ### ADDED
+  # libero_franka:
+  #   libero_spatial_no_noops_1.0.0_lerobot:
+  #     # path: /share/taolin/datasets/libero/libero_spatial_no_noops_1.0.0_lerobot
+  #     path: /rds/general/user/ll1225/home/datasets/evo1_libero_datasets/libero_spatial ### ADDED
+  #     view_map:
+  #       image_1: observation.images.image
+  #       image_2: observation.images.wrist_image
+
+  #   libero_object_no_noops_1.0.0_lerobot:
+  #     # path: /share/taolin/datasets/libero/libero_object_no_noops_1.0.0_lerobot
+  #     path: /rds/general/user/ll1225/home/datasets/evo1_libero_datasets/libero_object ### ADDED
+  #     view_map:
+  #       image_1: observation.images.image
+  #       image_2: observation.images.wrist_image
+
+  #   libero_goal_no_noops_1.0.0_lerobot:
+  #     # path: /share/taolin/datasets/libero/libero_goal_no_noops_1.0.0_lerobot
+  #     path: /rds/general/user/ll1225/home/datasets/evo1_libero_datasets/libero_goal ### ADDED
+  #     view_map:
+  #       image_1: observation.images.image
+  #       image_2: observation.images.wrist_image
+
+  #   libero_10_no_noops_1.0.0_lerobot:
+  #     # path: /share/taolin/datasets/libero/libero_10_no_noops_1.0.0_lerobot
+  #     path: /rds/general/user/ll1225/home/datasets/evo1_libero_datasets/libero_10 ### ADDED
+  #     view_map:
+  #       image_1: observation.images.image
+  #       image_2: observation.images.wrist_image
+
+
+  
+  ### ADDED
+  # This is the dataset configuration for the converted HabitatSim IndoorUAV-VLA dataset to LeRobot v2.1 format
+  indooruav:
+    indooruav-vla_habitatsim:
+      path: /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV/converted/hm3d_14
       view_map:
         image_1: observation.images.image
-        image_2: observation.images.wrist_image
-
-    libero_object_no_noops_1.0.0_lerobot:
-      # path: /share/taolin/datasets/libero/libero_object_no_noops_1.0.0_lerobot
-      path: /rds/general/user/ll1225/home/datasets/evo1_libero_datasets/libero_object ### ADDED
-      view_map:
-        image_1: observation.images.image
-        image_2: observation.images.wrist_image
-
-    libero_goal_no_noops_1.0.0_lerobot:
-      # path: /share/taolin/datasets/libero/libero_goal_no_noops_1.0.0_lerobot
-      path: /rds/general/user/ll1225/home/datasets/evo1_libero_datasets/libero_goal ### ADDED
-      view_map:
-        image_1: observation.images.image
-        image_2: observation.images.wrist_image
-
-    libero_10_no_noops_1.0.0_lerobot:
-      # path: /share/taolin/datasets/libero/libero_10_no_noops_1.0.0_lerobot
-      path: /rds/general/user/ll1225/home/datasets/evo1_libero_datasets/libero_10 ### ADDED
-      view_map:
-        image_1: observation.images.image
-        image_2: observation.images.wrist_image
-
-
+        image_2: observation.images.ref_image
+  ###
 
 
 
