@@ -11,7 +11,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 from torch.optim.lr_scheduler import LambdaLR
-from Evo1 import EVO1
+from model.AGVLA import AGVLA ### EDITED
 from accelerate import Accelerator 
 import logging
 from datetime import datetime
@@ -22,6 +22,14 @@ import shutil
 from torch.optim import AdamW
 
 import warnings
+
+### ADDED
+# Set up logging of training metrics
+import csv
+curr_time = datetime.now().strftime("%Y%m%d_%H%M%S") # Get current time (for placing in training metrics log file name)
+TRAINING_METRICS_PATH = f"/rds/general/user/ll1225/home/imperial_irp/extended_evo1/training_metrics_{curr_time}.csv"
+os.makedirs(os.path.dirname(TRAINING_METRICS_PATH), exist_ok=True) # Ensure logging directory exists, and make it if it doesn't
+###
 
 accelerator = Accelerator()
 
@@ -147,7 +155,7 @@ def prepare_dataset(config: dict) -> torch.utils.data.Dataset:
     binarize_gripper = get_with_warning(config, "binarize_gripper", False)
     use_augmentation = get_with_warning(config, "use_augmentation", False)
     if dataset_type == "lerobot":
-        from dataset.lerobot_dataset_pretrain_mp import LeRobotDataset 
+        from lerobot_dataset_pretrain_mp import LeRobotDataset ### EDITED
         import yaml
         with open(config.get("dataset_config_path"), 'r') as f:
             dataset_config = yaml.safe_load(f)
@@ -331,6 +339,14 @@ def train(config):
     # === Set logging ===
     save_dir = get_with_warning(config, "save_dir", "checkpoints")
     log_path = setup_logging(save_dir)
+
+    ### ADDED
+    # Set up training metric logging file
+    if accelerator.is_main_process:
+        with open(TRAINING_METRICS_PATH, "w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["step", "epoch", "mse_loss", "mae_loss", "learning_rate", "grad_norm"])
+    ###
     
     # === WandB and Swanlab ===
     init_wandb(config, accelerator)
@@ -347,7 +363,7 @@ def train(config):
     dataloader = prepare_dataloader(dataset, config)
 
     # === Model ===
-    model = EVO1(config)
+    model = AGVLA(config) ### EDITED
     model.train()
     model.set_finetune_flags()
 
@@ -491,6 +507,25 @@ def train(config):
             # === Logging ===
             if step % log_interval == 0:
                 log_training_step(step, loss, total_norm, clipped_norm, scheduler, dataloader, accelerator)
+
+                ### ADDED
+                # Calculate MAE
+                mae = torch.mean(torch.abs(pred_velocity_mask - target_velocity))
+                mae = mae * scale_factor # Apply same scaling factor as that applied to MSE loss
+
+                # Log training metrics (above is logging in wandb, here it is logging to a csv file)
+                if accelerator.is_main_process:
+                    with open(TRAINING_METRICS_PATH, "a", newline="") as f:
+                        writer = csv.writer(f)
+                        writer.writerow([
+                            step, # Step
+                            (step / len(dataloader)), # = current_epoch
+                            loss.item(), # MSE loss
+                            mae.item(), # MAE
+                            scheduler.get_last_lr()[0], # Learning rate
+                            clipped_norm.item() # Gradient norm
+                        ])
+                ###
    
             # === Save best checkpoint ===
             loss_value = loss.item()
