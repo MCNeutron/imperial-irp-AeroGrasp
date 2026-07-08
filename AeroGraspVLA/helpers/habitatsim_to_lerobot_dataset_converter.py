@@ -33,6 +33,7 @@ from datetime import datetime
 import shutil
 import json
 import numpy as np
+import argparse # For HPC job arguments parsing
 from pathlib import Path
 from dataclasses import dataclass
 from typing import List
@@ -50,7 +51,6 @@ DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/dat
 VLA_INS_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted/vla_ins" # vla_ins directory
 CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot" # Converted dataset directory
 DEBUG_LOG_PATH = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/dataset_converter.log" # DEBUG text file directory
-with open(DEBUG_LOG_PATH, "w") as f: f.write("") # Clear debug text file
 
 #########################
 ### Class definitions ###
@@ -430,6 +430,19 @@ def compute_dataset_stats(scene_group_data):
 
     return stats
 
+### HPC command-line input argument parser function ###
+# This function extracts the input arguments fed into the function via an HPC job (e.g. --scene_group)
+# OUTPUTS: Command-line argument provided
+def parse_args():
+    # Create an ArgumentParser object, for defining arguments the program accepts
+    parser = argparse.ArgumentParser(description="Convert HabitatSim dataset to LeRobot format")
+
+    # Add expected command-line argument
+    parser.add_argument("--scene_group", type=str, required=True, help="Scene group to convert, e.g. hm3d_1")
+
+    # Actually read command line, and return parsed argument attributes
+    return parser.parse_args()
+
 ####################
 # LeRobot writer functions
 ####################
@@ -440,7 +453,7 @@ def compute_dataset_stats(scene_group_data):
 def create_lerobot_dataset(output_dir):
     # Create dataset object
     dataset = LeRobotDataset.create(
-        repo_id = "IndoorUAV/indooruav-vla", # Dataset's name on HuggingFace Hub
+        repo_id = f"IndoorUAV-VLA_lerobot/{output_dir.name}", # Dataset's name on HuggingFace Hub
 
         root = output_dir, # Define where to write converted dataset files to (where episodes, videos, metadata, etc. will go)
 
@@ -589,8 +602,18 @@ def write_scene_group(scene_group_data, output_dir):
 #####################
 ### MAIN FUNCTION ###
 #####################
-def main():
+# def main(): # UNCOMMENT if want running converter from HPC/terminal with NO input args
+def main(scene_group_to_convert): # UNCOMMENT if running converter from HPC with specific scene group to convert input args
+    ### UNCOMMENT if running converter from HPC with specific scene group to convert input args
+    global DEBUG_LOG_PATH # Ensure the module/script-level DEBUG_LOG_PATH variable is being modified (not a new local variable)
+    DEBUG_LOG_PATH = Path(DEBUG_LOG_PATH) # Convert DEBUG_LOG_PATH to Path object
+    debug_log_path_parent = DEBUG_LOG_PATH.parent # Obtain parent directory of DEBUG_LOG_PATH (i.e. the directory without last directory section)
+    DEBUG_LOG_PATH = debug_log_path_parent / f"data_converter_{scene_group_to_convert}.log" # Construct new DEBUG_LOG_PATH specific for current scene group
+    ###
+
+    with open(DEBUG_LOG_PATH, "w") as f: f.write("") # Clear debug text file
     with open(DEBUG_LOG_PATH, "a") as f: f.write(f"Run: [{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}]\n") # Write to DEBUG file to indicate script running
+    with open(DEBUG_LOG_PATH, "a") as f: f.write(f"Debug log file directory: {DEBUG_LOG_PATH}\n") # Write to DEBUG file the debug log file directory
 
     # Loop over every scene group
     for scene_group_dir in sorted(Path(DATASET_DIR).iterdir()):
@@ -609,10 +632,15 @@ def main():
         }:
             continue
 
-        # DEBUGGING: For just converting a single scene group
-        if not scene_group in {
-            "hm3d_1",
-        }:
+        # DEBUGGING: For just converting a single scene group, manually setting the scene group to convert
+        # if not scene_group in {
+        #     "hm3d_1",
+        # }:
+        #     continue
+
+        # Only process the requested scene group (from HPC job input args)
+        # COMMENT OUT if not running HPC job with input args
+        if scene_group != scene_group_to_convert: # If current scene group is not the one requested from HPC job input args
             continue
 
         # Construct vla_ins/ directory for current scene group (vla_ins/ directory has same directory structure as datasets, but with vla_ins/ before the actual scene group folder)
@@ -659,4 +687,8 @@ def main():
 
 ### Prevent code execution if loaded as a module ###
 if __name__ == "__main__":
-    main()
+    # main() # UNCOMMENT if running converter from HPC/terminal with NO input args
+    
+    # UNCOMMENT if running converter from HPC WITH input args
+    args = parse_args()
+    main(args.scene_group)
