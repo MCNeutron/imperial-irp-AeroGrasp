@@ -603,14 +603,15 @@ def write_scene_group(scene_group_data, output_dir):
 ### MAIN FUNCTION ###
 #####################
 # def main(): # UNCOMMENT if want running converter from HPC/terminal with NO input args
-def main(scene_group_to_convert): # UNCOMMENT if running converter from HPC with specific scene group to convert input args
-    ### UNCOMMENT if running converter from HPC with specific scene group to convert input args
+### UNCOMMENT if running converter from HPC with specific scene group to convert input args
+def main(scene_group_to_convert):
     global DEBUG_LOG_PATH # Ensure the module/script-level DEBUG_LOG_PATH variable is being modified (not a new local variable)
     DEBUG_LOG_PATH = Path(DEBUG_LOG_PATH) # Convert DEBUG_LOG_PATH to Path object
     debug_log_path_parent = DEBUG_LOG_PATH.parent # Obtain parent directory of DEBUG_LOG_PATH (i.e. the directory without last directory section)
     DEBUG_LOG_PATH = debug_log_path_parent / f"data_converter_{scene_group_to_convert}.log" # Construct new DEBUG_LOG_PATH specific for current scene group
-    ###
+###
 
+    # Initialisations
     with open(DEBUG_LOG_PATH, "w") as f: f.write("") # Clear debug text file
     with open(DEBUG_LOG_PATH, "a") as f: f.write(f"Run: [{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}]\n") # Write to DEBUG file to indicate script running
     with open(DEBUG_LOG_PATH, "a") as f: f.write(f"Debug log file directory: {DEBUG_LOG_PATH}\n") # Write to DEBUG file the debug log file directory
@@ -655,11 +656,12 @@ def main(scene_group_to_convert): # UNCOMMENT if running converter from HPC with
         # Construct output directory
         converted_output_dir = Path(CONVERTED_DATASET_DIR) / scene_group
         
-        # FOR DEBUGGING: Clear converted dataset destination directory for clean conversion run (as LeRobot dataset creation expects a completely fresh directory)
+        ### FOR DEBUGGING: Clear converted dataset destination directory for clean conversion run (as LeRobot dataset creation expects a completely fresh directory)
         # Comment out at the end though, to prevent accidental dataset rewriting (i.e. requires manual deletion of existing dataset for this script to work)
-        if os.path.exists(converted_output_dir):
-            print(f"Clearing converted dataset destination directory: {converted_output_dir}", flush=True)
-            shutil.rmtree(converted_output_dir)
+        # if os.path.exists(converted_output_dir):
+        #     print(f"Clearing converted dataset destination directory: {converted_output_dir}", flush=True)
+        #     shutil.rmtree(converted_output_dir)
+        ###
 
         ### Start data conversion ###
         print(f"\n>> Processing {scene_group} <<\n")
