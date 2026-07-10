@@ -570,13 +570,13 @@ def train(config):
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description="Train Evo-1")
+    parser = argparse.ArgumentParser(description="Train AGVLA") ### EDITED
 
     # Basic config
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--run_name", type=str, default="default_run")
     parser.add_argument("--vlm_name", type=str, default="OpenGVLab/InternVL3-1B")
-    parser.add_argument("--action_head", type=str, default="flowmatching", choices=["flowmatching"])
+    parser.add_argument("--action_head", type=str, default="evo1_flowmatching", choices=["evo1_flowmatching"]) ### EDITED
     parser.add_argument("--return_cls_only", action="store_true")
     parser.add_argument("--disable_wandb", action="store_true", help="Disable wandb logging.")
 
