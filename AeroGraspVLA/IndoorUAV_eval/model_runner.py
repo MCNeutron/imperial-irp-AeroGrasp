@@ -4,6 +4,7 @@ import sys
 import json
 import time
 import numpy as np
+import torch
 from PIL import Image
 
 ### Import modules ###
@@ -14,8 +15,11 @@ import agvla_server as agvla
 import adapters
 
 ### Script definitions ###
+HABITATSIM_EMBODIMENT_ID = 1 # Integer ID for HabitatSim embodiment
 # Define model checkpoint directory
-CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/agvla_libero_evo1_weights" ### ADDED - For LIBERO
+# CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/agvla_libero_evo1_weights" ### ADDED - For LIBERO
+# CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1/step_best" # From AGVLA (base Evo1 model) stage1 training
+CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2/step_best" # From AGVLA (base Evo1 model) stage2 training
 
 # Define DEBUGGING directories
 DEBUG_FOLDER_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/agvla_habitat" # Define debug folder directory
@@ -50,7 +54,8 @@ def infer(policy, normalizer, habitat_format_out): # ADDED
 
     # Run inference (likely output shape: [T, 24])
     print("BEFORE evo1 infer...", flush=True)
-    evo1_format_actions = agvla.infer_from_json_dict(evo1_format_in, policy, normalizer)
+    evo1_format_actions = agvla.infer_from_json_dict(evo1_format_in, policy, normalizer) ### IF using single FlowmatchingActionHead model architecture
+    # evo1_format_actions = agvla.infer_from_json_dict(evo1_format_in, policy, normalizer, embodiment_ids=torch.tensor([HABITATSIM_EMBODIMENT_ID], dtype=torch.long, device="cuda")) ### IF using ParallelActionHead model architecture
     print(f"Evo1 infer outputs: {evo1_format_actions}", flush=True)
     print("AFTER evo1 infer...", flush=True)
 

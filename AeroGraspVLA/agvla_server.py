@@ -56,7 +56,9 @@ def decode_image_from_list(img_list):
 
 ### Function for INFERENCE from a client request ###
 # Client request is a JSON dict
-def infer_from_json_dict(data: dict, model, normalizer):
+# NOTE: Default embodiment_ids=None, as if no embodiment_ids input, then BOTH FlowmatchingActionHead and ParallelActionHead has logic implementation that defaults dataset input type to LIBERO, and acts runs logic accordingly
+# So, embodiment_ids for LIBERO is None, and embodiment_ids for HabitatSim is torch.tensor([1], device="cuda") (which is passed in as the input)
+def infer_from_json_dict(data: dict, model, normalizer, embodiment_ids=None):
     # Determine device and model type
     device = "cuda"
     model_dtype = next(model.parameters()).dtype
@@ -98,7 +100,8 @@ def infer_from_json_dict(data: dict, model, normalizer):
             image_mask=image_mask,
             prompt=prompt,
             state_input=norm_state,
-            action_mask=action_mask
+            action_mask=action_mask#, ### ADDED for ParallelActionHead implementation
+            # embodiment_ids = embodiment_ids ### ADDED for ParallelActionHead implementation
         )
         action = action.reshape(1, -1, 24) # Reshape output to batch x time horizon x action dim
         action = normalizer.denormalize_action(action[0]) # Denormalise actions. action[0] removes batch dim, which is not used in denormalisation

@@ -63,6 +63,7 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
         device = fused_tokens.device # Get device
         
         if embodiment_id is None: # Default embodiment (i.e. if no embodiment is provided)
+            print(f"parallel_action_head.py: No embodiment_id provided for inference with ParallelActionHead forward()", flush=True)
             embodiment_id = torch.zeros( # Everything becomes LIBERO (as ID = 0 is LIBERO). Preserves backward compatibility
                 B,
                 dtype = torch.long,
@@ -88,7 +89,7 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
                 fused_tokens = fused_tokens[nav_mask],
                 state = state[nav_mask] if state is not None else None,
                 actions_gt = actions_gt[nav_mask],
-                embodiment_id = torch.zeros(nav_mask.sum(), dtype=torch.long, device=device),#embodiment_id[nav_mask],
+                embodiment_id = torch.zeros(nav_mask.sum(), dtype=torch.long, device=device),#embodiment_id[nav_mask], # Set embodiment_id to 0 (default) WITHIN each Flowmatching action head, now that data is routed to correct head
                 state_mask = state_mask[nav_mask] if state_mask is not None else None,
                 action_mask = action_mask[nav_mask] if action_mask is not None else None,
             )   
@@ -103,7 +104,7 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
                 fused_tokens = fused_tokens[manip_mask],
                 state = state[manip_mask] if state is not None else None,
                 actions_gt = actions_gt[manip_mask],
-                embodiment_id = torch.zeros(manip_mask.sum(), dtype=torch.long, device=device),#embodiment_id[manip_mask],
+                embodiment_id = torch.zeros(manip_mask.sum(), dtype=torch.long, device=device),#embodiment_id[manip_mask], # Set embodiment_id to 0 (default) WITHIN each Flowmatching action head, now that data is routed to correct head
                 state_mask = state_mask[manip_mask] if state_mask is not None else None,
                 action_mask = action_mask[manip_mask] if action_mask is not None else None,
             )
@@ -144,6 +145,7 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
         device = fused_tokens.device
         
         if embodiment_id is None:
+            print(f"parallel_action_head.py: No embodiment_id provided for inference with ParallelActionHead get_action()", flush=True)
             embodiment_id = torch.zeros(
                 B,
                 dtype = torch.long,
@@ -168,7 +170,7 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
             actions[nav_mask] = self.nav_head.get_action(
                 fused_tokens = fused_tokens[nav_mask],
                 state = state[nav_mask] if state is not None else None,
-                embodiment_id = torch.zeros(nav_mask.sum(), dtype=torch.long, device=device),#embodiment_id[nav_mask],
+                embodiment_id = torch.zeros(nav_mask.sum(), dtype=torch.long, device=device),#embodiment_id[nav_mask], # Set embodiment_id to 0 (default) WITHIN each Flowmatching action head, now that data is routed to correct head
                 action_mask = action_mask[nav_mask] if action_mask is not None else None,
             )
 
@@ -176,7 +178,7 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
             actions[manip_mask] = self.manip_head.get_action(
                 fused_tokens = fused_tokens[manip_mask],
                 state = state[manip_mask] if state is not None else None,
-                embodiment_id = torch.zeros(manip_mask.sum(), dtype=torch.long, device=device),#embodiment_id[manip_mask],
+                embodiment_id = torch.zeros(manip_mask.sum(), dtype=torch.long, device=device),#embodiment_id[manip_mask], # Set embodiment_id to 0 (default) WITHIN each Flowmatching action head, now that data is routed to correct head
                 action_mask = action_mask[manip_mask] if action_mask is not None else None,
             )
         

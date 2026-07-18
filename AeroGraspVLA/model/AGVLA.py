@@ -10,6 +10,7 @@ import torch.nn as nn
 # Load other repo modules
 from model.internvl3_embedder import InternVL3Embedder
 from model.flow_matching import FlowmatchingActionHead
+# from model.parallel_action_head import ParallelActionHead # ADDED for ParallelActionHead implementation
 
 ### AeroGraspVLA class definition ###
 class AGVLA(nn.Module):
@@ -31,6 +32,7 @@ class AGVLA(nn.Module):
         action_head_type = config.get("action_head", "evo1_flowmatching").lower()
         
         ### Action head setup ###
+        # Original Evo-1 flowmatching action head
         if action_head_type == "evo1_flowmatching":
            
             # Define action dimensions
@@ -66,6 +68,44 @@ class AGVLA(nn.Module):
                 num_inference_timesteps=config.get("num_inference_timesteps", 50), # Inference steps for flow matching iterative refinement
                 num_categories=config.get("num_categories", 1) # Flow matching num categories (1 means continuous output vals, not discrete vals)
             )).to(self._device) # Move to device
+        
+        ### ADDED for ParallelActionHead implementation
+        # # Parallel action head, each of which are Evo-1 flowmatching action head
+        # elif action_head_type == "parallel_action_head":
+        #     # Define action dimensions
+        #     horizon = config.get("action_horizon", config.get("horizon", 16)) # Number of predicted future steps
+        #     per_action_dim = config.get("per_action_dim", 7) # Per action dimension (e.g. pose + gripper)
+        #     action_dim = horizon * per_action_dim
+            
+        #     # Store derived config values, for consistent use downstream
+        #     config["horizon"] = horizon
+        #     config["per_action_dim"] = per_action_dim
+        #     config["action_dim"] = action_dim
+            
+        #     # check in case inconsistent config (sanity check)
+        #     if action_dim != horizon * per_action_dim:
+        #         raise ValueError(f"action_dim ({action_dim}) ≠ horizon ({horizon}) × per_action_dim ({per_action_dim})")
+            
+        #     # Save key attributes for current model
+        #     self.horizon = horizon
+        #     self.per_action_dim = per_action_dim
+            
+        #     # Create action head
+        #     self.action_head = ParallelActionHead(config=SimpleNamespace(
+        #         embed_dim=config.get("embed_dim", 896), # Size of VLM output features
+        #         hidden_dim=config.get("hidden_dim", 1024), # Width of internal MLP/transformer
+        #         action_dim=action_dim, # Full output size
+        #         horizon=horizon, # Sequence length
+        #         per_action_dim=per_action_dim, # Per-step action size
+        #         state_dim=config.get("state_dim", 7), # Robot state input dim
+        #         state_hidden_dim=config.get("state_hidden_dim", 1024), # Internally projected state dim
+        #         num_heads=config.get("num_heads", 8), # Num transformer head
+        #         num_layers=config.get("num_layers", 8), # Num transformer layers
+        #         dropout=config.get("dropout", 0.0), # (Optional) transformer dropout
+        #         num_inference_timesteps=config.get("num_inference_timesteps", 50), # Inference steps for flow matching iterative refinement
+        #         num_categories=config.get("num_categories", 1) # Flow matching num categories (1 means continuous output vals, not discrete vals)
+        #     )).to(self._device) # Move to device
+        ###
         else:
             raise NotImplementedError(f"Unknown action_head: {action_head_type}")
         
@@ -141,7 +181,8 @@ class AGVLA(nn.Module):
         prompt: str,
         state_input: Union[list, torch.Tensor],
         return_cls_only: Union[bool, None] = None,
-        action_mask: Union[torch.Tensor, None] = None
+        action_mask: Union[torch.Tensor, None] = None#, # ADDED for parallelActionHead implementation
+        # embodiment_ids = None ### ADDED for ParallelActionHead implementation
     ) -> torch.Tensor:
 
         # Get VL embeddings
@@ -158,6 +199,7 @@ class AGVLA(nn.Module):
         
         # Predict actions
         return self.predict_action(fused_tokens, state_tensor, action_mask=action_mask)
+        # return self.predict_action(fused_tokens, state_tensor, action_mask=action_mask, embodiment_ids=embodiment_ids) ### ADDED for ParallelActionHead implementation
     
     ### Function for forward pass ###
     def forward(self, fused_tokens, state=None, actions_gt=None, action_mask=None, embodiment_ids=None):

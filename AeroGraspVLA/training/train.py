@@ -465,6 +465,7 @@ def train(config):
             with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
 
                 pred_velocity, noise = model(fused_tokens, state=states, actions_gt=actions_gt, action_mask=action_mask)
+                # pred_velocity, noise = model(fused_tokens, state=states, actions_gt=actions_gt, action_mask=action_mask, embodiment_ids=embodiment_ids) ### ADDED for ParallelActionHead implementation
                 
             target_velocity = (actions_gt - noise).view(actions_gt.shape[0], -1)
             
@@ -576,7 +577,7 @@ if __name__ == "__main__":
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--run_name", type=str, default="default_run")
     parser.add_argument("--vlm_name", type=str, default="OpenGVLab/InternVL3-1B")
-    parser.add_argument("--action_head", type=str, default="evo1_flowmatching", choices=["evo1_flowmatching"]) ### EDITED
+    parser.add_argument("--action_head", type=str, default="evo1_flowmatching", choices=["evo1_flowmatching", "parallel_action_head"]) ### EDITED
     parser.add_argument("--return_cls_only", action="store_true")
     parser.add_argument("--disable_wandb", action="store_true", help="Disable wandb logging.")
 
