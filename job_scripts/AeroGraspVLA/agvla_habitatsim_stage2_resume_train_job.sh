@@ -1,7 +1,7 @@
 #!/bin/bash
-#PBS -N agvla_habitatsim_stage1_train
+#PBS -N agvla_habitatsim_stage2_resume_train
 #PBS -l select=1:ncpus=8:ngpus=1:mem=32gb
-#PBS -l walltime=04:00:00
+#PBS -l walltime=24:00:00
 
 # Go to current working directory
 cd $PBS_O_WORKDIR
@@ -31,25 +31,28 @@ accelerate launch \
 --num_machines 1 \
 --deepspeed_config_file ds_config.json \
 train.py \
---run_name AGVLA_habitatsim_stage1_train \
+--run_name AGVLA_habitatsim_stage2_resume_train \
 --action_head evo1_flowmatching \
 --use_augmentation \
 --lr 1e-5 \
 --dropout 0.2 \
 --weight_decay 1e-3 \
---batch_size 16 \
+--batch_size 4 \
 --image_size 448 \
---max_steps 5000 \
+--max_steps 160000 \
 --log_interval 10 \
 --ckpt_interval 2500 \
 --warmup_steps 1000 \
 --grad_clip_norm 1.0 \
 --num_layers 8 \
 --horizon 50 \
+--finetune_vlm \
 --finetune_action_head \
 --disable_wandb \
 --vlm_name OpenGVLab/InternVL3-1B \
 --dataset_config_path config.yaml \
 --per_action_dim 24 \
 --state_dim 24 \
---save_dir /rds/general/user/ll1225/home/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1
+--save_dir /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_resume \
+--resume \
+--resume_path /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2/step_80000
