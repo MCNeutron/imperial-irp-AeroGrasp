@@ -10,7 +10,8 @@ MAX_INFERENCE_STEPS = 12
 SHARED_FOLDER = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/shared_folder" ### ADDED
 #TEST_VLA_FILE = "test_vla.json"
 #TEST_VLA_FILE = "/rds/general/user/ll1225/home/imperial_irp/indoorUAV_test/IndoorUAV-Agent/online_eval/vla_eval/test_vla.json" ### ADDED
-TEST_VLA_FILE = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/AeroGraspVLA/IndoorUAV_eval/test_vla_small.json" ### ADDED for HPC
+# TEST_VLA_FILE = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/AeroGraspVLA/IndoorUAV_eval/test_vla_small.json" ### ADDED for HPC hm3d_14
+TEST_VLA_FILE = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/AeroGraspVLA/IndoorUAV_eval/test_vla_hm3d_8_only.json" ### ADDED for HPC
 #VLA_INS_BASE = "./vla_ins"
 #VLA_INS_BASE = "/rds/general/user/ll1225/home/.cache/modelscope/hub/datasets/valyentine/Indoor_UAV/vla_ins" ### ADDED
 VLA_INS_BASE = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV/vla_ins" ### ADDED for HPC
@@ -27,7 +28,8 @@ INSTRUCTIONS_DIR = os.path.join(SHARED_FOLDER, "instructions")
 IMAGE_STORAGE = os.path.join(SHARED_FOLDER, "images")
 #INDOOR_UAV_BASE = "/data1/liux/Indoor_UAV"  # 新增基础路径
 #INDOOR_UAV_BASE = "/rds/general/user/ll1225/home/.cache/modelscope/hub/datasets/valyentine/Indoor_UAV" ### ADDED
-INDOOR_UAV_BASE = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV" ### ADDED for HPC
+# INDOOR_UAV_BASE = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV" ### ADDED for HPC
+INDOOR_UAV_BASE = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted" ### ADDED for HPC ALL data
 
 # 确保目录存在
 for dir_path in [CONTROLLER_INPUT, SIM_INPUT_DIR, SIM_OUTPUT_DIR,

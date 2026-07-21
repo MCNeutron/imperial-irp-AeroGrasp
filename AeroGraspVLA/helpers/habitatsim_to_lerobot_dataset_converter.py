@@ -47,10 +47,16 @@ print("PROJECT_ROOT: ", PROJECT_ROOT, flush=True) # DEBUGGING: Print project roo
 import IndoorUAV_eval.adapters as adapters
 
 ### Script definitions ###
-DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted" # Dataset directory
-VLA_INS_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted/vla_ins" # vla_ins directory
-CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot" # Converted dataset directory
-DEBUG_LOG_PATH = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/dataset_converter.log" # DEBUG text file directory
+# DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted" # Dataset directory
+# VLA_INS_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted/vla_ins" # vla_ins directory
+# CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot" # Converted dataset directory
+# DEBUG_LOG_PATH = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/dataset_converter.log" # DEBUG text file directory
+
+# FOR single trajectory testing (i.e. converting a single trajectory)
+DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_single_traj" # Dataset directory
+VLA_INS_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_single_traj/vla_ins" # vla_ins directory
+CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_single_traj_lerobot" # Converted dataset directory
+DEBUG_LOG_PATH = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/dataset_converter_single_hm3d_9.log" # DEBUG text file directory
 
 #########################
 ### Class definitions ###

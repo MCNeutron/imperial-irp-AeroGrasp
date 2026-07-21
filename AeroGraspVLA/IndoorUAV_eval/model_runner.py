@@ -19,7 +19,13 @@ HABITATSIM_EMBODIMENT_ID = 1 # Integer ID for HabitatSim embodiment
 # Define model checkpoint directory
 # CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/agvla_libero_evo1_weights" ### ADDED - For LIBERO
 # CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1/step_best" # From AGVLA (base Evo1 model) stage1 training
-CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2/step_best" # From AGVLA (base Evo1 model) stage2 training
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2/step_best" # From AGVLA (base Evo1 model) stage2 training
+CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_resume/step_best" # From AGVLA (base Evo1 model) stage2 resume1 training
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/only_hm3d_8_stage1/step_best" # From AGVLA (base Evo1 model) only hm3d_8 stage1 training
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/only_hm3d_2_stage1/step_best" # From AGVLA (base Evo1 model) only hm3d_2 stage1 training
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/only_hm3d_3_stage1/step_best" # From AGVLA (base Evo1 model) only hm3d_3 stage 1 training
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/only_hm3d_9_stage1/step_best" # From AGVLA (base Evo1 model) only hm3d_9 stage 1 training
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/only_hm3d_6_stage1/step_best" # From AGVLA (base Evo1 model) only hm3d_6 stage 1 training
 
 # Define DEBUGGING directories
 DEBUG_FOLDER_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/agvla_habitat" # Define debug folder directory
