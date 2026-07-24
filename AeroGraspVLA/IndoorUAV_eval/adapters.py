@@ -49,7 +49,7 @@ def process_hs_to_evo1_states(hs_state):
     hs_x, hs_y, hs_z, hs_yaw = hs_state # NOTE: this unpacking works whether input is a list, tuple, or numpy array (with EXACTLY 4 elements)
 
     # Convert HabitatSim yaw values from deg to rad (which Evo1-format expects)
-    hs_yaw = np.deg2rad(hs_yaw) # NOTE: UNCOMMENT FOR HABIATSIM DATASET CONVERSION TO LEROBOT FORMAT, BUT COMMENT FOR INFERENCE
+    # hs_yaw = np.deg2rad(hs_yaw) # NOTE: UNCOMMENT FOR HABIATSIM DATASET CONVERSION TO LEROBOT FORMAT, BUT COMMENT FOR INFERENCE
 
     # Build Evo1-format states
     evo1_states = np.array([hs_x, hs_y, hs_z, 0.0, 0.0, hs_yaw, 0.0, 0.0], dtype=np.float32)
@@ -67,7 +67,13 @@ def process_hs_to_evo1_imgs(hs_img):
     # NOTE: No need to convert each image to a list first (reducing unecessary overhead), as decode_image_from_list() converts them back to numpy arrays, and images from HabitatSim are already numpy arrays.
     ####################
     # Convert HabitatSim images from RGB to BGR (for feeding into Evo1 pipeline, i.e. into decode_image_from_list())
+    # hs_img = hs_img[:, ::-1, :]
+    # hs_img = np.flipud(hs_img)
     evo1_img = cv2.cvtColor(hs_img, cv2.COLOR_RGB2BGR)
+    # This is needed I think. Originally, LIBERO images (DIRECTLY FROM SIMULATOR) seem to be BGR, so decode_image_from_list() (in agvla_server.py) converts BGR2RGB for inference
+    #   Directly from sim is important, as training script does not seem to do any BGR2RGB conversions, meaning training data images are saved as RGB, and model is trained on RGB images
+    # However, for HabitatSim eval, get_img() from test_sim.py (which is called by sim_runner.py) does RGB to BGR conversion, probably because HabiatSim images are actually RGB here, but IndoorUAV model or HabitatSim pipeline needed BGR
+    # In our case, because we are using AGVLA model, which was trained on RGB images, conversion of BGR to RGB is what is needed.
 
     return evo1_img
 
@@ -130,18 +136,18 @@ def evo1_out_to_habitatsim_in(evo1_out, habitatsim_out):
     # Get the last action from Evo1 output horizon
     # NOTE that these actions are already denormalised from infer_from_json_dict(), so these outputs should be real-world deltas (not normalised deltas), and can be directly added to HabitatSim states
     # final_evo1_out = evo1_out[0]#[-1] # NOTE: VARIABLE NAME INCORRECT, SHOULD BE first_action, BUT NOT CHANGED YET FOR DEBUGGING
-    # final_evo1_out = np.sum(evo1_out[:3], axis=0) # TEST: Using a 50-step rollout sum for getting the final HabitatSim coordinate
+    final_evo1_out = np.sum(evo1_out[:2], axis=0) # TEST: Using a 50-step rollout sum for getting the final HabitatSim coordinate
     # TODO: Check if final_evo1_out (evo1 output) is a list of numpy arrays, and if this type of indexing is allowed
-    evo1_out = np.asarray(evo1_out)
-    final_evo1_out = np.array([
-        np.sum(evo1_out[:4, 0]), # x
-        np.sum(evo1_out[:4, 1]), # y
-        np.sum(evo1_out[:4, 2]), # z
-        np.sum(evo1_out[:2, 3]), # roll
-        np.sum(evo1_out[:2, 4]), # pitch
-        np.sum(evo1_out[:2, 5]), # yaw
-        np.sum(evo1_out[:2, 6]) # gripper
-    ])
+    # evo1_out = np.asarray(evo1_out)
+    # final_evo1_out = np.array([
+    #     np.sum(evo1_out[:4, 0]), # x
+    #     np.sum(evo1_out[:4, 1]), # y
+    #     np.sum(evo1_out[:4, 2]), # z
+    #     np.sum(evo1_out[:2, 3]), # roll
+    #     np.sum(evo1_out[:2, 4]), # pitch
+    #     np.sum(evo1_out[:2, 5]), # yaw
+    #     np.sum(evo1_out[:2, 6]) # gripper
+    # ])
 
     # Obtain the current HabitatSim state coordinates
     curr_state = habitatsim_out["observation/state"] # Current state
@@ -151,7 +157,8 @@ def evo1_out_to_habitatsim_in(evo1_out, habitatsim_out):
     evo1_dx, evo1_dy, evo1_dz = final_evo1_out[0:3] # x, y, z deltas
     evo1_dyaw = final_evo1_out[5] # Yaw delta
     # evo1_dyaw = np.rad2deg(evo1_dyaw) # Convert Evo1-format delta yaw from rad to deg (as HabitatSim uses angles in deg)
-    print(f"adapters output deltas: [{evo1_dx:.4f}, {evo1_dy:.4f}, {evo1_dz:.4f}, {evo1_dyaw:.4f}]", flush=True)
+    # print(f"adapters output deltas: [{evo1_dx:.4f}, {evo1_dy:.4f}, {evo1_dz:.4f}, {evo1_dyaw:.4f}]", flush=True) # DEBUGGING
+    # print(f"adapters output deltas: [{evo1_dx:.4f}, {evo1_dy:.4f}, {evo1_dz:.4f}, {final_evo1_out[3]:.4f}, {final_evo1_out[4]:.4f}, {evo1_dyaw:.4f}, {final_evo1_out[6]:.4f}]", flush=True) # DEBUGGING
     # evo1_dz = 0 # NOTE: DEBUGGING, comment out for real use
 
     # Construct HabitatSim-format input dictionary, calcualte the new HabitatSim state coordinates, as action inputs into HabitatSim

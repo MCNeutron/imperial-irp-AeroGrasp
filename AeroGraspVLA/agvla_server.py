@@ -19,7 +19,7 @@ from helpers.Normaliser import Normalizer
 PORT = 9000
 
 # Define model checkpoint directory
-CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/agvla_libero_evo1_weights" ### ADDED - For LIBERO
+# CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/agvla_libero_evo1_weights" ### ADDED - For LIBERO
 
 ### Function for loading model and normaliser ###
 # Specifically for inference
@@ -104,6 +104,7 @@ def infer_from_json_dict(data: dict, model, normalizer, embodiment_ids=None):
             # embodiment_ids = embodiment_ids ### ADDED for ParallelActionHead implementation
         )
         action = action.reshape(1, -1, 24) # Reshape output to batch x time horizon x action dim
+        print(f"Normalised actions: {action[0]}", flush=True) # DEBUGGING
         action = normalizer.denormalize_action(action[0]) # Denormalise actions. action[0] removes batch dim, which is not used in denormalisation
         return action.cpu().numpy().tolist() # Convert to JSON-friendly format
 

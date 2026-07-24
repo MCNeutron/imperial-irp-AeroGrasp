@@ -1,24 +1,10 @@
 {
-  "/hm3d_6/zepmXAdrpjR/traj_-2/vla_ins_6.json": {
+  "/hm3d_4/mWqBmEyXcXN/traj_1/vla_ins_1.json": {
     "difficulty": "hard",
-    "action_type": [
-      "turn",
-      "forward",
-      "up_down"
-    ]
-  },
-  "/hm3d_9/PB8eQHRTRRK/traj_1/vla_ins_4.json": {
-    "difficulty": "medium",
     "action_type": [
       "up_down",
-      "forward"
-    ]
-  },
-  "/hm3d_3/HY1NcmCgn3n/traj_2/vla_ins_4.json": {
-    "difficulty": "hard",
-    "action_type": [
-      "turn",
-      "forward"
+      "forward",
+      "turn"
     ]
   },
   "/hm3d_8/M8PMwoYQTUV/traj_-1/vla_ins_1.json": {

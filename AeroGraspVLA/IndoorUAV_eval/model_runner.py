@@ -20,12 +20,13 @@ HABITATSIM_EMBODIMENT_ID = 1 # Integer ID for HabitatSim embodiment
 # CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/agvla_libero_evo1_weights" ### ADDED - For LIBERO
 # CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1/step_best" # From AGVLA (base Evo1 model) stage1 training
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2/step_best" # From AGVLA (base Evo1 model) stage2 training
-CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_resume/step_best" # From AGVLA (base Evo1 model) stage2 resume1 training
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_resume/step_best" # From AGVLA (base Evo1 model) stage2 resume1 training
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/only_hm3d_8_stage1/step_best" # From AGVLA (base Evo1 model) only hm3d_8 stage1 training
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/only_hm3d_2_stage1/step_best" # From AGVLA (base Evo1 model) only hm3d_2 stage1 training
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/only_hm3d_3_stage1/step_best" # From AGVLA (base Evo1 model) only hm3d_3 stage 1 training
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/only_hm3d_9_stage1/step_best" # From AGVLA (base Evo1 model) only hm3d_9 stage 1 training
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/only_hm3d_6_stage1/step_best" # From AGVLA (base Evo1 model) only hm3d_6 stage 1 training
+CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/only_hm3d_4_stage1/step_best" # From AGVLA (base Evo1 model) only hm3d_4 stage 1 training
 
 # Define DEBUGGING directories
 DEBUG_FOLDER_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/agvla_habitat" # Define debug folder directory
@@ -33,6 +34,13 @@ os.makedirs(DEBUG_FOLDER_DIR, exist_ok=True) # Ensure the debug directory exists
 RUN_TIMESTAMP = time.strftime("%Y%m%d_%H%M%S")
 DEBUG_FILE_DIR = os.path.join(DEBUG_FOLDER_DIR, f"adapter_debug_{RUN_TIMESTAMP}.txt") # Define debug file directory
 print(f"model_runner.py debug log: {DEBUG_FILE_DIR}", flush=True) # Print debug file directory for ease of identification
+
+### Ground truth policy debugging ###
+# Define the ground truth policy to use for debugging whether the HabitatSim evaluation pipeline can recreate its training data trajectory (FROM NO MODEL INFERENCE)
+from helpers.ground_truth_policy import GroundTruthPolicy
+DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot/hm3d_4"
+ground_truth_policy = GroundTruthPolicy(DATASET_DIR) # Create the ground truth policy model
+###
 
 
 ### Function for initialising the trained model/policy ###
@@ -55,20 +63,24 @@ def infer(policy, normalizer, habitat_format_out): # ADDED
     # Convert HabitatSim outputs to Evo1-format inputs
     print("BEFORE input adapter...", flush=True)
     evo1_format_in = adapters.habitatsim_out_to_evo1_in(habitat_format_out)
-    print(f"Input adapter outputs: {evo1_format_in}", flush=True)
+    # print(f"Input adapter outputs: {evo1_format_in}", flush=True) # DEBUGGING
     print("AFTER input adapter...", flush=True)
 
     # Run inference (likely output shape: [T, 24])
     print("BEFORE evo1 infer...", flush=True)
     evo1_format_actions = agvla.infer_from_json_dict(evo1_format_in, policy, normalizer) ### IF using single FlowmatchingActionHead model architecture
+    # print_out = agvla.infer_from_json_dict(evo1_format_in, policy, normalizer) ### IF using single FlowmatchingActionHead model architecture
     # evo1_format_actions = agvla.infer_from_json_dict(evo1_format_in, policy, normalizer, embodiment_ids=torch.tensor([HABITATSIM_EMBODIMENT_ID], dtype=torch.long, device="cuda")) ### IF using ParallelActionHead model architecture
-    print(f"Evo1 infer outputs: {evo1_format_actions}", flush=True)
+    print_out = ground_truth_policy.get_action(habitat_format_out["task"]) # DEBUGGING, for testing ground truth policy (i.e. feed the training data actions directly into the HabitatSim eval pipeline)
+    # print(f"Evo1 infer outputs: {evo1_format_actions}", flush=True) # DEBUGGING
+    print(f"model preds: [{print_out[0][0]:.4}, {print_out[0][1]:.4}, {print_out[0][2]:.4}, {print_out[0][3]:.4}, {print_out[0][4]:.4}, {print_out[0][5]:.4}, {print_out[0][6]:.4}]", flush=True)
+    print(f"gt preds: [{evo1_format_actions[0][0]:.4}, {evo1_format_actions[0][1]:.4}, {evo1_format_actions[0][2]:.4}, {evo1_format_actions[0][3]:.4}, {evo1_format_actions[0][4]:.4}, {evo1_format_actions[0][5]:.4}, {evo1_format_actions[0][6]:.4}]", flush=True)
     print("AFTER evo1 infer...", flush=True)
 
     # Convert Evo1-format action outputs to HabitatSim actions
     print("BEFORE output adapter...", flush=True)
     habitat_format_actions = adapters.evo1_out_to_habitatsim_in(evo1_format_actions, habitat_format_out) # Also pass in habitat_format_out to calculate new state coordinates as actions in HabitatSim
-    print(f"Output adapter outputs: {habitat_format_actions}", flush=True)
+    # print(f"Output adapter outputs: {habitat_format_actions}", flush=True) # DEBUGGING
     print("AFTER output adapter...", flush=True)
 
     # DEBUGGING

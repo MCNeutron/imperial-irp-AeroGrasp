@@ -151,9 +151,10 @@ def load_states(posture_path):
 # So this function changes the 8D states ([x, y, z, angle1, angle2, angle3, gripper1, gripper2]) to [x, y, z, angle1, angle2, angle3, gripper] format
 #   gripper1 and gripper2 should always be the same magnitude and opposite in sign, ALTHOUGH during navigation in HabitatSim, they are both actually always 0, so just merge into a single 0
 #   angle1, angle2 and gripper are always 0, as in HabitatSim agent does not pitch/roll or have a gripper
-# Angles here are already in rad, so no need to convert
+# Angles here are already in deg, so convert to rads
 def format_libero_states(states):
     s = np.asarray(states, dtype=np.float32) # Convert hs_states for easier indexing
+    s[5] = np.deg2rad(s[5]) # Convert HabitatSim yaw DEGREE angles to RADIAN angles
     return np.array([s[0], s[1], s[2], s[3], s[4], s[5], 0.0], dtype=np.float32) # Format and return states
 
 
@@ -175,7 +176,16 @@ def compute_delta_actions(states_raw):
     # Loop over all timesteps/frames EXCEPT last frame (as each step needs a next state to compute delta actions)
     for t in range(len(states) - 1):
         delta = states[t+1] - states[t] # Calculate movement in x, y, z, and changes in yaw (like a velocity signal). Here, two numpy arrays are subtracted
+        delta[5] = (delta[5] + np.pi) % (2*np.pi) - np.pi # Wrap delta yaw changes, to ensure that shortest delta yaw change is recorded (e.g. 0.1 rad --> 6.1 rad is recorded as ~-0.28 rad, NOT +6 rad)
         actions.append(delta) # Store calculated delta action to total list of actions
+        
+        ### DEBUGGING
+        print(f">> Timestep {t} <<", flush=True)
+        print(f"states[t]: [{states[t]}]", flush=True)
+        print(f"states[t+1]: [{states[t+1]}]", flush=True)
+        print(f"delta: [{delta}]", flush=True)
+        print("--------------------")
+        ###
     
     actions.append(np.zeros_like(states[0])) # Last frame has no next state, so assign a zero action (as can't compute a real delta)
 
