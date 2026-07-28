@@ -180,11 +180,11 @@ def compute_delta_actions(states_raw):
         actions.append(delta) # Store calculated delta action to total list of actions
         
         ### DEBUGGING
-        print(f">> Timestep {t} <<", flush=True)
-        print(f"states[t]: [{states[t]}]", flush=True)
-        print(f"states[t+1]: [{states[t+1]}]", flush=True)
-        print(f"delta: [{delta}]", flush=True)
-        print("--------------------")
+        # print(f">> Timestep {t} <<", flush=True)
+        # print(f"states[t]: [{states[t]}]", flush=True)
+        # print(f"states[t+1]: [{states[t+1]}]", flush=True)
+        # print(f"delta: [{delta}]", flush=True)
+        # print("--------------------")
         ###
     
     actions.append(np.zeros_like(states[0])) # Last frame has no next state, so assign a zero action (as can't compute a real delta)
@@ -624,7 +624,7 @@ def main(scene_group_to_convert):
     global DEBUG_LOG_PATH # Ensure the module/script-level DEBUG_LOG_PATH variable is being modified (not a new local variable)
     DEBUG_LOG_PATH = Path(DEBUG_LOG_PATH) # Convert DEBUG_LOG_PATH to Path object
     debug_log_path_parent = DEBUG_LOG_PATH.parent # Obtain parent directory of DEBUG_LOG_PATH (i.e. the directory without last directory section)
-    DEBUG_LOG_PATH = debug_log_path_parent / f"data_converter_{scene_group_to_convert}.log" # Construct new DEBUG_LOG_PATH specific for current scene group
+    DEBUG_LOG_PATH = debug_log_path_parent / f"dataset_converter_{scene_group_to_convert}.log" # Construct new DEBUG_LOG_PATH specific for current scene group
 ###
 
     # Initialisations

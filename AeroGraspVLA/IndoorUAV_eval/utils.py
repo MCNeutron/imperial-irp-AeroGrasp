@@ -6,7 +6,7 @@ import numpy as np
 from magnum import Vector3, Quaternion, Rad
 from scipy.spatial.transform import Rotation
 
-SCENE_BASE_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV/scene_datasets" ### ADDED
+SCENE_BASE_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted/scene_datasets" ### ADDED
 
 def get_glb_path(group, scene):
     """根据group和scene获取glb路径"""

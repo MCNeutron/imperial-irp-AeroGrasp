@@ -139,17 +139,17 @@ class GroundTruthPolicy:
         # (Otherwise) extract the current action to execute, based on current step counter
         action = self.actions[self.current_step] # One step
         print(f"GT output deltas: [{action[0]:.4f}, {action[1]:.4f}, {action[2]:.4f}, {action[3]:.4f}, {action[4]:.4f}, {action[5]:.4f}, {action[6]:.4f}]", flush=True) # DEBUGGING
-        if self.current_step <= len(self.actions): # Two steps
-            action = self.actions[self.current_step] + self.actions[self.current_step+1] # Two steps
+        # if self.current_step <= len(self.actions): # Two steps
+        #     action = self.actions[self.current_step] + self.actions[self.current_step+1] # Two steps
         # if self.current_step+2 <= len(self.actions): # Three steps
         #     action = self.actions[self.current_step] + self.actions[self.current_step+1] + self.actions[self.current_step+2] # Three steps
-        else:
-            action = self.actions[self.current_step]
+        # else:
+        #     action = self.actions[self.current_step]
         # print(f"GT output deltas after sum: [{action[0]:.4f}, {action[1]:.4f}, {action[2]:.4f}, {action[3]:.4f}, {action[4]:.4f}, {action[5]:.4f}, {action[6]:.4f}]", flush=True) # DEBUGGING
         dummy_zeros = np.zeros((9,7), dtype=np.float32) # Create dummy zeros for appending to action, to create a 'fake' horizon prediction
         action = np.vstack((action[None,:], dummy_zeros)) # Append dummy zeros to action prediction
 
-        self.current_step += 2 # Increment current step counter after action execution
+        self.current_step += 1 # Increment current step counter after action execution
 
         # Return action for sending to HabitatSim
         return np.asarray(action, dtype=np.float32)

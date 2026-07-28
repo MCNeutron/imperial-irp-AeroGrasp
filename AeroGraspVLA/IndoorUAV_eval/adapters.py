@@ -98,6 +98,7 @@ def habitatsim_out_to_evo1_in(habitatsim_out):
 
     # Transform HabitatSim states into Evo1 state input format
     #state = curr_state
+    # curr_state[3] = np.deg2rad(curr_state[3]) # Convert yaw angle from degree to radians first, as HabitatSim output angles are in deg, but model expects rad angles
     state = process_hs_to_evo1_states(curr_state)
 
     ####################
@@ -135,8 +136,8 @@ def evo1_out_to_habitatsim_in(evo1_out, habitatsim_out):
     ####################
     # Get the last action from Evo1 output horizon
     # NOTE that these actions are already denormalised from infer_from_json_dict(), so these outputs should be real-world deltas (not normalised deltas), and can be directly added to HabitatSim states
-    # final_evo1_out = evo1_out[0]#[-1] # NOTE: VARIABLE NAME INCORRECT, SHOULD BE first_action, BUT NOT CHANGED YET FOR DEBUGGING
-    final_evo1_out = np.sum(evo1_out[:2], axis=0) # TEST: Using a 50-step rollout sum for getting the final HabitatSim coordinate
+    final_evo1_out = evo1_out[0]#[-1] # NOTE: VARIABLE NAME INCORRECT, SHOULD BE first_action, BUT NOT CHANGED YET FOR DEBUGGING
+    # final_evo1_out = np.sum(evo1_out[:1], axis=0) # TEST: Using a 50-step rollout sum for getting the final HabitatSim coordinate
     # TODO: Check if final_evo1_out (evo1 output) is a list of numpy arrays, and if this type of indexing is allowed
     # evo1_out = np.asarray(evo1_out)
     # final_evo1_out = np.array([
@@ -152,6 +153,8 @@ def evo1_out_to_habitatsim_in(evo1_out, habitatsim_out):
     # Obtain the current HabitatSim state coordinates
     curr_state = habitatsim_out["observation/state"] # Current state
     hs_x, hs_y, hs_z, hs_yaw = curr_state # Extract HabitatSim states
+    print(f"yaw before conversion: {hs_yaw}", flush=True)
+    # hs_yaw = np.deg2rad(hs_yaw) # Convert HabitatSim yaw angles from deg to rad (for computation), as HabitatSim angle output are in deg, but model is trained, and outputs angles in rads
 
     # Obtain the new HabitatSim state coordinate changes
     evo1_dx, evo1_dy, evo1_dz = final_evo1_out[0:3] # x, y, z deltas
@@ -160,6 +163,9 @@ def evo1_out_to_habitatsim_in(evo1_out, habitatsim_out):
     # print(f"adapters output deltas: [{evo1_dx:.4f}, {evo1_dy:.4f}, {evo1_dz:.4f}, {evo1_dyaw:.4f}]", flush=True) # DEBUGGING
     # print(f"adapters output deltas: [{evo1_dx:.4f}, {evo1_dy:.4f}, {evo1_dz:.4f}, {final_evo1_out[3]:.4f}, {final_evo1_out[4]:.4f}, {evo1_dyaw:.4f}, {final_evo1_out[6]:.4f}]", flush=True) # DEBUGGING
     # evo1_dz = 0 # NOTE: DEBUGGING, comment out for real use
+
+    print(f"hs_yaw: {hs_yaw}", flush=True)
+    print(f"evo1_dyaw: {evo1_dyaw}", flush=True)
 
     # Construct HabitatSim-format input dictionary, calcualte the new HabitatSim state coordinates, as action inputs into HabitatSim
     # Since HabitatSim pipeline obtains last output from a 10 horizon length action output, insert 9 dummy action outputs before the actual output
@@ -172,6 +178,7 @@ def evo1_out_to_habitatsim_in(evo1_out, habitatsim_out):
         (hs_y + evo1_dy), # The second output is the new y coordinate
         (hs_z + evo1_dz), # The third output is the new z coordinate
         ((hs_yaw + evo1_dyaw) % (2*np.pi))# 360) # The fifth output is the new yaw angle (%360 for dealing with yaw wrap-around, i.e. if angle exceeds 360 deg, do angle%360=angle_new)
+        # NOTE that HabitatSim expects angle inputs in deg, so convert from rad to deg
     ]], dtype=np.float32) # Make this shape (1,4)
 
     habitatsim_in = np.vstack((dummy_zeros, habitatsim_in)) # Append the dummy actions to the actual used action
