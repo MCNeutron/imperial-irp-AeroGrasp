@@ -345,7 +345,7 @@ def train(config):
     if accelerator.is_main_process:
         with open(TRAINING_METRICS_PATH, "w", newline="") as f:
             writer = csv.writer(f)
-            writer.writerow(["step", "epoch", "mse_loss", "mae_loss", "learning_rate", "grad_norm"])
+            writer.writerow(["step", "epoch", "mse_loss", "mse_x", "mse_y", "mse_z", "mse_angle1", "mse_angle2", "mse_angle3", "mse_gripper", "mae_loss", "learning_rate", "grad_norm"])
     ###
     
     # === WandB and Swanlab ===
@@ -480,6 +480,7 @@ def train(config):
 
             action_mask = action_mask.view(action_mask.shape[0], -1).to(dtype=pred_velocity.dtype)
             pred_velocity_mask = pred_velocity * action_mask
+            target_velocity = target_velocity * action_mask ### ADDED
             loss = loss_fn(pred_velocity_mask, target_velocity)
             scale_factor = action_mask.numel() / (action_mask.sum() + 1e-8)
             loss = loss * scale_factor
@@ -510,6 +511,13 @@ def train(config):
                 log_training_step(step, loss, total_norm, clipped_norm, scheduler, dataloader, accelerator)
 
                 ### ADDED
+                # Calculate per-action dimension losses
+                action_dim = actions_gt.shape[-1] # Get the action dimension
+                pred_dim = pred_velocity_mask.view(pred_velocity_mask.shape[0], -1, action_dim) # Get the predictions per dimension
+                target_dim = target_velocity.view(target_velocity.shape[0], -1, action_dim) # Get the targets per dimension
+
+                dim_losses = ((pred_dim - target_dim) ** 2).mean(dim=(0, 1)) * scale_factor # Calculate per-dimension losses (same way as calculated previously)
+
                 # Calculate MAE
                 mae = torch.mean(torch.abs(pred_velocity_mask - target_velocity))
                 mae = mae * scale_factor # Apply same scaling factor as that applied to MSE loss
@@ -522,6 +530,13 @@ def train(config):
                             step, # Step
                             (step / len(dataloader)), # = current_epoch
                             loss.item(), # MSE loss
+                            dim_losses[0].item(), # MSE loss x
+                            dim_losses[1].item(), # MSE loss y
+                            dim_losses[2].item(), # MSE loss z
+                            dim_losses[3].item(), # MSE loss angle1
+                            dim_losses[4].item(), # MSE loss angle2
+                            dim_losses[5].item(), # MSE loss angle3
+                            dim_losses[6].item(), # MSE loss gripper
                             mae.item(), # MAE
                             scheduler.get_last_lr()[0], # Learning rate
                             clipped_norm.item() # Gradient norm

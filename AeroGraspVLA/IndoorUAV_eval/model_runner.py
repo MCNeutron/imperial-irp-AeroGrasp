@@ -32,7 +32,17 @@ HABITATSIM_EMBODIMENT_ID = 1 # Integer ID for HabitatSim embodiment
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_resume/step_best" # From AGVLA (base Evo1 model) stage 2 resume training (with yaw wrapping logic in dataset creation)
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1_small_dataset/step_best" # From AGVLA (base Evo1 model) stage 1 training (smaller dataset)
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_small_dataset/step_best" # From AGVLA (base Evo1 model) stage 2 training (smaller dataset) (10000 steps only)
-CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_resume_small_dataset/step_best" # From AGVLA (base Evo1 model) stage 2 resume training (smaller dataset) (36570 steps only)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_resume_small_dataset/step_best" # From AGVLA (base Evo1 model) stage 2 resume training (smaller dataset) (36570 steps only)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1_10_horizon_single_traj/step_best" # From AGVLA (base Evo1 model) only hm3d_4 stage 1 training, with horizon of 10 (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_10_horizon_single_traj/step_best" # From AGVLA (base Evo1 model) only hm3d_4 stage 2 training, with horizon of 10 (only 51260 steps) (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_resume2_small_dataset/step_best" # From AGVLA (base Evo1 model) stage 2 resume 2 training (smaller dataset) (62500 steps only) (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1_10_horizon/step_best" # From AGVLA (base Evo1 model) stage 1 training, 10 horizon (smaller dataset) (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_10_horizon/step_best" # From AGVLA (base Evo1 model) stage 2 training, 10 horizon (smaller dataset) (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1_10_horizon_rel_state_test_rel/step_best" # From AGVLA (base Evo1 model) stage 1 training, 10 horizon, traj-rel states (only hm3d_1) (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1_10_horizon_masked_rel_state_test_rel/step_best" # From AGVLA (base Evo1 model) stage 1 training, 4 states, 10 horizon, traj-rel states (only hm3d_1) (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1_10_horizon_masked_rel_state_test_rel_only_single_traj_hm3d_4/step_best" # From AGVLA (base Evo1 model) stage 1 training, 4 states, 10 horizon, traj-rel states (only hm3d_4 1 traj) (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1_50_horizon_masked_rel_state_test_rel_only_single_traj_hm3d_4/step_best" # From AGVLA (base Evo1 model) stage 1 training, 4 states, 50 horizon, traj-rel states (only hm3d_4 1 traj) (on A40)
+CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_10_horizon_masked_rel_state_test_rel/step_best" # From AGVLA (base Evo1 model) stage 2 training, 4 states, 10 horizon, traj-rel states (only hm3d_1) (on A40)
 
 # Define DEBUGGING directories
 DEBUG_FOLDER_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/agvla_habitat" # Define debug folder directory
@@ -44,7 +54,8 @@ print(f"model_runner.py debug log: {DEBUG_FILE_DIR}", flush=True) # Print debug 
 ### Ground truth policy debugging ###
 # Define the ground truth policy to use for debugging whether the HabitatSim evaluation pipeline can recreate its training data trajectory (FROM NO MODEL INFERENCE)
 # from helpers.ground_truth_policy import GroundTruthPolicy
-# DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot/hm3d_4"
+# DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_single_traj_lerobot_rel/hm3d_4"
+# # DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_rel_pos_test_lerobot_rel/hm3d_1"
 # ground_truth_policy = GroundTruthPolicy(DATASET_DIR) # Create the ground truth policy model
 ###
 
@@ -69,7 +80,7 @@ def infer(policy, normalizer, habitat_format_out): # ADDED
     # Convert HabitatSim outputs to Evo1-format inputs
     print("BEFORE input adapter...", flush=True)
     evo1_format_in = adapters.habitatsim_out_to_evo1_in(habitat_format_out)
-    # print(f"Input adapter outputs: {evo1_format_in}", flush=True) # DEBUGGING
+    print(f'Input adapter outputs (states): {evo1_format_in["state"]}', flush=True) # DEBUGGING
     print("AFTER input adapter...", flush=True)
 
     # Run inference (likely output shape: [T, 24])
@@ -178,6 +189,11 @@ class ModelService:
                 self.instruction = data.get("instruction")
                 self.end_coords = data.get("end_coords")
                 self.last_start_image_path = None  # 重置图像路径
+
+                ### ADDED for trajectory-relative states logic
+                # Reset the starting state when a new episode/trajectory starts
+                adapters.reset_start_state()
+                ###
 
             # Get starting image path
             start_image_path = data.get("start_image_path")

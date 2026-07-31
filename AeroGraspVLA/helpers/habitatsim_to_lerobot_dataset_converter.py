@@ -55,8 +55,8 @@ import IndoorUAV_eval.adapters as adapters
 # FOR single trajectory testing (i.e. converting a single trajectory)
 DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_single_traj" # Dataset directory
 VLA_INS_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_single_traj/vla_ins" # vla_ins directory
-CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_single_traj_lerobot" # Converted dataset directory
-DEBUG_LOG_PATH = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/dataset_converter_single_hm3d_9.log" # DEBUG text file directory
+CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_single_traj_lerobot_rel" # Converted dataset directory
+DEBUG_LOG_PATH = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/dataset_converter_single_hm3d_1.log" # DEBUG text file directory
 
 #########################
 ### Class definitions ###
@@ -138,12 +138,47 @@ def load_states(posture_path):
         data = json.load(f)
     
     # Convert each frame into numpy arrays, of float32 (using list comprehension)
-    states = [
-        adapters.process_hs_to_evo1_states( np.asarray(frame, dtype=np.float32) ) # Apply the HabitatSim to Evo1-format image state transformation function before storing (changes states from 4D to 8D)
-        for frame in data
-    ]
+    states = [] # Initialise an empty list for storing the states
+
+    # Loop through all frames in the data
+    for frame in data:
+        # Apply the HabitatSim to Evo1-format image state transformation function before storing (changes states from 4D to 8D)
+        state = adapters.process_hs_to_evo1_states( np.asarray(frame, dtype=np.float32) )
+
+        # Convert yaw (6th element, index 5) from degrees to radians
+        state[5] = np.deg2rad(state[5])
+
+        # Append the current frame's state to list of states
+        states.append(state)
 
     return states
+
+
+### Helper function for converting absolute coordinate states to trajectory-relative coordinate states ###
+# This function converts the absolute world coordinates states for each vla_ins trajectory segment to coordinates relative to the segment's starting position
+# i.e. Converts [x, y, z, ..., yaw, ...] to [x-x_start, y-y_start, z-z_start, ..., yaw-yaw_start, ...]
+# INPUTS:
+#   States for current vla_ins trajectory segment, as a list of np arrays
+# OUTPUTS:
+#   Relative states for current vla_ins trajectory segment, as a list of np arrays
+def convert_to_relative_states(abs_states):
+    # Convert input states to np array for processing
+    abs_states = np.asarray(abs_states, dtype=np.float32)
+
+    # Get the reference pose, which is the first timestep state of current vla_ins trajectory segment
+    start_state = abs_states[0].copy()
+
+    # Copy so original absolute states are not modified
+    rel_states = abs_states.copy()
+
+    # Compute relative states (relative position to start)
+    rel_states[:, :] -= start_state[:] # state - state_start
+
+    # Wrap yaw difference, to ensure shortest yaw change is recorded
+    rel_states[:, 5] = (rel_states[:, 5] + np.pi) % (2*np.pi) - np.pi
+
+    # Return list of np arrays of relative states
+    return [ rel_states[i].astype(np.float32) for i in range(len(rel_states)) ]
 
 
 ### Helper function to format LIBERO states for computing LIBERO-format delta actions ###
@@ -151,10 +186,9 @@ def load_states(posture_path):
 # So this function changes the 8D states ([x, y, z, angle1, angle2, angle3, gripper1, gripper2]) to [x, y, z, angle1, angle2, angle3, gripper] format
 #   gripper1 and gripper2 should always be the same magnitude and opposite in sign, ALTHOUGH during navigation in HabitatSim, they are both actually always 0, so just merge into a single 0
 #   angle1, angle2 and gripper are always 0, as in HabitatSim agent does not pitch/roll or have a gripper
-# Angles here are already in deg, so convert to rads
+# Angles here are already in rad, so no need to convert to deg
 def format_libero_states(states):
-    s = np.asarray(states, dtype=np.float32) # Convert hs_states for easier indexing
-    s[5] = np.deg2rad(s[5]) # Convert HabitatSim yaw DEGREE angles to RADIAN angles
+    s = np.asarray(states, dtype=np.float32).copy() # Convert hs_states for easier indexing (COPY TO PREVENT MODIFYING ORIGINAL STATES)
     return np.array([s[0], s[1], s[2], s[3], s[4], s[5], 0.0], dtype=np.float32) # Format and return states
 
 
@@ -305,6 +339,7 @@ def load_trajectory(traj_dir, vla_ins_dir, scene_group, scene_id, traj_id):
 
         # Extract the start and end frames
         seg_states = states[start_frame:end_frame]
+        seg_states = convert_to_relative_states(seg_states) # Convert states from absolute position to relative position
         seg_imgs = images[start_frame:end_frame]
         seg_ref_imgs = [images[start_frame]] * (end_frame - start_frame) # The reference image for all timesteps in each segment is just the starting frame
         seg_actions = compute_delta_actions(seg_states) # Compute delta actions here, to ensure all segments end with a zero action (instead of just at the end of the original traj)

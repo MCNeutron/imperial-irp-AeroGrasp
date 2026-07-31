@@ -497,6 +497,14 @@ class LeRobotDataset(Dataset):
             action, self.max_action_dim
         )
 
+        ### ADDED
+        # Masking out the roll, pitch and gripper dimensions for training HabitatSim on datasets
+        # NOTE that action_mask returned above has shape [horizon, action_dim]. Must mask across all horizon steps.
+        action_mask[:,3] = False
+        action_mask[:,4] = False
+        action_mask[:,6] = False
+        ###
+
         prompt = item["prompt"] if item["prompt"] is not None else ""
         
         return {

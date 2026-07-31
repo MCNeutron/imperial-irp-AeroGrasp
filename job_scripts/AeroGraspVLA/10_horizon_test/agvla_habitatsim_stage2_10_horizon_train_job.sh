@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -N agvla_habitatsim_stage2_resume_train
+#PBS -N agvla_habitatsim_stage2_10_horizon_train
 #PBS -l select=1:ncpus=8:ngpus=1:mem=32gb
 #PBS -l walltime=24:00:00
 
@@ -31,7 +31,7 @@ accelerate launch \
 --num_machines 1 \
 --deepspeed_config_file ds_config.json \
 train.py \
---run_name AGVLA_habitatsim_stage2_resume2_train \
+--run_name AGVLA_habitatsim_stage2_train \
 --action_head evo1_flowmatching \
 --use_augmentation \
 --lr 1e-5 \
@@ -39,13 +39,13 @@ train.py \
 --weight_decay 1e-3 \
 --batch_size 4 \
 --image_size 448 \
---max_steps 80000 \
+--max_steps 40000 \
 --log_interval 10 \
 --ckpt_interval 2500 \
 --warmup_steps 1000 \
 --grad_clip_norm 1.0 \
 --num_layers 8 \
---horizon 50 \
+--horizon 10 \
 --finetune_vlm \
 --finetune_action_head \
 --disable_wandb \
@@ -53,6 +53,7 @@ train.py \
 --dataset_config_path config.yaml \
 --per_action_dim 24 \
 --state_dim 24 \
---save_dir /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_resume2_small_dataset \
+--save_dir /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_10_horizon \
 --resume \
---resume_path /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_resume_small_dataset/step_35000
+--resume_pretrain \
+--resume_path /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1_10_horizon/step_5000

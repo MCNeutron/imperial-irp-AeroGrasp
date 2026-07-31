@@ -21,6 +21,33 @@
 import numpy as np
 import cv2
 
+### Script definitions ###
+_START_STATE = None # Starting state for a new episode/trajectory, for trajectory-relative state logic
+
+### Function for resetting starting state for a new episode/traj, for traj-relative state logic
+def reset_start_state():
+    global _START_STATE # Configure this variable to refer to the module-level/global variable (not a new local variable)
+    _START_STATE = None # Reset the starting state
+
+### Function for computing trajectory-relative states
+def compute_rel_states(original_state):
+    global _START_STATE # Configure this variable to refer to the module-level/global variable (not a new local variable)
+
+    original_state = np.asarray(original_state, dtype=np.float32) # Convert input state to a np array
+    print(f"Before relative state computation: {original_state}", flush=True) # DEBUGGING
+
+    # If the starting state is not yet set (which means current step is the start of a new episode/traj evaluation)
+    if _START_STATE is None:
+        _START_STATE = original_state.copy() # Set the starting state to current state (COPY to prevent accidentally modifying original variable)
+
+    rel_state = original_state.copy() # Make a copy of current original state, to prevent accidentally modifying the original variable
+    rel_state -= _START_STATE # Compute trajectory-relative states, i.e. Relative state = Current state - Starting state
+
+    # Wrap yaw angles
+    rel_state[3] = (rel_state[3] + np.pi) % (2*np.pi) - np.pi
+
+    return rel_state
+
 ### Function for converting HabitatSim STATES to Evo1-format STATES ###
 def process_hs_to_evo1_states(hs_state):
     #####################
@@ -45,6 +72,9 @@ def process_hs_to_evo1_states(hs_state):
     #   gripper1: Position/state of left finger
     #   gripper2: Position/state of right finger
     #####################
+    # Convert absolute states to trajectory-relative states
+    hs_state = compute_rel_states(hs_state)
+    
     # Extract HabitatSim states
     hs_x, hs_y, hs_z, hs_yaw = hs_state # NOTE: this unpacking works whether input is a list, tuple, or numpy array (with EXACTLY 4 elements)
 
@@ -137,7 +167,7 @@ def evo1_out_to_habitatsim_in(evo1_out, habitatsim_out):
     # Get the last action from Evo1 output horizon
     # NOTE that these actions are already denormalised from infer_from_json_dict(), so these outputs should be real-world deltas (not normalised deltas), and can be directly added to HabitatSim states
     final_evo1_out = evo1_out[0]#[-1] # NOTE: VARIABLE NAME INCORRECT, SHOULD BE first_action, BUT NOT CHANGED YET FOR DEBUGGING
-    # final_evo1_out = np.sum(evo1_out[:1], axis=0) # TEST: Using a 50-step rollout sum for getting the final HabitatSim coordinate
+    # final_evo1_out = np.sum(evo1_out[:10], axis=0) # TEST: Using a 50-step rollout sum for getting the final HabitatSim coordinate
     # TODO: Check if final_evo1_out (evo1 output) is a list of numpy arrays, and if this type of indexing is allowed
     # evo1_out = np.asarray(evo1_out)
     # final_evo1_out = np.array([
