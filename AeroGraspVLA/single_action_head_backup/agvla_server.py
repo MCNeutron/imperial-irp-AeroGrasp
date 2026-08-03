@@ -20,8 +20,6 @@ PORT = 9000
 
 # Define model checkpoint directory
 # CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/agvla_libero_evo1_weights" ### ADDED - For LIBERO
-CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_libero/stage1_only_spatial/step_best" # From AGVLA (base Evo1 model) stage 2 training (only LIBERO spatial) (on A40)
-# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_libero/stage2_only_spatial/step_best" # From AGVLA (base Evo1 model) stage 2 training (only LIBERO spatial) (on A40)
 
 ### Function for loading model and normaliser ###
 # Specifically for inference
@@ -102,8 +100,8 @@ def infer_from_json_dict(data: dict, model, normalizer, embodiment_ids=None):
             image_mask=image_mask,
             prompt=prompt,
             state_input=norm_state,
-            action_mask=action_mask, ### ADDED for ParallelActionHead implementation
-            embodiment_ids = embodiment_ids ### ADDED for ParallelActionHead implementation
+            action_mask=action_mask#, ### ADDED for ParallelActionHead implementation
+            # embodiment_ids = embodiment_ids ### ADDED for ParallelActionHead implementation
         )
         action = action.reshape(1, -1, 24) # Reshape output to batch x time horizon x action dim
         print(f"Normalised actions: {action[0]}", flush=True) # DEBUGGING

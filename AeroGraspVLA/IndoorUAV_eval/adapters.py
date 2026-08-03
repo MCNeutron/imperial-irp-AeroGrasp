@@ -166,8 +166,8 @@ def evo1_out_to_habitatsim_in(evo1_out, habitatsim_out):
     ####################
     # Get the last action from Evo1 output horizon
     # NOTE that these actions are already denormalised from infer_from_json_dict(), so these outputs should be real-world deltas (not normalised deltas), and can be directly added to HabitatSim states
-    final_evo1_out = evo1_out[0]#[-1] # NOTE: VARIABLE NAME INCORRECT, SHOULD BE first_action, BUT NOT CHANGED YET FOR DEBUGGING
-    # final_evo1_out = np.sum(evo1_out[:10], axis=0) # TEST: Using a 50-step rollout sum for getting the final HabitatSim coordinate
+    # final_evo1_out = evo1_out[0]#[-1] # NOTE: VARIABLE NAME INCORRECT, SHOULD BE first_action, BUT NOT CHANGED YET FOR DEBUGGING
+    final_evo1_out = np.sum(evo1_out[:2], axis=0) # TEST: Using a 50-step rollout sum for getting the final HabitatSim coordinate
     # TODO: Check if final_evo1_out (evo1 output) is a list of numpy arrays, and if this type of indexing is allowed
     # evo1_out = np.asarray(evo1_out)
     # final_evo1_out = np.array([

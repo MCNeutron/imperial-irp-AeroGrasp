@@ -24,10 +24,6 @@ from torch.optim import AdamW
 import warnings
 
 ### ADDED
-### Script definitions ###
-# Integer IDs for the different embodiments
-from model.embodiment_id import LIBERO_EMBODIMENT_ID, HABITATSIM_EMBODIMENT_ID
-
 # Set up logging of training metrics
 import csv
 curr_time = datetime.now().strftime("%Y%m%d_%H%M%S") # Get current time (for placing in training metrics log file name)
@@ -76,55 +72,15 @@ def inspect_named_submodules(module_dict: dict, verbose: bool = True):
     logging.info("=" * 70)
 
 
-### ADDED for Parallel Action Head implementation
-# This function pads the target actions and corresponding action masks to the maximum action horizon, when different horizon lengths are used across different embodiments
-# INPUTS:
-#   Actions in the current batch
-#   Action masks for the actions
-#   Maximum horizon length (to pad to)
-# OUTPUTS:
-#   List of padded actions (where any action with a horizon less than the maximum horizon will have the extra horizon entries padded with zeros)
-#   List of corresponding padded action masks (NOTE that the masks here are JUST for masking out the extra padded horizons added, to prevent them contributing to training loss gradients)
-# This function achieves for the action mask:
-#   real timestep + valid dimension --> TRUE
-#   real_timestep + masked dimension --> FALSE (i.e. any masked dimensions in the ORIGINAL mask)
-#   padded timestep --> FALSE
-def pad_actions(actions, action_masks, max_horizon):
-    # Obtain the batch size and action dimensions
-    batch_size = len(actions)
-    action_dim = actions[0].shape[1]
-
-    # Initialise torch arrays for storing the padded actions and padded action masks
-    padded_actions = torch.zeros(batch_size, max_horizon, action_dim, dtype=actions[0].dtype,) # Initialise a padded action array with all entries as zero
-    padded_masks = torch.zeros(batch_size, max_horizon, action_dim, dtype=torch.bool,) # Initialise a mask array with all mask elements as False (will fill in which are True ones after)
-
-    # Loop through all individual actions and action mask pairs
-    for i, (a, m) in enumerate(zip(actions, action_masks)):
-        h = a.shape[0]
-        padded_actions[i, :h] = a # Place the current action into the initial h horizons. If current action's horizon length is smaller than the max horizon, the remaining horizon elements will be 0
-        padded_masks[i, :h] = m # Place the current action's mask into the initial h horizons. If the current action mask's horizon length is smaller than the max horizon, the remaining horizon elements (i.e. the padded timesteps) will remain as False (as initialised before)
-
-    return padded_actions, padded_masks # Return the resulting padded actions and corresponding padded mask
-###
-
 def custom_collate_fn(batch):
     prompts = [item["prompt"] for item in batch]
     images = [item["images"] for item in batch]
     states = torch.stack([item["state"] for item in batch], dim=0)
-    # actions = torch.stack([item["action"] for item in batch], dim=0) # NOTE: UNCOMMENT if NOT using Parallel Action Head implementation
-    # action_mask = torch.stack([item["action_mask"] for item in batch], dim=0) # NOTE: UNCOMMENT if NOT using Parallel Action Head implementation
+    actions = torch.stack([item["action"] for item in batch], dim=0)
+    action_mask = torch.stack([item["action_mask"] for item in batch], dim=0)
     image_masks = torch.stack([item["image_mask"] for item in batch], dim=0)
     state_mask = torch.stack([item["state_mask"] for item in batch], dim=0)
     embodiment_ids = torch.stack([item["embodiment_id"] for item in batch], dim=0)
-
-    ### ADDED for Parallel Action Head implementation. NOTE COMMENT this block out if NOT using Parallel Action Head implementation
-    actions = [item["action"] for item in batch]
-    action_mask = [item["action_mask"] for item in batch]
-    
-    print(f"In train.py: USING PARALLEL ACTION HEAD LOGIC! Check code here if not using Parallel Action Head implementation.")
-    max_horizon = 50# max(a.shape[0] for a in actions) # Obtain the maximum horizon length used (which will be the maximum horizon length found in the actions)
-    actions, action_mask = pad_actions(actions, action_mask, max_horizon) # Pad the actions and obtain the corresponding masks specifically only to mask out the extra padded actions
-    ###
 
     return {
         "prompts": prompts,
@@ -196,8 +152,6 @@ def prepare_dataset(config: dict) -> torch.utils.data.Dataset:
     image_size = get_with_warning(config, "image_size", 448)
     max_samples = get_with_warning(config, "max_samples_per_file", None)
     horizon = get_with_warning(config, "horizon", 50)
-    nav_horizon = get_with_warning(config, "nav_horizon", 10) ### ADDED for Parallel Action Head implementation
-    manip_horizon = get_with_warning(config, "manip_horizon", 50) ### ADDED for Parallel Action Head implementation
     binarize_gripper = get_with_warning(config, "binarize_gripper", False)
     use_augmentation = get_with_warning(config, "use_augmentation", False)
     if dataset_type == "lerobot":
@@ -211,8 +165,6 @@ def prepare_dataset(config: dict) -> torch.utils.data.Dataset:
             image_size=image_size,
             max_samples_per_file=max_samples,
             action_horizon=horizon,
-            nav_horizon=nav_horizon, ### ADDED for Parallel Action Head implementation
-            manip_horizon=manip_horizon, ### ADDED for Parallel Action Head implementation
             binarize_gripper=binarize_gripper,
             use_augmentation=use_augmentation
         )
@@ -393,12 +345,7 @@ def train(config):
     if accelerator.is_main_process:
         with open(TRAINING_METRICS_PATH, "w", newline="") as f:
             writer = csv.writer(f)
-            # writer.writerow(["step", "epoch", "mse_loss", "mse_x", "mse_y", "mse_z", "mse_angle1", "mse_angle2", "mse_angle3", "mse_gripper", "mae_loss", "learning_rate", "grad_norm"]) # FOR single action head implementation
-            # FOR parallel action head implementation
-            writer.writerow(["step", "epoch", "mse_loss",
-                             "nav_mse_x", "nav_mse_y", "nav_mse_z", "nav_mse_angle1", "nav_mse_angle2", "nav_mse_angle3", "nav_mse_gripper",
-                             "manip_mse_x", "manip_mse_y", "manip_mse_z", "manip_mse_angle1", "manip_mse_angle2", "manip_mse_angle3", "manip_mse_gripper",
-                             "mae_loss", "learning_rate", "grad_norm"])
+            writer.writerow(["step", "epoch", "mse_loss", "mse_x", "mse_y", "mse_z", "mse_angle1", "mse_angle2", "mse_angle3", "mse_gripper", "mae_loss", "learning_rate", "grad_norm"])
     ###
     
     # === WandB and Swanlab ===
@@ -517,8 +464,8 @@ def train(config):
 
             with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
 
-                # pred_velocity, noise = model(fused_tokens, state=states, actions_gt=actions_gt, action_mask=action_mask)
-                pred_velocity, noise = model(fused_tokens, state=states, actions_gt=actions_gt, action_mask=action_mask, embodiment_ids=embodiment_ids) ### ADDED for ParallelActionHead implementation
+                pred_velocity, noise = model(fused_tokens, state=states, actions_gt=actions_gt, action_mask=action_mask)
+                # pred_velocity, noise = model(fused_tokens, state=states, actions_gt=actions_gt, action_mask=action_mask, embodiment_ids=embodiment_ids) ### ADDED for ParallelActionHead implementation
                 
             target_velocity = (actions_gt - noise).view(actions_gt.shape[0], -1)
             
@@ -531,20 +478,9 @@ def train(config):
                             f"action_mask: {action_mask}")
             
 
-            ### DEBUGGING
-            print(f">> In train.py <<")
-            print(f"pred_velocity shape: {pred_velocity.shape}", flush=True)
-            print(f"target_velocity shape: {target_velocity.shape}", flush=True)
-            print(f"action_mask shape: {action_mask.shape}", flush=True)
-            # Print "for this sample, how many timesteps is this action dimension active?"
-            print(f"action_mask sum: {action_mask.sum(dim=1)[:5]}", flush=True) # For HabitatSim data samples, MUST see 240, and for LIBERO samples, MUST see 1200! They can't all be the same, or it means masking is not working (not masking out padded horizon dims)
-            print(f"action_mask sum (num valid dims): {action_mask.sum(dim=2)[:5]}", flush=True) # Prints how many valid dims each timestep has
-            print(f"action_mask sum (total num of active entries): {action_mask.view(action_mask.size(0), -1).sum(dim=1)}", flush=True) # Print total num of active entries per sample
-            ###
-
             action_mask = action_mask.view(action_mask.shape[0], -1).to(dtype=pred_velocity.dtype)
             pred_velocity_mask = pred_velocity * action_mask
-            target_velocity = target_velocity * action_mask ### ADDED, for masking out roll, pitch and gripper dimensions when training on HabitatSim datasets
+            target_velocity = target_velocity * action_mask ### ADDED
             loss = loss_fn(pred_velocity_mask, target_velocity)
             scale_factor = action_mask.numel() / (action_mask.sum() + 1e-8)
             loss = loss * scale_factor
@@ -580,60 +516,11 @@ def train(config):
                 pred_dim = pred_velocity_mask.view(pred_velocity_mask.shape[0], -1, action_dim) # Get the predictions per dimension
                 target_dim = target_velocity.view(target_velocity.shape[0], -1, action_dim) # Get the targets per dimension
 
+                dim_losses = ((pred_dim - target_dim) ** 2).mean(dim=(0, 1)) * scale_factor # Calculate per-dimension losses (same way as calculated previously)
+
                 # Calculate MAE
                 mae = torch.mean(torch.abs(pred_velocity_mask - target_velocity))
                 mae = mae * scale_factor # Apply same scaling factor as that applied to MSE loss
-
-                ### FOR SINGLE ACTION HEAD IMPLEMENTATION ###
-                # dim_losses = ((pred_dim - target_dim) ** 2).mean(dim=(0, 1)) * scale_factor # Calculate per-dimension losses (same way as calculated previously)
-
-                # # Log training metrics (above is logging in wandb, here it is logging to a csv file)
-                # if accelerator.is_main_process:
-                #     with open(TRAINING_METRICS_PATH, "a", newline="") as f:
-                #         writer = csv.writer(f)
-                #         writer.writerow([
-                #             step, # Step
-                #             (step / len(dataloader)), # = current_epoch
-                #             loss.item(), # MSE loss
-                #             dim_losses[0].item(), # MSE loss x
-                #             dim_losses[1].item(), # MSE loss y
-                #             dim_losses[2].item(), # MSE loss z
-                #             dim_losses[3].item(), # MSE loss angle1
-                #             dim_losses[4].item(), # MSE loss angle2
-                #             dim_losses[5].item(), # MSE loss angle3
-                #             dim_losses[6].item(), # MSE loss gripper
-                #             mae.item(), # MAE
-                #             scheduler.get_last_lr()[0], # Learning rate
-                #             clipped_norm.item() # Gradient norm
-                #         ])
-                ######
-
-                ### FOR PARALLEL ACTION HEAD IMPLEMENTATION ###
-                # Create action masks, which selects samples
-                nav_mask = embodiment_ids == HABITATSIM_EMBODIMENT_ID # Form NAVIGATION mask
-                manip_mask = embodiment_ids == LIBERO_EMBODIMENT_ID # Form MANIPULATION mask
-
-                # Calculate scale factor for each action head
-                # NOTE that these calculation work because the action mask for EACH navigation/manipulation are the same
-                nav_scale_factor = action_mask[nav_mask].numel() / (action_mask[nav_mask].sum() + 1e-8)
-                manip_scale_factor = action_mask[manip_mask].numel() / (action_mask[manip_mask].sum() + 1e-8)
-
-                # Compute per-dimension losses for each action head
-                # FOR navigation datasets
-                if nav_mask.any():
-                    nav_pred_dim = pred_dim[nav_mask] # Extract the per-dimension predicted velocities
-                    nav_target_dim = target_dim[nav_mask] # Extract the per-dimension target velocities
-                    nav_dim_losses = ((nav_pred_dim - nav_target_dim)**2).mean(dim=(0,1)) * nav_scale_factor # Calculate MSE loss (NOTE that target_velocity is already masked above, so MSE calculation will be done with those unecessary dimensions masked aleady)
-                else: # IF no navigation datasets
-                    nav_dim_losses = torch.zeros(7)
-
-                # FOR manipulation datasets
-                if manip_mask.any():
-                    manip_pred_dim = pred_dim[manip_mask] # Extract the per-dimension predicted velocities
-                    manip_target_dim = target_dim[manip_mask] # Extract the per-dimension target velocities
-                    manip_dim_losses = ((manip_pred_dim - manip_target_dim)**2).mean(dim=(0,1)) * manip_scale_factor # Calculate MSE loss
-                else: # IF no manipulation datasets
-                    manip_dim_losses = torch.zeros(7)
 
                 # Log training metrics (above is logging in wandb, here it is logging to a csv file)
                 if accelerator.is_main_process:
@@ -642,26 +529,18 @@ def train(config):
                         writer.writerow([
                             step, # Step
                             (step / len(dataloader)), # = current_epoch
-                            loss.item(), # Overall MSE loss
-                            nav_dim_losses[0].item(), # Navigation MSE loss x
-                            nav_dim_losses[1].item(), # Navigation MSE loss y
-                            nav_dim_losses[2].item(), # Navigation MSE loss z
-                            nav_dim_losses[3].item(), # Navigation MSE loss angle1
-                            nav_dim_losses[4].item(), # Navigation MSE loss angle2
-                            nav_dim_losses[5].item(), # Navigation MSE loss angle3
-                            nav_dim_losses[6].item(), # Navigation MSE loss gripper
-                            manip_dim_losses[0].item(), # Manipulation MSE loss x
-                            manip_dim_losses[1].item(), # Manipulation MSE loss y
-                            manip_dim_losses[2].item(), # Manipulation MSE loss z
-                            manip_dim_losses[3].item(), # Manipulation MSE loss angle1
-                            manip_dim_losses[4].item(), # Manipulation MSE loss angle2
-                            manip_dim_losses[5].item(), # Manipulation MSE loss angle3
-                            manip_dim_losses[6].item(), # Manipulation MSE loss gripper
+                            loss.item(), # MSE loss
+                            dim_losses[0].item(), # MSE loss x
+                            dim_losses[1].item(), # MSE loss y
+                            dim_losses[2].item(), # MSE loss z
+                            dim_losses[3].item(), # MSE loss angle1
+                            dim_losses[4].item(), # MSE loss angle2
+                            dim_losses[5].item(), # MSE loss angle3
+                            dim_losses[6].item(), # MSE loss gripper
                             mae.item(), # MAE
                             scheduler.get_last_lr()[0], # Learning rate
                             clipped_norm.item() # Gradient norm
                         ])
-                ######
                 ###
    
             # === Save best checkpoint ===
@@ -753,8 +632,6 @@ if __name__ == "__main__":
     parser.add_argument("--per_action_dim", type=int, default=7)
     parser.add_argument("--state_dim", type=int, default=7)
     parser.add_argument("--horizon", type=int, default=16)
-    parser.add_argument("--nav_horizon", type=int, default=10) ### ADDED for Parallel Action Head implementation, for setting the navigation action head horizon
-    parser.add_argument("--manip_horizon", type=int, default=50) ### ADDED for Parallel Action Head implementation for setting the manipulation action head horizon
     parser.add_argument("--num_layers", type=int, default=8)
     parser.add_argument("--num_workers", type=int, default=4)
     # dropout

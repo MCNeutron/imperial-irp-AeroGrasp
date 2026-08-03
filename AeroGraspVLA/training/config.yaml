@@ -30,13 +30,13 @@ data_groups:
   # This is an example of how to configure multi-task training for LIBERO.
   # The libero dataset is from https://huggingface.co/collections/IPEC-COMMUNITY/libero-benchmark-dataset
 
-  # libero_franka:
-  #   libero_spatial_no_noops_1.0.0_lerobot:
-  #     # path: /share/taolin/datasets/libero/libero_spatial_no_noops_1.0.0_lerobot
-  #     path: /rds/general/user/ll1225/home/datasets/evo1_libero_datasets/libero_spatial ### ADDED
-  #     view_map:
-  #       image_1: observation.images.image
-  #       image_2: observation.images.wrist_image
+  libero_franka:
+    libero_spatial_no_noops_1.0.0_lerobot:
+      # path: /share/taolin/datasets/libero/libero_spatial_no_noops_1.0.0_lerobot
+      path: /rds/general/user/ll1225/home/datasets/evo1_libero_datasets/libero_spatial ### ADDED
+      view_map:
+        image_1: observation.images.image
+        image_2: observation.images.wrist_image
 
   #   libero_object_no_noops_1.0.0_lerobot:
   #     # path: /share/taolin/datasets/libero/libero_object_no_noops_1.0.0_lerobot

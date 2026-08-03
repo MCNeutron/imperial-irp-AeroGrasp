@@ -23,7 +23,7 @@ class Args():
     #SERVER_URL = "ws://0.0.0.0:9000"
     SERVER_URL = "ws://127.0.0.1:9000" ### ADDED
     #ckpt_name = f"Evo1_libero_all"  
-    ckpt_name = f"AGVLA_libero_all_test_19june" ### ADDED
+    ckpt_name = f"AGVLA_libero_spatial_test_2aug"#all_test_19june" ### ADDED
     task_suites = ["libero_spatial", "libero_object", "libero_goal", "libero_10"] 
     log_file = f"./log_file/{ckpt_name}.txt"
     num_episodes = 10

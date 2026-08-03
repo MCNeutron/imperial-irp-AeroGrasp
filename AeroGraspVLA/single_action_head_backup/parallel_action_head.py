@@ -1,14 +1,14 @@
 ### Import packages ###
 import torch
 import torch.nn as nn
-from copy import deepcopy
 
 # Load modules
-from model.flow_matching import FlowmatchingActionHead # Evo1 action head implementation
+from flow_matching import FlowmatchingActionHead # Evo1 action head implementation
 
 ### Script definitions ###
 # Integer IDs for the different embodiments
-from model.embodiment_id import LIBERO_EMBODIMENT_ID, HABITATSIM_EMBODIMENT_ID
+LIBERO_EMBODIMENT_ID = 0
+HABITATSIM_EMBODIMENT_ID = 1
 
 ### Class definition ###
 # This class should expose the same public interface as FlowmatchingActionHead
@@ -17,26 +17,12 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
     def __init__(self, config):
         super().__init__()
 
-        # Create the configs for both the navigation action haed and manipulation action head
-        nav_config = deepcopy(config) # Copy the input configs
-        nav_config.horizon = config.nav_horizon # Set the horizon length specifically for this action head
-        nav_config.action_dim = config.nav_horizon * config.per_action_dim # Calculate the action dimension specifically for this action head
-
-        manip_config = deepcopy(config) # Copy the input configs
-        manip_config.horizon = config.manip_horizon # Set the horizon length specifically for this action head
-        manip_config.action_dim = config.manip_horizon * config.per_action_dim # Calculate the action dimension specifically for this action head
-
         # Define parallel action heads, creating two independent copies of the flow matching action head
-        self.nav_head = FlowmatchingActionHead(nav_config) # NAVIGATION HEAD, for HabitatSim dataset
-        self.manip_head = FlowmatchingActionHead(manip_config) # MANIPULATION HEAD, for LIBERO dataset
-
-        # Store the horizon lengths for each action haed
-        self.nav_horizon = config.nav_horizon
-        self.manip_horizon = config.manip_horizon
+        self.nav_head = FlowmatchingActionHead(config) # NAVIGATION HEAD, for HabitatSim dataset
+        self.manip_head = FlowmatchingActionHead(config) # MANIPULATION HEAD, for LIBERO dataset
 
         # Get output action dims (using manipulation head/LIBERO head)
-        # self.action_dim = self.manip_head.action_dim
-        self.action_dim = max(self.nav_head.action_dim, self.manip_head.action_dim,) # Get the largest action dimension out of both action heads. This is because ParallelActionHead exposes a single interface to the rest of the model pipeline, so they should match.
+        self.action_dim = self.manip_head.action_dim
     
     ### Define forward function ###
     # Inputs have shape:
@@ -89,12 +75,6 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
         nav_mask = embodiment_id == HABITATSIM_EMBODIMENT_ID # Form NAVIGATION mask
         manip_mask = embodiment_id == LIBERO_EMBODIMENT_ID # Form MANIPULATION mask
 
-        ### DEBUGGING
-        print(f"embodiment_id: {embodiment_id}", flush=True)
-        print(f"nav_mask: {nav_mask}", flush=True)
-        print(f"manip_mask: {manip_mask}", flush=True)
-        ###
-
         # Initialise output variables for storing outputs, if it is still None (i.e. output variable is not yet used)
         # E.g. if actions_gt shape is [4,50,24], then pred_velocity = [sample0 empty, sample1 empty, sample2 empty, sample3 empty]
         # pred_velocity has the exact same shape as actions_gt
@@ -108,31 +88,12 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
             nav_pred, nav_noise = self.nav_head( # Only send HabitatSim samples into navigation action expert (by doing [nav_mask], no LIBERO samples ever enter action head)
                 fused_tokens = fused_tokens[nav_mask],
                 state = state[nav_mask] if state is not None else None,
-                actions_gt = actions_gt[nav_mask, :self.nav_horizon], # ONLY keep the ground truth actions corresponding to this action head's horizon length (as action_gt would have been padded to the max horizon length of both action heads, in custom_collate_fn in train.py)
+                actions_gt = actions_gt[nav_mask],
                 embodiment_id = torch.zeros(nav_mask.sum(), dtype=torch.long, device=device),#embodiment_id[nav_mask], # Set embodiment_id to 0 (default) WITHIN each Flowmatching action head, now that data is routed to correct head
                 state_mask = state_mask[nav_mask] if state_mask is not None else None,
-                action_mask = action_mask[nav_mask, :self.nav_horizon] if action_mask is not None else None, # Slice action mask for same reason as slicing actions_gt
+                action_mask = action_mask[nav_mask] if action_mask is not None else None,
             )   
             
-            ### DEBUGGING
-            print(f">> In parallel_action_head.py: BEFORE padding predictions <<", flush=True)
-            print(f"nav_pred shape: {nav_pred.shape}", flush=True) # Outputs show that pred_velocity is a FLATTENED tensor of [B, H*D]
-            print(f"nav_noise shape: {nav_noise.shape}", flush=True) # Outputs show that noise is an UNFLATTENED tensor of [B, H, D]
-            ###
-
-            # IF the action horizon of the navigation head output is smaller than the maximum of both action heads, pad the extra horizon dimensions (for noise) and feature dims (for preds) (so that both action outputs have matching shapes and can be appended)
-            if self.nav_horizon < self.manip_horizon:
-                pad = self.manip_head.action_dim - self.nav_head.action_dim # Get the difference between the action dimensions
-                nav_pred = torch.cat([nav_pred, nav_pred.new_zeros(nav_pred.size(0), pad)], dim=1,) # Pad the extra dimensions with 0. Pad like this as nav_pred is 2D, so padding along the ACTION DIMS
-                pad = self.manip_horizon - self.nav_horizon # Get the difference between the action horizons
-                nav_noise = torch.cat([nav_noise, nav_noise.new_zeros(nav_noise.size(0), pad, nav_noise.size(2))], dim=1,) # Pad the extra dimensions with 0. Pad like this as nav_noise is 3D, so padding along the HORIZON
-
-                ### DEBUGGING
-                print(f">> In parallel_action_head.py: AFTER padding predictions <<", flush=True)
-                print(f"nav_pred shape: {nav_pred.shape}", flush=True)
-                print(f"nav_noise shape: {nav_noise.shape}", flush=True)
-                ###
-
             # Insert navigation action head outputs/predictions into ONLY corresponding navigation dataset sample indices
             pred_outputs.append(nav_pred)
             noise_outputs.append(nav_noise)
@@ -142,40 +103,20 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
             manip_pred, manip_noise = self.manip_head(
                 fused_tokens = fused_tokens[manip_mask],
                 state = state[manip_mask] if state is not None else None,
-                actions_gt = actions_gt[manip_mask, :self.manip_horizon], # ONLY keep the ground truth actions corresponding to this action head's horizon length (as action_gt would have been padded to the max horizon length of both action heads, in custom_collate_fn in train.py)
+                actions_gt = actions_gt[manip_mask],
                 embodiment_id = torch.zeros(manip_mask.sum(), dtype=torch.long, device=device),#embodiment_id[manip_mask], # Set embodiment_id to 0 (default) WITHIN each Flowmatching action head, now that data is routed to correct head
                 state_mask = state_mask[manip_mask] if state_mask is not None else None,
-                action_mask = action_mask[manip_mask, :self.manip_horizon] if action_mask is not None else None, # Slice action mask for same reason as slicing actions_gt
+                action_mask = action_mask[manip_mask] if action_mask is not None else None,
             )
-
-            ### DEBUGGING
-            print(f">> In parallel_action_head.py: BEFORE padding predictions <<", flush=True)
-            print(f"manip_pred shape: {manip_pred.shape}", flush=True)
-            print(f"manip_noise shape: {manip_noise.shape}", flush=True)
-            ###
-
-            # IF the action horizon of the manipulation head output is smaller than the maximum of both action heads, pad the extra horizon dimensions (for noise) and feature dims (for preds) (so that both action outputs have matching shapes and can be appended)
-            if self.manip_horizon < self.nav_horizon:
-                pad = self.nav_head.action_dim - self.manip_head.action_dim # Get the difference between the action dimensions
-                manip_pred = torch.cat([manip_pred, manip_pred.new_zeros(manip_pred.size(0), pad)], dim=1,) # Pad the extra dimensions with 0. Pad like this as manip_pred is 2D, so padding along the ACTION DIMS
-                pad = self.nav_horizon - self.manip_horizon # Get the difference between the action horizons
-                manip_noise = torch.cat([manip_noise, manip_noise.new_zeros(manip_noise.size(0), pad, manip_noise.size(2))], dim=1,) # Pad the extra dimensions with 0. Pad like this as manip_noise is 3D, so padding along the HORIZON
-
-                ### DEBUGGING
-                print(f">> In parallel_action_head.py: AFTER padding predictions <<", flush=True)
-                print(f"manip_pred shape: {manip_pred.shape}", flush=True)
-                print(f"manip_noise shape: {manip_noise.shape}", flush=True)
-                ###
 
             # Store manipulation action head outputs into corresponding manipulation dataset sample indices
             pred_outputs.append(manip_pred)
             noise_outputs.append(manip_noise)
             sample_idx.append(torch.where(manip_mask)[0].to(device))
         
-        # Safety check for empty batches and invalid embodiment IDs (otherwise torch.cat([]) will crash)
-        known_ids = nav_mask | manip_mask # Perform elementwise logical OR on the masks. If an embodiment_id is neither of the known HABITATSIM_EMBODIMENT_ID or LIBERO_EMBODIMENT_ID, then that element will be False
-        if not known_ids.all(): # If there are any unknown embodiment IDs
-            raise ValueError(f"Unknown embodiment IDs found: {torch.unique(embodiment_id[~known_ids])}") # Print the unknown embodiment IDs
+        # Safety check for empty batches (otherwise torch.cat([]) will crash)
+        if len(pred_outputs) == 0:
+            raise ValueError("Batch contains no known embodiment IDs")
         
         ### Reconstruct outputs ###
         pred_velocity = torch.cat(pred_outputs, dim=0)
@@ -186,12 +127,6 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
         sort_idx = torch.argsort(sample_idx)
         pred_velocity = pred_velocity[sort_idx]
         noise = noise[sort_idx]
-
-        ### DEBUGGING
-        print(f">> In parallel_action_head.py: AFTER reconstructing the batch <<")
-        print(f"Final pred_velocity shape: {pred_velocity.shape}", flush=True)
-        print(f"Final noise shape: {noise.shape}", flush=True)
-        ###
 
         # Return the predicted velocity and noise for all samples in the batch
         # Here, output is restored to the original ordering (IMPORTANT as loss function expects the prediction order to match)
@@ -223,7 +158,7 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
 
         # Initialise actions output
         # E.g. [[0,0,...], [0,0,...], [0,0,...], [0,0,...]]
-        actions = torch.zeros(
+        actions = torch.empty(
             B,
             self.action_dim,
             device = device,
@@ -232,24 +167,20 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
         # Inference routing logic
         # Run forward pass depending on which dataset input data is from, and fill in actions
         if nav_mask.any(): # If data is from HabitatSim dataset (for navigation tasks)
-            nav_actions = self.nav_head.get_action(
+            actions[nav_mask] = self.nav_head.get_action(
                 fused_tokens = fused_tokens[nav_mask],
                 state = state[nav_mask] if state is not None else None,
                 embodiment_id = torch.zeros(nav_mask.sum(), dtype=torch.long, device=device),#embodiment_id[nav_mask], # Set embodiment_id to 0 (default) WITHIN each Flowmatching action head, now that data is routed to correct head
-                action_mask = action_mask[nav_mask, :self.nav_horizon] if action_mask is not None else None, # Only keep the actions corresponding to this action head's horizon length (as outputs would be in the max horizon length of both action heads)
+                action_mask = action_mask[nav_mask] if action_mask is not None else None,
             )
 
-            actions[nav_mask, :self.nav_head.action_dim] = nav_actions # IF the output action dimension is smaller than the maximum used across both action heads to store actions, place the shorter output actions into the full action array
-
         if manip_mask.any(): # If data is from LIBERO dataset (for manipulation tasks)
-            manip_actions = self.manip_head.get_action(
+            actions[manip_mask] = self.manip_head.get_action(
                 fused_tokens = fused_tokens[manip_mask],
                 state = state[manip_mask] if state is not None else None,
                 embodiment_id = torch.zeros(manip_mask.sum(), dtype=torch.long, device=device),#embodiment_id[manip_mask], # Set embodiment_id to 0 (default) WITHIN each Flowmatching action head, now that data is routed to correct head
-                action_mask = action_mask[manip_mask, :self.manip_horizon] if action_mask is not None else None, # Only keep the actions corresponding to this action head's horizon length (as outputs would be in the max horizon length of both action heads)
+                action_mask = action_mask[manip_mask] if action_mask is not None else None,
             )
-
-            actions[manip_mask, :self.manip_head.action_dim] = manip_actions # IF the output action dimension is smaller than the maximum used across both action heads to store actions, place the shorter output actinos in to the full action array
         
         if not nav_mask.any() and not manip_mask.any():
             raise ValueError(f"Unknown embodiment IDs: {torch.unique(embodiment_id).tolist()}")

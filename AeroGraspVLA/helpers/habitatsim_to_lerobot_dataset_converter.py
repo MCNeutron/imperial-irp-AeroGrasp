@@ -53,10 +53,10 @@ import IndoorUAV_eval.adapters as adapters
 # DEBUG_LOG_PATH = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/dataset_converter.log" # DEBUG text file directory
 
 # FOR single trajectory testing (i.e. converting a single trajectory)
-DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_single_traj" # Dataset directory
-VLA_INS_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_single_traj/vla_ins" # vla_ins directory
-CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_single_traj_lerobot_rel" # Converted dataset directory
-DEBUG_LOG_PATH = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/dataset_converter_single_hm3d_1.log" # DEBUG text file directory
+DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_rel_pos_test" # Dataset directory
+VLA_INS_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted/vla_ins" # vla_ins directory
+CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_rel_pos_test_lerobot_rel" # Converted dataset directory
+DEBUG_LOG_PATH = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/dataset_converter_single_hm3d_2.log" # DEBUG text file directory
 
 #########################
 ### Class definitions ###
@@ -659,7 +659,7 @@ def main(scene_group_to_convert):
     global DEBUG_LOG_PATH # Ensure the module/script-level DEBUG_LOG_PATH variable is being modified (not a new local variable)
     DEBUG_LOG_PATH = Path(DEBUG_LOG_PATH) # Convert DEBUG_LOG_PATH to Path object
     debug_log_path_parent = DEBUG_LOG_PATH.parent # Obtain parent directory of DEBUG_LOG_PATH (i.e. the directory without last directory section)
-    DEBUG_LOG_PATH = debug_log_path_parent / f"dataset_converter_{scene_group_to_convert}.log" # Construct new DEBUG_LOG_PATH specific for current scene group
+    DEBUG_LOG_PATH = debug_log_path_parent / f"dataset_converter_single_{scene_group_to_convert}.log" # Construct new DEBUG_LOG_PATH specific for current scene group
 ###
 
     # Initialisations

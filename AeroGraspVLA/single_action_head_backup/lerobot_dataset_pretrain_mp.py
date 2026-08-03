@@ -22,8 +22,6 @@ import pickle
 IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)
 
-from model.embodiment_id import LIBERO_EMBODIMENT_ID, HABITATSIM_EMBODIMENT_ID ### ADDED for ParallelActionHead logic (CHECK that it matches with what is set in agvla_server.py)
-
 def compute_lerobot_normalization_stats_from_minmax(jsonl_path):
     state_mins, state_maxs = [], []
     action_mins, action_maxs = [], []
@@ -152,8 +150,6 @@ class LeRobotDataset(Dataset):
         max_samples_per_file: Union[int, None] = None,
         video_backend: str = "av", # TODO: 
         action_horizon: int = 50,
-        nav_horizon: int = 10, ### ADDED for Parallel Action Head implementation
-        manip_horizon: int = 50, ### ADDED for Parallel Action Head implementation
         video_backend_kwargs: Dict[str, Any] = None,
         binarize_gripper: bool = False,
         cache_dir: Union[str, Path] = None,  
@@ -163,10 +159,6 @@ class LeRobotDataset(Dataset):
 
         sorted_datasets = sorted(self.config['data_groups'].keys())
         self.arm_to_embodiment_id = {key: i for i, key in enumerate(sorted_datasets)}
-
-        ### DEBUGGING
-        print(f"In lerobot_dataset_pretrain_mp.py: self.arm_to_embodiment_id is {self.arm_to_embodiment_id}", flush=True)
-        ###
 
         self.max_action_dim = config['max_action_dim']
         self.max_state_dim = config['max_state_dim']
@@ -188,8 +180,6 @@ class LeRobotDataset(Dataset):
         self.data = []  
         self.arm2stats_dict = {}
         self.action_horizon = action_horizon
-        self.nav_action_horizon = nav_horizon ### ADDED for Parallel Action Head implementation
-        self.manip_action_horizon = manip_horizon ### ADDED for Parallel Action Head implementation
         self.video_backend = video_backend
         self.video_backend_kwargs = video_backend_kwargs or {}  
 
@@ -282,19 +272,6 @@ class LeRobotDataset(Dataset):
                 parquet_files = list(dataset_path.glob("data/*/*.parquet"))
                 
                 task_mapping = self.tasks[arm_name][dataset_name]
-
-                ### ADDED for Parallel Action Head implementation. NOTE: COMMENT OUT if NOT using Parallel Action Head!
-                print(f"In lerobot_dataset_pretrain_mp.py: USING PARALLEL ACTION HEAD LOGIC! Check code here if not using Parallel Action Head implementation.")
-                print(f"self.nav_action_horizon: {self.nav_action_horizon}", flush=True)
-                print(f"self.manip_action_horizon: {self.manip_action_horizon}", flush=True)
-
-                if arm_name == "indooruav": # IF current trajectory is from the IndoorUAV dataset
-                    dataset_action_horizon = self.nav_action_horizon
-                elif arm_name == "libero_franka": # IF current trajectorry is from the LIBERO dataset
-                    dataset_action_horizon = self.manip_action_horizon
-                else:
-                    raise ValueError("Unknown dataset arm_name")
-                ###
                 
                 for parquet_path in parquet_files:
                     parquet_process_units.append((
@@ -304,8 +281,7 @@ class LeRobotDataset(Dataset):
                         dataset_config, 
                         dataset_path,
                         task_mapping,  
-                        # self.action_horizon, ### NOTE UNCOMMENT if NOT using Parallel Action Head implementation
-                        dataset_action_horizon, ### ADDED for Parallel Action Head implementation. NOTE COMMENT if NOT using Parallel Action Head implementation
+                        self.action_horizon,
                         self.max_samples_per_file,
                         self.cache_dir  
                     ))
@@ -524,14 +500,9 @@ class LeRobotDataset(Dataset):
         ### ADDED
         # Masking out the roll, pitch and gripper dimensions for training HabitatSim on datasets
         # NOTE that action_mask returned above has shape [horizon, action_dim]. Must mask across all horizon steps.
-        if embodiment_id == HABITATSIM_EMBODIMENT_ID:
-            action_mask[:,3] = False
-            action_mask[:,4] = False
-            action_mask[:,6] = False
-
-        # DEBUGGING
-        print(f"In lerobot_dataset_pretrain_mp.py: Checking horizon lengths", flush=True)
-        print(arm_key, np.stack(item["action"]).shape, embodiment_id, HABITATSIM_EMBODIMENT_ID, action_mask.shape, action_mask.sum(dim=0), flush=True)
+        action_mask[:,3] = False
+        action_mask[:,4] = False
+        action_mask[:,6] = False
         ###
 
         prompt = item["prompt"] if item["prompt"] is not None else ""

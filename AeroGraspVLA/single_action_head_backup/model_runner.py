@@ -15,7 +15,7 @@ import agvla_server as agvla
 import adapters
 
 ### Script definitions ###
-from model.embodiment_id import LIBERO_EMBODIMENT_ID, HABITATSIM_EMBODIMENT_ID # Integer ID for HabitatSim embodiment
+HABITATSIM_EMBODIMENT_ID = 1 # Integer ID for HabitatSim embodiment
 # Define model checkpoint directory
 # CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/agvla_libero_evo1_weights" ### ADDED - For LIBERO
 # CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1/step_best" # From AGVLA (base Evo1 model) stage1 training
@@ -42,8 +42,7 @@ from model.embodiment_id import LIBERO_EMBODIMENT_ID, HABITATSIM_EMBODIMENT_ID #
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1_10_horizon_masked_rel_state_test_rel/step_best" # From AGVLA (base Evo1 model) stage 1 training, 4 states, 10 horizon, traj-rel states (only hm3d_1) (on A40)
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1_10_horizon_masked_rel_state_test_rel_only_single_traj_hm3d_4/step_best" # From AGVLA (base Evo1 model) stage 1 training, 4 states, 10 horizon, traj-rel states (only hm3d_4 1 traj) (on A40)
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1_50_horizon_masked_rel_state_test_rel_only_single_traj_hm3d_4/step_best" # From AGVLA (base Evo1 model) stage 1 training, 4 states, 50 horizon, traj-rel states (only hm3d_4 1 traj) (on A40)
-# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_10_horizon_masked_rel_state_test_rel/step_best" # From AGVLA (base Evo1 model) stage 2 training, 4 states, 10 horizon, traj-rel states (only hm3d_1) (on A40)
-CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_resume_10_horizon_masked_rel_state_test_rel/step_best" # From AGVLA (base Evo1 model) stage 2 resume training, 4 states, 10 horizon, traj-rel states (only hm3d_1) (on A40)
+CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_10_horizon_masked_rel_state_test_rel/step_best" # From AGVLA (base Evo1 model) stage 2 training, 4 states, 10 horizon, traj-rel states (only hm3d_1) (on A40)
 
 # Define DEBUGGING directories
 DEBUG_FOLDER_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/agvla_habitat" # Define debug folder directory
