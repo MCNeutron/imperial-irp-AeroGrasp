@@ -90,9 +90,10 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
         manip_mask = embodiment_id == LIBERO_EMBODIMENT_ID # Form MANIPULATION mask
 
         ### DEBUGGING
-        print(f"embodiment_id: {embodiment_id}", flush=True)
-        print(f"nav_mask: {nav_mask}", flush=True)
-        print(f"manip_mask: {manip_mask}", flush=True)
+        # print(f"In parallel_action_head.py")
+        # print(f"embodiment_id: {embodiment_id}", flush=True)
+        # print(f"nav_mask: {nav_mask}", flush=True)
+        # print(f"manip_mask: {manip_mask}", flush=True)
         ###
 
         # Initialise output variables for storing outputs, if it is still None (i.e. output variable is not yet used)
@@ -115,9 +116,9 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
             )   
             
             ### DEBUGGING
-            print(f">> In parallel_action_head.py: BEFORE padding predictions <<", flush=True)
-            print(f"nav_pred shape: {nav_pred.shape}", flush=True) # Outputs show that pred_velocity is a FLATTENED tensor of [B, H*D]
-            print(f"nav_noise shape: {nav_noise.shape}", flush=True) # Outputs show that noise is an UNFLATTENED tensor of [B, H, D]
+            # print(f">> In parallel_action_head.py: BEFORE padding predictions <<", flush=True)
+            # print(f"nav_pred shape: {nav_pred.shape}", flush=True) # Outputs show that pred_velocity is a FLATTENED tensor of [B, H*D]
+            # print(f"nav_noise shape: {nav_noise.shape}", flush=True) # Outputs show that noise is an UNFLATTENED tensor of [B, H, D]
             ###
 
             # IF the action horizon of the navigation head output is smaller than the maximum of both action heads, pad the extra horizon dimensions (for noise) and feature dims (for preds) (so that both action outputs have matching shapes and can be appended)
@@ -128,9 +129,9 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
                 nav_noise = torch.cat([nav_noise, nav_noise.new_zeros(nav_noise.size(0), pad, nav_noise.size(2))], dim=1,) # Pad the extra dimensions with 0. Pad like this as nav_noise is 3D, so padding along the HORIZON
 
                 ### DEBUGGING
-                print(f">> In parallel_action_head.py: AFTER padding predictions <<", flush=True)
-                print(f"nav_pred shape: {nav_pred.shape}", flush=True)
-                print(f"nav_noise shape: {nav_noise.shape}", flush=True)
+                # print(f">> In parallel_action_head.py: AFTER padding predictions <<", flush=True)
+                # print(f"nav_pred shape: {nav_pred.shape}", flush=True)
+                # print(f"nav_noise shape: {nav_noise.shape}", flush=True)
                 ###
 
             # Insert navigation action head outputs/predictions into ONLY corresponding navigation dataset sample indices
@@ -149,9 +150,9 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
             )
 
             ### DEBUGGING
-            print(f">> In parallel_action_head.py: BEFORE padding predictions <<", flush=True)
-            print(f"manip_pred shape: {manip_pred.shape}", flush=True)
-            print(f"manip_noise shape: {manip_noise.shape}", flush=True)
+            # print(f">> In parallel_action_head.py: BEFORE padding predictions <<", flush=True)
+            # print(f"manip_pred shape: {manip_pred.shape}", flush=True)
+            # print(f"manip_noise shape: {manip_noise.shape}", flush=True)
             ###
 
             # IF the action horizon of the manipulation head output is smaller than the maximum of both action heads, pad the extra horizon dimensions (for noise) and feature dims (for preds) (so that both action outputs have matching shapes and can be appended)
@@ -162,9 +163,9 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
                 manip_noise = torch.cat([manip_noise, manip_noise.new_zeros(manip_noise.size(0), pad, manip_noise.size(2))], dim=1,) # Pad the extra dimensions with 0. Pad like this as manip_noise is 3D, so padding along the HORIZON
 
                 ### DEBUGGING
-                print(f">> In parallel_action_head.py: AFTER padding predictions <<", flush=True)
-                print(f"manip_pred shape: {manip_pred.shape}", flush=True)
-                print(f"manip_noise shape: {manip_noise.shape}", flush=True)
+                # print(f">> In parallel_action_head.py: AFTER padding predictions <<", flush=True)
+                # print(f"manip_pred shape: {manip_pred.shape}", flush=True)
+                # print(f"manip_noise shape: {manip_noise.shape}", flush=True)
                 ###
 
             # Store manipulation action head outputs into corresponding manipulation dataset sample indices
@@ -188,9 +189,9 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
         noise = noise[sort_idx]
 
         ### DEBUGGING
-        print(f">> In parallel_action_head.py: AFTER reconstructing the batch <<")
-        print(f"Final pred_velocity shape: {pred_velocity.shape}", flush=True)
-        print(f"Final noise shape: {noise.shape}", flush=True)
+        # print(f">> In parallel_action_head.py: AFTER reconstructing the batch <<")
+        # print(f"Final pred_velocity shape: {pred_velocity.shape}", flush=True)
+        # print(f"Final noise shape: {noise.shape}", flush=True)
         ###
 
         # Return the predicted velocity and noise for all samples in the batch
@@ -236,7 +237,7 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
                 fused_tokens = fused_tokens[nav_mask],
                 state = state[nav_mask] if state is not None else None,
                 embodiment_id = torch.zeros(nav_mask.sum(), dtype=torch.long, device=device),#embodiment_id[nav_mask], # Set embodiment_id to 0 (default) WITHIN each Flowmatching action head, now that data is routed to correct head
-                action_mask = action_mask[nav_mask, :self.nav_horizon] if action_mask is not None else None, # Only keep the actions corresponding to this action head's horizon length (as outputs would be in the max horizon length of both action heads)
+                action_mask = action_mask[nav_mask] if action_mask is not None else None, # Only keep the actions corresponding to this action head's horizon length (as outputs would be in the max horizon length of both action heads)
             )
 
             actions[nav_mask, :self.nav_head.action_dim] = nav_actions # IF the output action dimension is smaller than the maximum used across both action heads to store actions, place the shorter output actions into the full action array
@@ -246,7 +247,7 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
                 fused_tokens = fused_tokens[manip_mask],
                 state = state[manip_mask] if state is not None else None,
                 embodiment_id = torch.zeros(manip_mask.sum(), dtype=torch.long, device=device),#embodiment_id[manip_mask], # Set embodiment_id to 0 (default) WITHIN each Flowmatching action head, now that data is routed to correct head
-                action_mask = action_mask[manip_mask, :self.manip_horizon] if action_mask is not None else None, # Only keep the actions corresponding to this action head's horizon length (as outputs would be in the max horizon length of both action heads)
+                action_mask = action_mask[manip_mask] if action_mask is not None else None, # Only keep the actions corresponding to this action head's horizon length (as outputs would be in the max horizon length of both action heads)
             )
 
             actions[manip_mask, :self.manip_head.action_dim] = manip_actions # IF the output action dimension is smaller than the maximum used across both action heads to store actions, place the shorter output actinos in to the full action array

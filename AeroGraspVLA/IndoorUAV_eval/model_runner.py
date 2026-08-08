@@ -43,7 +43,20 @@ from model.embodiment_id import LIBERO_EMBODIMENT_ID, HABITATSIM_EMBODIMENT_ID #
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1_10_horizon_masked_rel_state_test_rel_only_single_traj_hm3d_4/step_best" # From AGVLA (base Evo1 model) stage 1 training, 4 states, 10 horizon, traj-rel states (only hm3d_4 1 traj) (on A40)
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage1_50_horizon_masked_rel_state_test_rel_only_single_traj_hm3d_4/step_best" # From AGVLA (base Evo1 model) stage 1 training, 4 states, 50 horizon, traj-rel states (only hm3d_4 1 traj) (on A40)
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_10_horizon_masked_rel_state_test_rel/step_best" # From AGVLA (base Evo1 model) stage 2 training, 4 states, 10 horizon, traj-rel states (only hm3d_1) (on A40)
-CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_resume_10_horizon_masked_rel_state_test_rel/step_best" # From AGVLA (base Evo1 model) stage 2 resume training, 4 states, 10 horizon, traj-rel states (only hm3d_1) (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_habitatsim/stage2_resume_10_horizon_masked_rel_state_test_rel/step_best" # From AGVLA (base Evo1 model) stage 2 resume training, 4 states, 10 horizon, traj-rel states (only hm3d_1) (on A40)
+### NEW CHECKPOINTS, trained with both HabitatSim and LIBERO datasets (combined dataset) WITH DOUBLE REL STATE CONVERSION ISSUE ###
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage1/step_best" # From AGVLA (parallel action head) stage 1 training, on hm3d_1-6 and LIBERO-Spatial only (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage2/step_best" # From AGVLA (parallel action head) stage 2 training, on hm3d_1-6 and LIBERO-Spatial only (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage2_resume/step_best" # From AGVLA (parallel action head) stage 2 training, on hm3d_1-6 and LIBERO-Spatial only (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/only_hm3d_4_stage1/step_best" # From AGVLA (parallel action head) stage 1 training, on hm3d_4 only (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/only_hm3d_4_stage2/step_best" # From AGVLA (parallel action head) stage 2 training, on hm3d_4 only (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage1_parallel_full_hm3d_1-2_libero_spatial/step_best" # From AGVLA (parallel action head) stage 1 training, on full hm3d_1-2 and LIBERO Spatial (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage2_parallel_full_hm3d_1-2_libero_spatial/step_best" # From AGVLA (parallel action head) stage 2 training, on full hm3d_1-2 and LIBERO Spatial (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage2_parallel_full_hm3d_1-2_libero_spatial_resume/step_best" # From AGVLA (parallel action head) stage 2 resume training, on full hm3d_1-2 and LIBERO Spatial (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage1_long_full_hm3d_1-2_libero_spatial/step_best" # From AGVLA (parallel action head) stage 1 long training, on full hm3d_1-2 and LIBERO Spatial (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage1_resume_long_full_hm3d_1-2_libero_spatial/step_best" # From AGVLA (parallel action head) stage 1 resume long training, on full hm3d_1-2 and LIBERO Spatial (on A40)
+### NEW CHECKPOINTS, trained with both HabitatSim and LIBERO datasets (combined dataset) ###
+CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage1_full_hm3d_1-2_libero_spatial/step_best" # From AGVLA (parallel action head) stage 1 training, on full hm3d_1-2 and LIBERO Spatial (on A40)
 
 # Define DEBUGGING directories
 DEBUG_FOLDER_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/agvla_habitat" # Define debug folder directory
@@ -86,9 +99,9 @@ def infer(policy, normalizer, habitat_format_out): # ADDED
 
     # Run inference (likely output shape: [T, 24])
     print("BEFORE evo1 infer...", flush=True)
-    evo1_format_actions = agvla.infer_from_json_dict(evo1_format_in, policy, normalizer) ### IF using single FlowmatchingActionHead model architecture
+    # evo1_format_actions = agvla.infer_from_json_dict(evo1_format_in, policy, normalizer) ### IF using single FlowmatchingActionHead model architecture
     # print_out = agvla.infer_from_json_dict(evo1_format_in, policy, normalizer) ### IF using single FlowmatchingActionHead model architecture
-    # evo1_format_actions = agvla.infer_from_json_dict(evo1_format_in, policy, normalizer, embodiment_ids=torch.tensor([HABITATSIM_EMBODIMENT_ID], dtype=torch.long, device="cuda")) ### IF using ParallelActionHead model architecture
+    evo1_format_actions = agvla.infer_from_json_dict(evo1_format_in, policy, normalizer, embodiment_ids=torch.tensor([HABITATSIM_EMBODIMENT_ID], dtype=torch.long, device="cuda")) ### IF using ParallelActionHead model architecture
     # evo1_format_actions = ground_truth_policy.get_action(habitat_format_out["task"]) # DEBUGGING, for testing ground truth policy (i.e. feed the training data actions directly into the HabitatSim eval pipeline)
     # print_out = ground_truth_policy.get_action(habitat_format_out["task"]) # DEBUGGING, for testing ground truth policy (i.e. feed the training data actions directly into the HabitatSim eval pipeline)
     # print(f"Evo1 infer outputs: {evo1_format_actions}", flush=True) # DEBUGGING
@@ -284,7 +297,7 @@ class ModelService:
 def main():
     ### ADDED
     # Load model
-    policy, normalizer = agvla.load_model_and_normalizer(CKPT_DIR)
+    policy, normalizer = agvla.load_model_and_normalizer(CKPT_DIR, "indooruav")
     print(">> Model loaded successfully", flush=True)
     ###
     

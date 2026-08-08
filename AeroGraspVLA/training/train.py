@@ -121,7 +121,7 @@ def custom_collate_fn(batch):
     actions = [item["action"] for item in batch]
     action_mask = [item["action_mask"] for item in batch]
     
-    print(f"In train.py: USING PARALLEL ACTION HEAD LOGIC! Check code here if not using Parallel Action Head implementation.")
+    # print(f"In train.py: USING PARALLEL ACTION HEAD LOGIC! Check code here if not using Parallel Action Head implementation.")
     max_horizon = 50# max(a.shape[0] for a in actions) # Obtain the maximum horizon length used (which will be the maximum horizon length found in the actions)
     actions, action_mask = pad_actions(actions, action_mask, max_horizon) # Pad the actions and obtain the corresponding masks specifically only to mask out the extra padded actions
     ###
@@ -398,7 +398,7 @@ def train(config):
             writer.writerow(["step", "epoch", "mse_loss",
                              "nav_mse_x", "nav_mse_y", "nav_mse_z", "nav_mse_angle1", "nav_mse_angle2", "nav_mse_angle3", "nav_mse_gripper",
                              "manip_mse_x", "manip_mse_y", "manip_mse_z", "manip_mse_angle1", "manip_mse_angle2", "manip_mse_angle3", "manip_mse_gripper",
-                             "mae_loss", "learning_rate", "grad_norm"])
+                             "mae_loss", "nav_samples", "manip_samples", "batch_size", "valid_nav_entries", "valid_manip_entries", "total_entries", "learning_rate", "grad_norm"])
     ###
     
     # === WandB and Swanlab ===
@@ -532,14 +532,14 @@ def train(config):
             
 
             ### DEBUGGING
-            print(f">> In train.py <<")
-            print(f"pred_velocity shape: {pred_velocity.shape}", flush=True)
-            print(f"target_velocity shape: {target_velocity.shape}", flush=True)
-            print(f"action_mask shape: {action_mask.shape}", flush=True)
-            # Print "for this sample, how many timesteps is this action dimension active?"
-            print(f"action_mask sum: {action_mask.sum(dim=1)[:5]}", flush=True) # For HabitatSim data samples, MUST see 240, and for LIBERO samples, MUST see 1200! They can't all be the same, or it means masking is not working (not masking out padded horizon dims)
-            print(f"action_mask sum (num valid dims): {action_mask.sum(dim=2)[:5]}", flush=True) # Prints how many valid dims each timestep has
-            print(f"action_mask sum (total num of active entries): {action_mask.view(action_mask.size(0), -1).sum(dim=1)}", flush=True) # Print total num of active entries per sample
+            # print(f">> In train.py <<")
+            # print(f"pred_velocity shape: {pred_velocity.shape}", flush=True)
+            # print(f"target_velocity shape: {target_velocity.shape}", flush=True)
+            # print(f"action_mask shape: {action_mask.shape}", flush=True)
+            # # Print "for this sample, how many timesteps is this action dimension active?"
+            # print(f"action_mask sum: {action_mask.sum(dim=1)[:5]}", flush=True) # For HabitatSim data samples, MUST see 240, and for LIBERO samples, MUST see 1200! They can't all be the same, or it means masking is not working (not masking out padded horizon dims)
+            # print(f"action_mask sum (num valid dims): {action_mask.sum(dim=2)[:5]}", flush=True) # Prints how many valid dims each timestep has
+            # print(f"action_mask sum (total num of active entries): {action_mask.view(action_mask.size(0), -1).sum(dim=1)}", flush=True) # Print total num of active entries per sample
             ###
 
             action_mask = action_mask.view(action_mask.shape[0], -1).to(dtype=pred_velocity.dtype)
@@ -635,6 +635,15 @@ def train(config):
                 else: # IF no manipulation datasets
                     manip_dim_losses = torch.zeros(7)
 
+                # Get information relating to number of navigation and manipulation samples in current batch
+                num_nav_samples = nav_mask.sum().item() # Get number of navigation samples
+                num_manip_samples = manip_mask.sum().item() # Get number of manipulation samples
+                batch_size = embodiment_ids.shape[0] # Get batch size (which will be same as number of rows in embodiment_ids)
+
+                num_nav_valid = action_mask[nav_mask].sum().item() # Get number of valid navigation sample entries
+                num_manip_valid = action_mask[manip_mask].sum().item() # Get number of valid manipulation sample entries
+                total_valid = num_nav_valid + num_manip_valid # Get total number of valid sample entries
+
                 # Log training metrics (above is logging in wandb, here it is logging to a csv file)
                 if accelerator.is_main_process:
                     with open(TRAINING_METRICS_PATH, "a", newline="") as f:
@@ -658,6 +667,12 @@ def train(config):
                             manip_dim_losses[5].item(), # Manipulation MSE loss angle3
                             manip_dim_losses[6].item(), # Manipulation MSE loss gripper
                             mae.item(), # MAE
+                            num_nav_samples, # Number of navigation samples in current batch
+                            num_manip_samples, # Number of manipulation samples in current batch
+                            batch_size, # Current batch size
+                            num_nav_valid, # Number of valid navigation sample entries
+                            num_manip_valid, # Number of valid manipulation sample entries
+                            total_valid, # Total number of valid sample entries
                             scheduler.get_last_lr()[0], # Learning rate
                             clipped_norm.item() # Gradient norm
                         ])

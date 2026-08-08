@@ -284,9 +284,10 @@ class LeRobotDataset(Dataset):
                 task_mapping = self.tasks[arm_name][dataset_name]
 
                 ### ADDED for Parallel Action Head implementation. NOTE: COMMENT OUT if NOT using Parallel Action Head!
-                print(f"In lerobot_dataset_pretrain_mp.py: USING PARALLEL ACTION HEAD LOGIC! Check code here if not using Parallel Action Head implementation.")
-                print(f"self.nav_action_horizon: {self.nav_action_horizon}", flush=True)
-                print(f"self.manip_action_horizon: {self.manip_action_horizon}", flush=True)
+                # DEBUGGING
+                # print(f"In lerobot_dataset_pretrain_mp.py: USING PARALLEL ACTION HEAD LOGIC! Check code here if not using Parallel Action Head implementation.")
+                # print(f"self.nav_action_horizon: {self.nav_action_horizon}", flush=True)
+                # print(f"self.manip_action_horizon: {self.manip_action_horizon}", flush=True)
 
                 if arm_name == "indooruav": # IF current trajectory is from the IndoorUAV dataset
                     dataset_action_horizon = self.nav_action_horizon
@@ -530,8 +531,8 @@ class LeRobotDataset(Dataset):
             action_mask[:,6] = False
 
         # DEBUGGING
-        print(f"In lerobot_dataset_pretrain_mp.py: Checking horizon lengths", flush=True)
-        print(arm_key, np.stack(item["action"]).shape, embodiment_id, HABITATSIM_EMBODIMENT_ID, action_mask.shape, action_mask.sum(dim=0), flush=True)
+        # print(f"In lerobot_dataset_pretrain_mp.py: Checking horizon lengths", flush=True)
+        # print(arm_key, np.stack(item["action"]).shape, embodiment_id, HABITATSIM_EMBODIMENT_ID, action_mask.shape, action_mask.sum(dim=0), flush=True)
         ###
 
         prompt = item["prompt"] if item["prompt"] is not None else ""

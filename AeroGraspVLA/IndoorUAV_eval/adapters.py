@@ -73,13 +73,13 @@ def process_hs_to_evo1_states(hs_state):
     #   gripper2: Position/state of right finger
     #####################
     # Convert absolute states to trajectory-relative states
-    hs_state = compute_rel_states(hs_state)
+    hs_state = compute_rel_states(hs_state) # NOTE: COMMENT FOR HABITATSIM DATASET CONVERSION TO LEROBOT FORMAT, BUT UNCOMMENT FOR INFERENCE
     
     # Extract HabitatSim states
     hs_x, hs_y, hs_z, hs_yaw = hs_state # NOTE: this unpacking works whether input is a list, tuple, or numpy array (with EXACTLY 4 elements)
 
     # Convert HabitatSim yaw values from deg to rad (which Evo1-format expects)
-    # hs_yaw = np.deg2rad(hs_yaw) # NOTE: UNCOMMENT FOR HABIATSIM DATASET CONVERSION TO LEROBOT FORMAT, BUT COMMENT FOR INFERENCE
+    # hs_yaw = np.deg2rad(hs_yaw) # DELETE
 
     # Build Evo1-format states
     evo1_states = np.array([hs_x, hs_y, hs_z, 0.0, 0.0, hs_yaw, 0.0, 0.0], dtype=np.float32)
@@ -166,8 +166,8 @@ def evo1_out_to_habitatsim_in(evo1_out, habitatsim_out):
     ####################
     # Get the last action from Evo1 output horizon
     # NOTE that these actions are already denormalised from infer_from_json_dict(), so these outputs should be real-world deltas (not normalised deltas), and can be directly added to HabitatSim states
-    # final_evo1_out = evo1_out[0]#[-1] # NOTE: VARIABLE NAME INCORRECT, SHOULD BE first_action, BUT NOT CHANGED YET FOR DEBUGGING
-    final_evo1_out = np.sum(evo1_out[:2], axis=0) # TEST: Using a 50-step rollout sum for getting the final HabitatSim coordinate
+    final_evo1_out = evo1_out[0]#[-1] # NOTE: VARIABLE NAME INCORRECT, SHOULD BE first_action, BUT NOT CHANGED YET FOR DEBUGGING
+    # final_evo1_out = np.sum(evo1_out[:5], axis=0) # TEST: Using a 50-step rollout sum for getting the final HabitatSim coordinate
     # TODO: Check if final_evo1_out (evo1 output) is a list of numpy arrays, and if this type of indexing is allowed
     # evo1_out = np.asarray(evo1_out)
     # final_evo1_out = np.array([

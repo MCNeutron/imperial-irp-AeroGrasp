@@ -18,14 +18,28 @@ from helpers.Normaliser import Normalizer
 # Define server port
 PORT = 9000
 
+# Integer IDs for the different embodiments
+from model.embodiment_id import LIBERO_EMBODIMENT_ID, HABITATSIM_EMBODIMENT_ID
+
 # Define model checkpoint directory
 # CKPT_DIR = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/weights/agvla_libero_evo1_weights" ### ADDED - For LIBERO
-CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_libero/stage1_only_spatial/step_best" # From AGVLA (base Evo1 model) stage 2 training (only LIBERO spatial) (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_libero/stage1_only_spatial/step_best" # From AGVLA (base Evo1 model) stage 2 training (only LIBERO spatial) (on A40)
 # CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_libero/stage2_only_spatial/step_best" # From AGVLA (base Evo1 model) stage 2 training (only LIBERO spatial) (on A40)
+### Checkpoints trained with both HabitatSim and LIBERO datasets (combined dataset) WITH DOUBLE REL STATE CONVERSION ISSUE ###
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage1/step_best" # From AGVLA (parallel action head) stage 1 training, on hm3d_1-6 and LIBERO-Spatial only (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage2/step_best" # From AGVLA (parallel action head) stage 2 training, on hm3d_1-6 and LIBERO-Spatial only (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage2_resume/step_best" # From AGVLA (parallel action head) stage 2 training, on hm3d_1-6 and LIBERO-Spatial only (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage1_parallel_full_hm3d_1-2_libero_spatial/step_best" # From AGVLA (parallel action head) stage 1 training, on full hm3d_1-2 and LIBERO Spatial (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage2_parallel_full_hm3d_1-2_libero_spatial/step_best" # From AGVLA (parallel action head) stage 2 training, on full hm3d_1-2 and LIBERO Spatial (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage2_parallel_full_hm3d_1-2_libero_spatial_resume/step_best" # From AGVLA (parallel action head) stage 2 resume training, on full hm3d_1-2 and LIBERO Spatial (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage1_long_full_hm3d_1-2_libero_spatial/step_best" # From AGVLA (parallel action head) stage 1 long training, on full hm3d_1-2 and LIBERO Spatial (on A40)
+# CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage1_resume_long_full_hm3d_1-2_libero_spatial/step_best" # From AGVLA (parallel action head) stage 1 resume long training, on full hm3d_1-2 and LIBERO Spatial (on A40)
+### Checkpoints trained with both HabitatSim and LIBERO datasets (combined dataset) ###
+CKPT_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/checkpoints/agvla_combined/stage1_full_hm3d_1-2_libero_spatial/step_best" # From AGVLA (parallel action head) stage 1 training, on full hm3d_1-2 and LIBERO Spatial (on A40)
 
 ### Function for loading model and normaliser ###
 # Specifically for inference
-def load_model_and_normalizer(ckpt_dir):
+def load_model_and_normalizer(ckpt_dir, robot_key):
     config = json.load(open(os.path.join(ckpt_dir, "config.json"))) # Load model config
     stats = json.load(open(os.path.join(ckpt_dir, "norm_stats.json"))) # Load normalisation stats (used by Normaliser)
 
@@ -41,7 +55,7 @@ def load_model_and_normalizer(ckpt_dir):
     model.load_state_dict(checkpoint["module"], strict=True) # Load weights into model
     model = model.to("cuda") # Move model to device
 
-    normalizer = Normalizer(stats) # Use normilsation stats loaded earlier, for preprocessing and postprocessing
+    normalizer = Normalizer(stats, robot_key) # Use normilsation stats loaded earlier, for preprocessing and postprocessing
     return model, normalizer
 
 
@@ -120,7 +134,8 @@ async def handle_request(websocket, model, normalizer):
            
             json_data = json.loads(message) # Receive message and parse JSON into a dict
             print(f"Received JSON observation")
-            actions = infer_from_json_dict(json_data, model, normalizer) # Run inference (likely output shape: [T, 24])
+            # actions = infer_from_json_dict(json_data, model, normalizer) # Run inference (likely output shape: [T, 24]), FOR single action head implementation
+            actions = infer_from_json_dict(json_data, model, normalizer, embodiment_ids=torch.tensor([LIBERO_EMBODIMENT_ID], dtype=torch.long, device="cuda")) # Run inference (likely output shape: [T, 24]), FOR parallel action head implementation
             await websocket.send(json.dumps(actions)) # Send result back to client
             print("Sent action chunk")
 
@@ -131,7 +146,7 @@ async def handle_request(websocket, model, normalizer):
 ### Main function ###
 if __name__ == "__main__": # Start server only if this file is explicitly run (not imported as a module)
     print("Loading EVO_1 model...")
-    model, normalizer = load_model_and_normalizer(CKPT_DIR)
+    model, normalizer = load_model_and_normalizer(CKPT_DIR, "libero_franka")
 
     async def main():
         print(f"EVO_1 server running at ws://0.0.0.0:{PORT}")

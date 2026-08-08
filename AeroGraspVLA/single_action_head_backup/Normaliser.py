@@ -4,7 +4,7 @@ import torch
 
 ### Normaliser class definition ###
 class Normalizer:
-    def __init__(self, stats_or_path, robot_key=None):
+    def __init__(self, stats_or_path):
 
         # Loading normalisation statistics
         if isinstance(stats_or_path, str):
@@ -22,21 +22,11 @@ class Normalizer:
                 raise ValueError(f"Input length {x.shape[0]} exceeds expected 24")
             return x
 
-        # if len(stats) != 1: # Verify only one robot exists
-        #     raise ValueError(f"norm_stats.json should contain only one robot key, but: {list(stats.keys())}")
+        if len(stats) != 1: # Verify only one robot exists
+            raise ValueError(f"norm_stats.json should contain only one robot key, but: {list(stats.keys())}")
 
-        # # Extract robot statistics
-        # robot_key = list(stats.keys())[0]
-        # robot_stats = stats[robot_key]
-
-        if robot_key is None:
-            if len(stats) != 1:
-                raise ValueError(f"Multiple robot keys found {list(stats.keys())}. Please specify robot_key.")
-            robot_key = list(stats.keys())[0]
-
-        if robot_key not in stats:
-            raise ValueError(f"Robot key {robot_key} not found. Available keys: {list(stats.keys())}")
-        
+        # Extract robot statistics
+        robot_key = list(stats.keys())[0]
         robot_stats = stats[robot_key]
 
         # Load robot state and action statistics
