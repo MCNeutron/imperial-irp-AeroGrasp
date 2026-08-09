@@ -28,6 +28,9 @@ import warnings
 # Integer IDs for the different embodiments
 from model.embodiment_id import LIBERO_EMBODIMENT_ID, HABITATSIM_EMBODIMENT_ID
 
+# PCGrad function
+from helpers.pcgrad import pcgrad_backward
+
 # Set up logging of training metrics
 import csv
 curr_time = datetime.now().strftime("%Y%m%d_%H%M%S") # Get current time (for placing in training metrics log file name)
@@ -398,7 +401,8 @@ def train(config):
             writer.writerow(["step", "epoch", "mse_loss",
                              "nav_mse_x", "nav_mse_y", "nav_mse_z", "nav_mse_angle1", "nav_mse_angle2", "nav_mse_angle3", "nav_mse_gripper",
                              "manip_mse_x", "manip_mse_y", "manip_mse_z", "manip_mse_angle1", "manip_mse_angle2", "manip_mse_angle3", "manip_mse_gripper",
-                             "mae_loss", "nav_samples", "manip_samples", "batch_size", "valid_nav_entries", "valid_manip_entries", "total_entries", "learning_rate", "grad_norm"])
+                             "mae_loss", "nav_samples", "manip_samples", "batch_size", "valid_nav_entries", "valid_manip_entries", "total_entries",
+                             "nav_grad_norm", "manip_grad_norm", "grad_dot_product", "grad_cosine_similarity", "pcgrad_projections", "learning_rate", "grad_norm"])
     ###
     
     # === WandB and Swanlab ===
@@ -545,9 +549,45 @@ def train(config):
             action_mask = action_mask.view(action_mask.shape[0], -1).to(dtype=pred_velocity.dtype)
             pred_velocity_mask = pred_velocity * action_mask
             target_velocity = target_velocity * action_mask ### ADDED, for masking out roll, pitch and gripper dimensions when training on HabitatSim datasets
-            loss = loss_fn(pred_velocity_mask, target_velocity)
+            # loss = loss_fn(pred_velocity_mask, target_velocity)
             scale_factor = action_mask.numel() / (action_mask.sum() + 1e-8)
-            loss = loss * scale_factor
+            # loss = loss * scale_factor
+            ### ADDED for PCGrad
+            # Create action masks, which selects samples
+            nav_mask = embodiment_ids == HABITATSIM_EMBODIMENT_ID # Form NAVIGATION mask
+            manip_mask = embodiment_ids == LIBERO_EMBODIMENT_ID # Form MANIPULATION mask
+
+            # Initialise the separate losses
+            nav_loss = None
+            manip_loss = None
+
+            # Calculate navigation loss:
+            if nav_mask.any():
+                nav_pred = pred_velocity_mask[nav_mask]
+                nav_target = target_velocity[nav_mask]
+                nav_action_mask = action_mask[nav_mask]
+
+                nav_loss = loss_fn(nav_pred, nav_target)
+                nav_scale_factor = nav_action_mask.numel() / (nav_action_mask.sum() + 1e-8)
+
+                nav_loss = nav_loss * nav_scale_factor
+
+            # Calculate manipulation loss:
+            if manip_mask.any():
+                manip_pred = pred_velocity_mask[manip_mask]
+                manip_target = target_velocity[manip_mask]
+                manip_action_mask = action_mask[manip_mask]
+
+                manip_loss = loss_fn(manip_pred, manip_target)
+                manip_scale_factor = manip_action_mask.numel() / (manip_action_mask.sum() + 1e-8)
+
+                manip_loss = manip_loss * manip_scale_factor
+
+            # Calculate overall loss (for logging)
+            valid_losses = [loss for loss in [nav_loss, manip_loss] if loss is not None]
+            if len(valid_losses) == 0: raise ValueError(f"[Step {step}] Batch contains no valid task samples.")
+            loss = sum(valid_losses) / len(valid_losses)
+            ###
             
             # === NaN/Inf check ===
             if not check_numerical_stability(
@@ -562,7 +602,12 @@ def train(config):
 
             # === Backward and optimizer step ===
             optimizer.zero_grad(set_to_none=True)
-            accelerator.backward(loss)
+            # accelerator.backward(loss)
+            ### ADDED for PCGrad
+            task_losses = [nav_loss, manip_loss] # Initialise list of task losses for individual tasks
+
+            pcgrad_out = pcgrad_backward(accelerator=accelerator, model=model, losses=task_losses, retain_graph=False)
+            ###
 
             # === Clip grad norm ===
             total_norm, clipped_norm = get_and_clip_grad_norm(accelerator, model, loss, max_norm)
@@ -673,6 +718,11 @@ def train(config):
                             num_nav_valid, # Number of valid navigation sample entries
                             num_manip_valid, # Number of valid manipulation sample entries
                             total_valid, # Total number of valid sample entries
+                            pcgrad_out['task_grad_norms'][0].item(), # PCGrad navigation norm
+                            pcgrad_out['task_grad_norms'][1].item(), # PCGrad manipulation norm
+                            (pcgrad_out['dot_product'].item() if pcgrad_out["dot_product"] is not None else float("nan")), # PCGrad dot product
+                            (pcgrad_out['cosine_similarity'].item() if pcgrad_out["cosine_similarity"] is not None else float("nan")), # PCGrad cosine similarity
+                            pcgrad_out['num_projections'], # PCGrad number of actual projections
                             scheduler.get_last_lr()[0], # Learning rate
                             clipped_norm.item() # Gradient norm
                         ])
