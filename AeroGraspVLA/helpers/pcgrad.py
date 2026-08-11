@@ -12,7 +12,7 @@
 import torch
 
 ### Definition for PCGrad backward function ###
-# Perform PCGrad using Accelerate's backward() mechanism
+# Perform PCGrad using Accelerate's backward() mechanism and parameter gradient hooks
 # INPUTS:
 #   accelerator: HuggingFace Accelerate Accelerator
 #   model: Accelerate/DeepSpeed-wrapped model
@@ -25,20 +25,22 @@ import torch
 #   accelerator.backward(loss), which allows it to work with distributed/DeepSpeed setups.
 #   Designed for AGVLA two-task setup - i.e. [navigation loss, manipulation loss]
 #   Gradients are collected after each backward pass, then projected (for PCGrad)
-#   Final projected gradients are written back into p.grad
+#   This version does NOT rely on param.grad to extract the task gradients, as under the current DeepSpeed/ZeRO
+#       configuration, param.grad is not populated in a way where parameter gradients can be read from it.
 #
 # This function essentially replaces the normal:
 #   loss = nav_loss + manip_loss
 #   accelerator.backward(loss)
 #   optimizer.step()
 # With:
-#   1. Get navigation gradient
-#   2. Get manipulation gradient
-#   3. Check whether they conflict
-#   4. Remove conflicting components
-#   5. Add the cleaned gradients together
-#   6. Put the result into p.grad
-#   7. optimizer.step()
+#   1. Registers a hook on every trainable parameter
+#   2. Calls accelerator.backward(nav_loss)
+#   3. The hooks capture the navigation gradients
+#   4. Clears the capture dictionary
+#   5. Calls accelerator.backward(manip_loss, retain_graph=False)
+#   6. The hooks capture the manipulation gradients
+#   7. Perform PCGrad projection logic on captured gradients (check whether nav and manip gradients conflict, remove conflicting components, then add the cleaned gradients together)
+#   8. Use DeepSpeed's safe_set_full_grad() to put the final PCGrad gradients back into DeepSpeed's gradient state
 #
 # In a normal, combined loss scenario, if the dot product of the navigation and manipulatino gradients
 # are negative, it means moving in the direction preferred by one task tends to increase the other task's loss
@@ -52,24 +54,71 @@ def pcgrad_backward(accelerator, model, losses, retain_graph=True):
     # IMPORTANT as function later manually assigns gradients back to each param
     params = [p for p in model.parameters() if p.requires_grad]
 
-    # Initialise empty list to store gradients for each task
-    # Will look like e.g. task_grads=[nav_grads, manip_grads], where each task's grads are a list corresponding to the model params (e.g. [grad_for_p0, grad_for_p1, ...])
-    task_grads = []
+    ### Initialise gradient hook storage ###
+    # Initialise empty dictionaries to store gradient hooks for each task
+    # Each dictionary will contain:
+    #   parameter -> gradient
+    # For ONE task
+    nav_grads_dict = {} # Dictionary for navigation gradient hooks
+    manip_grads_dict = {} # Dictionary for manipulatino gradient hooks
+
+    current_grads = nav_grads_dict # Initialise current gradient hooks
+
+    ### Register parameter hooks ###
+    hooks = [] # Initialise list for hooks
+
+    # This loop essentially attaches a hook that saves an independent copy of every model param's gradient whenever PyTorch computes it during backward.
+    # NOTE: In this implementation, current_grads is looked up when the hook executes, NOT when the hook is created
+    #   This is what is wanted, as before the first backward: current_grads --> nav_grads_dict, and before the second backward: current_grads --> manip_grads_dict
+    #   So the same hooks can capture the two different backward passes
+    # Look through all trainable params
+    for p in params:
+        # Define a function for creating the hook
+        #   Each hook here remembers which param it belongs to
+        def make_hook(param):
+            # Define function for defining the actual hook
+            #   It saves a copy of the grad, and returns the original grad
+            #   NOTE: Because current_grads is selected here, the SAME hooks can capture different tasks' gradients into different dictionaries
+            def hook(grad):
+                # Save an independent copy of the gradient into dictionary because the gradient tensor may subsequently be modified/reused.
+                #   .detach() for removing gradient tensor from autograd graph (to prevent it from participating in another backward computation)
+                #   .clone() as original grad tensor may subsequently be modified, reused, accumulated, or otherwise changed.
+                current_grads[param] = grad.detach().clone()
+
+                # Return original gradient
+                #   Hook isn't supposed to replace or modify the gradient. It just observes it and makes a copy
+                #   Returning grad means to continue the normal backward pass using the original gradient.
+                return grad
+
+            # Return the hook (associated with p)
+            return hook
+
+        # Register the hook
+        #   Return value of register_hook() is a hook handle, which gets stored in hooks
+        hooks.append(p.register_hook(make_hook(p)))
 
     ### Compute gradients for each task separately ###
     # Gradients for each task are vectors
+    # Put the two gradient dictionaries into a list
+    #   Creates a list where the index corresponds to the task (e.g. task index 0 --> nav_loss --> mav_grads_dict)
+    #   Avoids need to write seperate code for nav and manip
+    task_grads_dicts = [nav_grads_dict, manip_grads_dict]
+    
     # Loop through each task's losses
+    #   Losses should be losses = [nav_loss, manip_loss] (from input)
+    #   So task_idx=0 --> loss=nav_loss, task_idx=1 --> loss=manip_loss
     for task_idx, loss in enumerate(losses):
         ### Check if there are losses in current batch ###
-        # If none, skip
+        # Skip tasks that don't have a loss (for cases where a batch only has data for only one task)
         if loss is None:
-            task_grads.append([None] * len(params))
             continue
 
-        ### Clear gradients before computing this task's gradient, starting with p.grad=None for every param ###
-        # VERY IMPORTANT, as don't want any previous gradient sitting inside p.grad (otherwise PyTorch could accumulate gradients)
-        for p in params:
-            p.grad = None
+        # Select gradient dictionary into which hooks should write
+        current_grads = task_grads_dicts[task_idx]
+
+        ### Clear previous captured gradients in current dictionary before computing this task's gradient ###
+        # Prevent accidentally using stale gradients from a previous backward pass
+        current_grads.clear()
 
         ### Determine whether another valid loss follows ###
         # With [nav, manip]: NAV --> retain_graph=True, MANIP --> retain_graph=False
@@ -84,18 +133,57 @@ def pcgrad_backward(accelerator, model, losses, retain_graph=True):
         #   So set this flag to tell PyTorch to keep computation graph, as will need to perform another backward pass (for next task)
         accelerator.backward(loss, retain_graph=(retain_graph or remaining_valid_losses)) # Always retain graph if retain_graph=True, or retain it for every task except final one (as no following computation graph after last task to backprop)
 
-        ### Copy current task's gradients after backward pass, because the next backward pass will overwrite them ###
-        grads = []
+        ### DEBUGGING
+        # if accelerator.is_main_process:
+        #     print(f"\n===== PCGrad TASK {task_idx} =====", flush=True)
+        #     print("Captured gradients:", len(current_grads), flush=True)
+        #     count = 0
 
-        # Loop through each param
+        #     for p in params:
+        #         if p not in current_grads:
+        #             continue
+
+        #         g = current_grads[p]
+
+        #         if torch.any(g != 0):
+        #             print("Gradient:", tuple(g.shape), "| norm:", g.float().norm().item(), flush=True)
+
+        #             count += 1
+        #             if count >= 3:
+        #                 break
+        ###
+
+    ### Remove hooks ###
+    for hook in hooks:
+        hook.remove()
+
+    ### Convert dictionaries to lists ###
+    # Converts per-task gradient dictionaries into ordered lists of gradients
+    # Maintain exactly the same ordering as 'params'
+    #   Important for PCGrad code as later it does zip(projected_grads[i], task_grads[j]) --> Needs the grads for corresponding params to be in the same position
+    task_grads = [] # Initialise task_grads as an empty list (will subsequently look like task_grads[0] --> nav grads, task_grads[1] --> manip grads)
+
+    # Loop through each task's grad dictionary
+    for grads_dict in task_grads_dicts:
+        # Initialise empty list for current task
+        #   Will subsequently contain grads for all params, in the exact order of params
+        grads =[]
+
+        # Loop through params in the ORIGINAL ORDER
         for p in params:
-            if p.grad is None: # IF parameter recieved no gradient from the current task (e.g. nav head shouldn't receive gradients from every task (manip tasks))
-                grads.append(None)
-            else: # IF param recieved a gradient from current task
-                grads.append(p.grad.detach().clone()) # Save an independent copy of grad (as otherwise may end up with references to grad tensors that are subsequently modified/reused)
+            # If current param has a gradient (i.e. if current task produced a grad for this particular param) - Matters to check as not every param necessarily participates in every task (e.g. nav loss does not participate in manip head)
+            if p in grads_dict:
+                grads.append(grads_dict[p]) # Append grad
+            # If no gradient
+            #   IMPORTANT that instead of just skipping params with no grad, it preserves the position of the param (by appending None)
+            #   Maintains same length and ordering of the nav grad and manip grad lists. List indices will also correspond to the same param. (Ensures PCGrad compares grads belonging to SAME params)
+            else:
+                grads.append(None) # Append None
 
         ### Store the current task's gradients ###
         # E.g. task_grads[0] = [grad of loss wrt to p0, grad of loss wrt to p1, ...]
+        #   Task grads will be: task_grads[task_idx][param_idx]
+        # This ensures later, gi and gj will always correspond to the SAME MODEL PARAM, as both lists were constructed using for p in params: in exactly the same order.
         task_grads.append(grads)
 
     ### Initialise PCGrad diagonstics ###
@@ -220,28 +308,48 @@ def pcgrad_backward(accelerator, model, losses, retain_graph=True):
                     projected_grads[i][k] = (gi - projection_coeff * gj) # Projects away conflicting components
     
     ### Combine projected task gradients ###
+    # Combine the projected grads from all tasks (projected_grads) into one gradient per model param
+    #   i.e. For each param, collect all available projected task grads and add them together
     # NOTE: Standard PCGrad uses the sum of projected gradients
-    for p_idx, p in enumerate(params): # Loop through each model parameter
+    # Initialise empty list to store final grads (will eventually contain one grad for every param in params, e.g. final_grads:[grad_for_param0, grad_for_param1, ...])
+    final_grads = []
+
+    for p_idx in range(len(params)): # Loop through each model parameter
         # Gather the projected gradients for current parameter (p_idx), e.g. grads_for_param = [[nav_proj_grads], [manip_proj_grads]]
         grads_for_param = [task_grad[p_idx] for task_grad in projected_grads if task_grad[p_idx] is not None]
 
         ### Add the projected gradients together ###
         # g_final = g_nav,PCGrad + g_manip,PCGrad
-        if len(grads_for_param) == 0:
-            p.grad = None
-        else:
-            combined_grad = torch.stack(grads_for_param, dim=0).sum(dim=0)
+        if len(grads_for_param) == 0: # IF no task has a gradient
+            final_grads.append(None) # Append None, as no task produced a grad for the current param
+        else: # Stack the gradients
+            combined_grad = torch.stack(grads_for_param, dim=0).sum(dim=0) # Creates a new task dim, and sum across the task dim to get the combined gradient
 
             ### Put final gradient into p.grad ###
             # IMPORTANT for allowing PyTorch's optimiser to see p.grad --> PCGrad-combined gradient
             # So when training loop subsequently does optimizer.step(), optimizer updates the model using the PCGrad gradient.
             # NOTE: The function itself does NOT update the model. It only prepares p.grad for the optimizer
             #   The optimizer still performs the actual update.
-            p.grad = combined_grad
+            final_grads.append(combined_grad) # final_grads[p_idx] should contain the final gradient that should be assigned to param p_idx
+
+    ### Write final gradients into p.grad ###
+    # IMPORTANT for allowing PyTorch's optimiser to see p.grad --> PCGrad-combined gradient
+    # So when training loop subsequently does optimizer.step(), optimizer updates the model using the PCGrad gradient.
+    # NOTE: The function itself does NOT update the model. It only prepares p.grad for the optimizer
+    #   The optimizer still performs the actual update.
+    # Pair params with final grads (works as both lists were constructed using the same params ordering)
+    for p, grad in zip(params, final_grads):
+        # IF current param has no grad (i.e. no task produced a grad for this param)
+        if grad is None:
+            # No gradient for this parameter
+            p.grad = torch.zeros_like(p)
+        # IF current param has grad
+        else:
+            p.grad = grad # Set the PCGrad-computed gradient for param p
     
     ### Calculate PCGrad cosine similarity diagonstics ###
-    if num_tasks == 2 and pcgrad_dot_product is not None:
-        cosine_similarity = pcgrad_dot_product / ((pcgrad_norm_nav * pcgrad_norm_manip) + 1e-12).detach()
+    if num_tasks == 2 and pcgrad_dot_product is not None and pcgrad_norm_nav is not None and pcgrad_norm_manip is not None:
+        cosine_similarity = pcgrad_dot_product / ((pcgrad_norm_nav * pcgrad_norm_manip) + 1e-12)
     else:
         cosine_similarity = None
 

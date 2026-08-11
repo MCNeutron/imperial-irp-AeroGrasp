@@ -603,6 +603,7 @@ def train(config):
             # === Backward and optimizer step ===
             optimizer.zero_grad(set_to_none=True)
             # accelerator.backward(loss)
+
             ### ADDED for PCGrad
             task_losses = [nav_loss, manip_loss] # Initialise list of task losses for individual tasks
 
