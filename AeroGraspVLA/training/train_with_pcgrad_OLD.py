@@ -24,12 +24,11 @@ from torch.optim import AdamW
 import warnings
 
 ### ADDED
+from pcgrad import PCGrad ### ADDED for PCGrad
+
 ### Script definitions ###
 # Integer IDs for the different embodiments
 from model.embodiment_id import LIBERO_EMBODIMENT_ID, HABITATSIM_EMBODIMENT_ID
-
-# PCGrad function
-from helpers.pcgrad import pcgrad_backward
 
 # Set up logging of training metrics
 import csv
@@ -398,11 +397,11 @@ def train(config):
             writer = csv.writer(f)
             # writer.writerow(["step", "epoch", "mse_loss", "mse_x", "mse_y", "mse_z", "mse_angle1", "mse_angle2", "mse_angle3", "mse_gripper", "mae_loss", "learning_rate", "grad_norm"]) # FOR single action head implementation
             # FOR parallel action head implementation
-            writer.writerow(["step", "epoch", "mse_loss", "original_loss",
+            writer.writerow(["step", "epoch", "mse_loss",
                              "nav_mse_x", "nav_mse_y", "nav_mse_z", "nav_mse_angle1", "nav_mse_angle2", "nav_mse_angle3", "nav_mse_gripper",
                              "manip_mse_x", "manip_mse_y", "manip_mse_z", "manip_mse_angle1", "manip_mse_angle2", "manip_mse_angle3", "manip_mse_gripper",
-                             "mae_loss", "nav_samples", "manip_samples", "batch_size", "valid_nav_entries", "valid_manip_entries", "total_entries",
-                             "nav_grad_norm", "manip_grad_norm", "grad_dot_product", "grad_cosine_similarity", "pcgrad_projections", "learning_rate", "grad_norm"])
+                             "mae_loss", "cosine_similarity", "nav_loss_to_nav_head", "nav_loss_to_manip_head", "manip_loss_to_nav_head", "manip_loss_to_manip_head",
+                             "nav_samples", "manip_samples", "batch_size", "valid_nav_entries", "valid_manip_entries", "total_entries", "learning_rate", "grad_norm"])
     ###
     
     # === WandB and Swanlab ===
@@ -426,7 +425,11 @@ def train(config):
 
     lr = get_with_warning(config, "lr", 1e-5)
     wd = get_with_warning(config, "weight_decay", 1e-5)
-    optimizer = AdamW(build_param_groups(model, wd), lr=lr)
+    # optimizer = AdamW(build_param_groups(model, wd), lr=lr)
+    ### ADDED for PCGrad
+    base_optimizer = AdamW(build_param_groups(model, wd), lr=lr)
+    optimizer = PCGrad(base_optimizer)
+    ###
     if accelerator.is_main_process:
         logging.info(f"Optimizer=AdamW, lr={lr}, weight_decay={wd}")
 
@@ -549,54 +552,111 @@ def train(config):
             action_mask = action_mask.view(action_mask.shape[0], -1).to(dtype=pred_velocity.dtype)
             pred_velocity_mask = pred_velocity * action_mask
             target_velocity = target_velocity * action_mask ### ADDED, for masking out roll, pitch and gripper dimensions when training on HabitatSim datasets
-            loss = loss_fn(pred_velocity_mask, target_velocity)
+            # loss = loss_fn(pred_velocity_mask, target_velocity)
             scale_factor = action_mask.numel() / (action_mask.sum() + 1e-8)
-            loss = loss * scale_factor
+            # loss = loss * scale_factor
             ### ADDED for PCGrad
             # Create action masks, which selects samples
             nav_mask = embodiment_ids == HABITATSIM_EMBODIMENT_ID # Form NAVIGATION mask
             manip_mask = embodiment_ids == LIBERO_EMBODIMENT_ID # Form MANIPULATION mask
 
-            # Initialise the separate losses
-            nav_loss = None
-            manip_loss = None
+            # Initialise list of losses to save the separate navigation and manipulation losses
+            nav_loss = None # Initialise to indicate downstream whether batch contains nav samples
+            manip_loss = None # Initialise to indicate downstream whether batch contains manip samples
+            losses = []
 
-            # Calculate navigation loss:
+            # If there are any navigation samples
             if nav_mask.any():
-                nav_pred = pred_velocity_mask[nav_mask]
-                nav_target = target_velocity[nav_mask]
-                nav_action_mask = action_mask[nav_mask]
+                nav_pred_mask = pred_velocity_mask[nav_mask] # Extract the prediction velocities for navigation samples
+                nav_target_mask = target_velocity[nav_mask] # Extract the target velocities for navigation samples
+                nav_action_mask = action_mask[nav_mask] # Extract the action mask entries for navigation samples
 
-                nav_loss = loss_fn(nav_pred, nav_target)
-                # nav_scale_factor = nav_action_mask.numel() / (nav_action_mask.sum() + 1e-8) # Per-task normalisation of loss
-                nav_scale_factor = nav_action_mask.numel() / (action_mask.sum() + 1e-8) # Contribution to global loss - i.e. Decomposition of original loss for this task
+                nav_loss = loss_fn(nav_pred_mask, nav_target_mask) # Calculate loss for just navigation samples
 
-                nav_loss = nav_loss * nav_scale_factor
+                nav_scale_factor = nav_action_mask.numel() / (nav_action_mask.sum() + 1e-8) # Calculate the scale factor for just navigation samples
 
-            # Calculate manipulation loss:
+                nav_loss = nav_loss * nav_scale_factor # Calculate the scaled navigation loss
+
+                losses.append(nav_loss) # Append the navigation loss to the total list of losses
+
+            # If there are any manipulation samples
             if manip_mask.any():
-                manip_pred = pred_velocity_mask[manip_mask]
-                manip_target = target_velocity[manip_mask]
-                manip_action_mask = action_mask[manip_mask]
+                manip_pred_mask = pred_velocity_mask[manip_mask] # Extract the prediction velocities for manipulation samples
+                manip_target_mask = target_velocity[manip_mask] # Extract the target velocities for manipulation samples
+                manip_action_mask = action_mask[manip_mask] # Extract the action mask entries for manipulation samples
 
-                manip_loss = loss_fn(manip_pred, manip_target)
-                # manip_scale_factor = manip_action_mask.numel() / (manip_action_mask.sum() + 1e-8) # Per-task normalisation of loss
-                manip_scale_factor = manip_action_mask.numel() / (action_mask.sum() + 1e-8) # Contribution to global loss - i.e. Decomposition of original loss for this task
+                manip_loss = loss_fn(manip_pred_mask, manip_target_mask) # Calculate loss for just manipulation samples
 
-                manip_loss = manip_loss * manip_scale_factor
+                manip_scale_factor = manip_action_mask.numel() / (manip_action_mask.sum() + 1e-8) # Calculate the scale factor for just manipulation samples
 
-            # Recombining loss test
-            # # print(f"Original loss: {loss}", flush=True)
-            # loss = 0.0
-            # if nav_loss is not None:
-            #     loss = loss + loss_fn(nav_pred, nav_target) * nav_pred.numel() / action_mask.numel()
-            # if manip_loss is not None:
-            #     loss = loss + loss_fn(manip_pred, manip_target) * manip_pred.numel() / action_mask.numel()
+                manip_loss = manip_loss * manip_scale_factor # Calculate the scaled manipulation loss
 
-            # loss = loss * scale_factor
-            # # print(f"Recombined loss: {loss}", flush=True)
-            # # print(f"Nav loss: {nav_loss}", flush=True)
-            # # print(f"Manip loss: {manip_loss}", flush=True)
+                losses.append(manip_loss) # Append the manipulation loss to the total list of losses
+
+            # Length check
+            if len(losses) == 0:
+                raise ValueError(f"[Step {step}] No valid losses were generated. embodiment_ids={embodiment_ids}")
+
+            # Combine losses for logging/checkpointing
+            # This loss is used for logging, checkpoint selection, NaN checking, etc.
+            # PCGrad does NOT use this scalar for its backward pass!
+            loss = torch.stack(losses).sum()
+
+            # Calculate gradient cosine similarity for checking PCGrad effectiveness
+            params = [p for p in model.embedder.parameters() if p.requires_grad]
+
+            cosine = float("nan") # Initialise cosine similarity value
+
+            if nav_loss is not None and manip_loss is not None:
+                nav_grads = torch.autograd.grad(nav_loss, params, retain_graph=True, allow_unused=True)
+                manip_grads = torch.autograd.grad(manip_loss, params, retain_graph=True, allow_unused=True)
+
+                cosine = torch.nn.functional.cosine_similarity(
+                    torch.cat([g.flatten() if g is not None else torch.zeros_like(p).flatten() for g, p in zip(nav_grads, params)]).unsqueeze(0),
+                    torch.cat([g.flatten() if g is not None else torch.zeros_like(p).flatten() for g, p in zip(manip_grads, params)]).unsqueeze(0)
+                ).item()
+
+            # Calculate navigation and manipulation head gradients
+            nav_params = [p for p in model.action_head.nav_head.parameters() if p.requires_grad]
+            manip_params = [p for p in model.action_head.manip_head.parameters() if p.requires_grad]
+
+            # Initialise relative losses
+            nav_loss_to_nav = float("nan")
+            nav_loss_to_manip = float("nan")
+            manip_loss_to_nav = float("nan")
+            manip_loss_to_manip = float("nan")
+
+            if nav_loss is not None:
+                nav_grad_nav = torch.autograd.grad(nav_loss, nav_params, retain_graph=True, allow_unused=True)
+                nav_grad_manip = torch.autograd.grad(nav_loss, manip_params, retain_graph=True, allow_unused=True)
+
+                nav_loss_to_nav = torch.sqrt(
+                    sum((g ** 2).sum() for g in nav_grad_nav if g is not None)
+                ) if any(g is not None for g in nav_grad_nav) else torch.tensor(
+                    0.0, device=nav_loss.device
+                )
+
+                nav_loss_to_manip = torch.sqrt(
+                    sum((g ** 2).sum() for g in nav_grad_manip if g is not None)
+                ) if any(g is not None for g in nav_grad_manip) else torch.tensor(
+                    0.0, device=nav_loss.device
+                )
+
+            if manip_loss is not None:
+                manip_grad_nav = torch.autograd.grad(manip_loss, nav_params, retain_graph=True, allow_unused=True)
+                manip_grad_manip = torch.autograd.grad(manip_loss, manip_params, retain_graph=True, allow_unused=True)
+
+                manip_loss_to_nav = torch.sqrt(
+                    sum((g ** 2).sum() for g in manip_grad_nav if g is not None)
+                ) if any(g is not None for g in manip_grad_nav) else torch.tensor(
+                    0.0, device=manip_loss.device
+                )
+
+                manip_loss_to_manip = torch.sqrt(
+                    sum((g ** 2).sum() for g in manip_grad_manip if g is not None)
+                ) if any(g is not None for g in manip_grad_manip) else torch.tensor(
+                    0.0, device=manip_loss.device
+                )
             ###
             
             # === NaN/Inf check ===
@@ -611,173 +671,19 @@ def train(config):
                 continue
 
             # === Backward and optimizer step ===
-            # optimizer.zero_grad(set_to_none=True)
+            optimizer.zero_grad(set_to_none=True)
             # accelerator.backward(loss)
-
             ### ADDED for PCGrad
-            model.zero_grad()
-            task_losses = [nav_loss, manip_loss] # Initialise list of task losses for individual tasks
-
-            pcgrad_out = pcgrad_backward(accelerator=accelerator, model=model, losses=task_losses, retain_graph=True)
+            if len(losses) == 1:
+                accelerator.backward(losses[0])
+            else:
+                optimizer.pc_backward(losses, backward_fn=accelerator.backward) ### ADDED for PCGrad
             ###
-
-            ##### DEBUGGING
-            # ### DEBUGGING loss shape (for later input into backward())
-            # for name, task_loss in [
-            #     ("nav_loss", nav_loss),
-            #     ("manip_loss", manip_loss),
-            # ]:
-            #     if task_loss is not None:
-            #         print(
-            #             f"{name}: "
-            #             f"type={type(task_loss)}, "
-            #             f"shape={task_loss.shape}, "
-            #             f"ndim={task_loss.ndim}, "
-            #             f"numel={task_loss.numel()}, "
-            #             f"requires_grad={task_loss.requires_grad}",
-            #             flush=True,
-            #         )
-            # ###
-            # ### DEBUGGING obtaining two independent task gradients, using DeepSpeed APIs
-            # from deepspeed.utils import safe_get_full_grad, safe_set_full_grad
-
-            # nav_grads = {}
-            # manip_grads = {}
-
-            # if nav_loss is not None:
-            #     model.backward(nav_loss, retain_graph=True)
-
-            #     for name, p in model.named_parameters():
-            #         if not p.requires_grad:
-            #             continue
-
-            #         g = safe_get_full_grad(p)
-
-            #         if g is not None:
-            #             nav_grads[name] = g.detach().clone()
-
-            #     model.zero_grad()
-
-            # if manip_loss is not None:
-            #     model.backward(manip_loss)
-
-            #     for name, p in model.named_parameters():
-            #         if not p.requires_grad:
-            #             continue
-
-            #         g = safe_get_full_grad(p)
-
-            #         if g is not None:
-            #             manip_grads[name] = g.detach().clone()
-
-            # for name in nav_grads:
-
-            #     if name not in manip_grads:
-            #         continue
-
-            #     g_nav = nav_grads[name].float()
-            #     g_manip = manip_grads[name].float()
-
-            #     dot = torch.sum(g_nav * g_manip)
-
-            #     nav_norm = torch.linalg.vector_norm(g_nav)
-            #     manip_norm = torch.linalg.vector_norm(g_manip)
-
-            #     cosine = dot / (nav_norm * manip_norm + 1e-12)
-
-            #     print(
-            #         name,
-            #         "nav_norm =", nav_norm.item(),
-            #         "manip_norm =", manip_norm.item(),
-            #         "dot =", dot.item(),
-            #         "cosine =", cosine.item(),
-            #     )
-            # ###
-
-            # Split losses + double backwards test
-            # print(f"Original loss: {loss}", flush=True)
-            original_loss = loss # Save the original, unplit loss (for logging/debugging)
-            loss = sum(x for x in (nav_loss, manip_loss) if x is not None) # i.e. nav_loss + manip_loss if both are NOT None, otherwise just whichever exists.
-            # print(f"Split combined loss: {loss}", flush=True)
-            #####
 
             # === Clip grad norm ===
             total_norm, clipped_norm = get_and_clip_grad_norm(accelerator, model, loss, max_norm)
 
-            # optimizer.step()
-            model.step() ### ADDED
-            ### DEBUGGING to check if optimizer actually consumes
-            # from deepspeed.utils import (
-            #     safe_get_full_grad,
-            #     safe_get_full_fp32_param,
-            # )
-
-            # debug_param = None
-            # debug_name = None
-
-            # for name, p in model.named_parameters():
-            #     if name == "module.embedder.model.vision_model.embeddings.class_embedding":
-            #         debug_param = p
-            #         debug_name = name
-            #         break
-
-            # if debug_param is not None:
-
-            #     # --------------------------------------------------
-            #     # BEFORE optimizer.step()
-            #     # --------------------------------------------------
-
-            #     grad_before = safe_get_full_grad(debug_param)
-            #     fp32_before = safe_get_full_fp32_param(debug_param)
-
-            #     print("\nBEFORE optimizer.step():")
-            #     print("parameter:", debug_name)
-
-            #     if grad_before is not None:
-            #         print("grad norm:",
-            #             torch.linalg.vector_norm(grad_before.float()).item())
-
-            #     if fp32_before is not None:
-            #         print("FP32 param norm:",
-            #             torch.linalg.vector_norm(fp32_before.float()).item())
-
-            #         fp32_before = fp32_before.detach().clone()
-
-            #     param_before = debug_param.detach().clone()
-
-            #     # --------------------------------------------------
-            #     # OPTIMIZER STEP
-            #     # --------------------------------------------------
-
-            #     # optimizer.step()
-            #     model.step()
-
-            #     # --------------------------------------------------
-            #     # AFTER optimizer.step()
-            #     # --------------------------------------------------
-
-            #     fp32_after = safe_get_full_fp32_param(debug_param)
-            #     param_after = debug_param.detach().clone()
-
-            #     print("\nAFTER optimizer.step():")
-
-            #     if fp32_after is not None:
-            #         fp32_change = fp32_after.float() - fp32_before.float()
-
-            #         print("FP32 parameter change norm:",
-            #             torch.linalg.vector_norm(fp32_change).item())
-
-            #         print("FP32 parameter change max:",
-            #             torch.max(torch.abs(fp32_change)).item())
-
-            #     bf16_change = param_after.float() - param_before.float()
-
-            #     print("BF16 parameter change norm:",
-            #         torch.linalg.vector_norm(bf16_change).item())
-
-            #     print("BF16 parameter change max:",
-            #         torch.max(torch.abs(bf16_change)).item())
-            ###
+            optimizer.step()
             scheduler.step()
             
             # === Logging ===
@@ -862,7 +768,6 @@ def train(config):
                             step, # Step
                             (step / len(dataloader)), # = current_epoch
                             loss.item(), # Overall MSE loss
-                            original_loss.item(), # Original overall MSE loss (calculated without splitting)
                             nav_dim_losses[0].item(), # Navigation MSE loss x
                             nav_dim_losses[1].item(), # Navigation MSE loss y
                             nav_dim_losses[2].item(), # Navigation MSE loss z
@@ -878,17 +783,17 @@ def train(config):
                             manip_dim_losses[5].item(), # Manipulation MSE loss angle3
                             manip_dim_losses[6].item(), # Manipulation MSE loss gripper
                             mae.item(), # MAE
+                            cosine, # Gradient cosine similarity for PCGrad
+                            nav_loss_to_nav.item(), # Nav losses wrt to navigation head params
+                            nav_loss_to_manip.item(), # Nav losses wrt to manipulation head params
+                            manip_loss_to_nav.item(), # Manip losses wrt to navigation head params
+                            manip_loss_to_manip.item(), # Manip losses wrt to manipulation head params
                             num_nav_samples, # Number of navigation samples in current batch
                             num_manip_samples, # Number of manipulation samples in current batch
                             batch_size, # Current batch size
                             num_nav_valid, # Number of valid navigation sample entries
                             num_manip_valid, # Number of valid manipulation sample entries
                             total_valid, # Total number of valid sample entries
-                            pcgrad_out['task_grad_norms'][0].item(), # PCGrad navigation norm
-                            pcgrad_out['task_grad_norms'][1].item(), # PCGrad manipulation norm
-                            (pcgrad_out['dot_product'].item() if pcgrad_out["dot_product"] is not None else float("nan")), # PCGrad dot product
-                            (pcgrad_out['cosine_similarity'].item() if pcgrad_out["cosine_similarity"] is not None else float("nan")), # PCGrad cosine similarity
-                            pcgrad_out['num_projections'], # PCGrad number of actual projections
                             scheduler.get_last_lr()[0], # Learning rate
                             clipped_norm.item() # Gradient norm
                         ])
