@@ -398,7 +398,7 @@ def train(config):
             writer = csv.writer(f)
             # writer.writerow(["step", "epoch", "mse_loss", "mse_x", "mse_y", "mse_z", "mse_angle1", "mse_angle2", "mse_angle3", "mse_gripper", "mae_loss", "learning_rate", "grad_norm"]) # FOR single action head implementation
             # FOR parallel action head implementation
-            writer.writerow(["step", "epoch", "mse_loss", "original_loss",
+            writer.writerow(["step", "epoch", "mse_loss", "original_loss", "nav_loss", "manip_loss",
                              "nav_mse_x", "nav_mse_y", "nav_mse_z", "nav_mse_angle1", "nav_mse_angle2", "nav_mse_angle3", "nav_mse_gripper",
                              "manip_mse_x", "manip_mse_y", "manip_mse_z", "manip_mse_angle1", "manip_mse_angle2", "manip_mse_angle3", "manip_mse_gripper",
                              "mae_loss", "nav_samples", "manip_samples", "batch_size", "valid_nav_entries", "valid_manip_entries", "total_entries",
@@ -512,6 +512,16 @@ def train(config):
             state_mask = batch["state_mask"]
             embodiment_ids = batch["embodiment_ids"]
             fused_tokens_list = []
+
+            ### ADDED for discarding datasets that only contain samples from a single dataset type
+            nav_mask = embodiment_ids == HABITATSIM_EMBODIMENT_ID
+            manip_mask = embodiment_ids == LIBERO_EMBODIMENT_ID
+
+            # Require both task types, otherwise skip this loop (essentially refetching a new batch)
+            # NOTE: step does not increment until after a batch is actually trained, so skipping batches won't count as training steps
+            if not nav_mask.any() or not manip_mask.any():
+                continue
+            ###
             
             for prompt, images, image_mask in zip(prompts, images_batch, image_masks):
                 fused = model.get_vl_embeddings(images=images, image_mask=image_mask, prompt=prompt, return_cls_only=False)
@@ -568,8 +578,8 @@ def train(config):
                 nav_action_mask = action_mask[nav_mask]
 
                 nav_loss = loss_fn(nav_pred, nav_target)
-                # nav_scale_factor = nav_action_mask.numel() / (nav_action_mask.sum() + 1e-8) # Per-task normalisation of loss
-                nav_scale_factor = nav_action_mask.numel() / (action_mask.sum() + 1e-8) # Contribution to global loss - i.e. Decomposition of original loss for this task
+                nav_scale_factor = nav_action_mask.numel() / (nav_action_mask.sum() + 1e-8) # Per-task normalisation of loss
+                # nav_scale_factor = nav_action_mask.numel() / (action_mask.sum() + 1e-8) # Contribution to global loss - i.e. Decomposition of original loss for this task
 
                 nav_loss = nav_loss * nav_scale_factor
 
@@ -580,8 +590,8 @@ def train(config):
                 manip_action_mask = action_mask[manip_mask]
 
                 manip_loss = loss_fn(manip_pred, manip_target)
-                # manip_scale_factor = manip_action_mask.numel() / (manip_action_mask.sum() + 1e-8) # Per-task normalisation of loss
-                manip_scale_factor = manip_action_mask.numel() / (action_mask.sum() + 1e-8) # Contribution to global loss - i.e. Decomposition of original loss for this task
+                manip_scale_factor = manip_action_mask.numel() / (manip_action_mask.sum() + 1e-8) # Per-task normalisation of loss
+                # manip_scale_factor = manip_action_mask.numel() / (action_mask.sum() + 1e-8) # Contribution to global loss - i.e. Decomposition of original loss for this task
 
                 manip_loss = manip_loss * manip_scale_factor
 
@@ -696,8 +706,12 @@ def train(config):
 
             # Split losses + double backwards test
             # print(f"Original loss: {loss}", flush=True)
-            original_loss = loss # Save the original, unplit loss (for logging/debugging)
-            loss = sum(x for x in (nav_loss, manip_loss) if x is not None) # i.e. nav_loss + manip_loss if both are NOT None, otherwise just whichever exists.
+            original_loss = loss.detach().clone() # Save the original, unsplit loss (for logging/debugging)
+            # loss = sum(x for x in (nav_loss, manip_loss) if x is not None) # i.e. nav_loss + manip_loss if both are NOT None, otherwise just whichever exists.
+            nav_valid_entries = nav_action_mask.sum() if nav_loss is not None else 0 # Get number of valid nav entries (0 if there are no nav entries)
+            manip_valid_entries = manip_action_mask.sum() if manip_loss is not None else 0 # Get number of valid manip entries (0 if there are no manip entries)
+            total_valid_entries = nav_valid_entries + manip_valid_entries # Calculate total number of valid entries
+            loss = ((nav_loss * nav_valid_entries if nav_loss is not None else 0) + (manip_loss * manip_valid_entries if manip_loss is not None else 0)) / (total_valid_entries + 1e-8) # Calculate original loss
             # print(f"Split combined loss: {loss}", flush=True)
             #####
 
@@ -863,6 +877,8 @@ def train(config):
                             (step / len(dataloader)), # = current_epoch
                             loss.item(), # Overall MSE loss
                             original_loss.item(), # Original overall MSE loss (calculated without splitting)
+                            nav_loss.item() if nav_loss is not None else float("nan"), # Navigation loss being passed into PCGrad
+                            manip_loss.item() if manip_loss is not None else float("nan"), # Manipulation loss being passed into PCGrad
                             nav_dim_losses[0].item(), # Navigation MSE loss x
                             nav_dim_losses[1].item(), # Navigation MSE loss y
                             nav_dim_losses[2].item(), # Navigation MSE loss z
