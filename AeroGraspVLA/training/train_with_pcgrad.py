@@ -401,8 +401,12 @@ def train(config):
             writer.writerow(["step", "epoch", "mse_loss", "original_loss", "nav_loss", "manip_loss",
                              "nav_mse_x", "nav_mse_y", "nav_mse_z", "nav_mse_angle1", "nav_mse_angle2", "nav_mse_angle3", "nav_mse_gripper",
                              "manip_mse_x", "manip_mse_y", "manip_mse_z", "manip_mse_angle1", "manip_mse_angle2", "manip_mse_angle3", "manip_mse_gripper",
-                             "mae_loss", "nav_samples", "manip_samples", "batch_size", "valid_nav_entries", "valid_manip_entries", "total_entries",
+                             "mae_loss", "nav_samples", "manip_samples", "batch_size", "valid_nav_entries", "valid_manip_entries", "total_entries", "skipped_batches", "trained_batches",
                              "nav_grad_norm", "manip_grad_norm", "grad_dot_product", "grad_cosine_similarity", "pcgrad_projections", "learning_rate", "grad_norm"])
+
+    # Initialise skipped and trained batches counter (for use as I am skipping batches)
+    skipped_batches = 0
+    trained_batches = 0
     ###
     
     # === WandB and Swanlab ===
@@ -520,7 +524,15 @@ def train(config):
             # Require both task types, otherwise skip this loop (essentially refetching a new batch)
             # NOTE: step does not increment until after a batch is actually trained, so skipping batches won't count as training steps
             if not nav_mask.any() or not manip_mask.any():
+                skipped_batches += 1 # Increment counter for number of batches skipped
                 continue
+
+            # # For ensuring only using batches with the same number of samples from both task types
+            # if nav_mask.sum() != manip_mask.sum():
+            #     skipped_batches += 1 # Increment counter for number of batches skipped
+            #     continue
+
+            trained_batches += 1 # Increment counter for number of batches trained
             ###
             
             for prompt, images, image_mask in zip(prompts, images_batch, image_masks):
@@ -576,6 +588,37 @@ def train(config):
                 nav_pred = pred_velocity_mask[nav_mask]
                 nav_target = target_velocity[nav_mask]
                 nav_action_mask = action_mask[nav_mask]
+
+                ### Dimensions-specific loss weighting
+                # Set the loss weightings
+                w_forward_loss = 3
+                w_yaw_loss = 2
+
+                # Calculate values for forward loss weighting
+                # NOTE: CHECK THESE VALUES ARE CORRECT FROM NORMALISATION STATS OF CHECKPOINT!!
+                forward_min = -1.773238182067871e-05
+                forward_max = 0.5600090622901917
+                forward_thresh = 0.05 # Forward threshold in raw action units to penalise the model
+                forward_thresh_norm_pos = 2 * (forward_thresh - forward_min) / (forward_max - forward_min) - 1 # Upper bound of normalised forward threshold
+                forward_thresh_norm_neg = 2 * (-1 * forward_thresh - forward_min) / (forward_max - forward_min) - 1 # Lower bound normalised forward threshold
+
+                # Unflatten nav_pred and nav_target to [batch, horizon, dim] for applying weighting
+                nav_pred = nav_pred.view(nav_pred.shape[0], -1, actions_gt.shape[-1])
+                nav_target = nav_target.view(nav_target.shape[0], -1, actions_gt.shape[-1])
+                
+                # Create weighting vector
+                nav_dim_weights = torch.ones_like(nav_pred) # Initialise nav_dim_weights to be all ones
+                nav_dim_weights[..., 0] = torch.where((nav_target[..., 0] >= forward_thresh_norm_neg) & (nav_target[..., 0] <= forward_thresh_norm_pos), w_forward_loss**0.5, 1.0) # Set the forward dim loss weighting to x3 IF its corresponding ground truth action is very small (norm < forward_thresh_norm)
+                nav_dim_weights[..., 5] = w_yaw_loss**0.5 # Set the yaw dim loss weighting to x2
+
+                # Scale nav_pred and nav_target by loss weighting
+                nav_pred = nav_pred * nav_dim_weights
+                nav_target = nav_target * nav_dim_weights
+
+                # Flatten the predictions and target back to the original [batch, horizon*dim]
+                nav_pred = nav_pred.view(nav_pred.shape[0], -1)
+                nav_target = nav_target.view(nav_target.shape[0], -1)
+                ###
 
                 nav_loss = loss_fn(nav_pred, nav_target)
                 nav_scale_factor = nav_action_mask.numel() / (nav_action_mask.sum() + 1e-8) # Per-task normalisation of loss
@@ -900,6 +943,8 @@ def train(config):
                             num_nav_valid, # Number of valid navigation sample entries
                             num_manip_valid, # Number of valid manipulation sample entries
                             total_valid, # Total number of valid sample entries
+                            skipped_batches, # Total number of batches skipped during training
+                            trained_batches, # Total number of batches used for training during training
                             pcgrad_out['task_grad_norms'][0].item(), # PCGrad navigation norm
                             pcgrad_out['task_grad_norms'][1].item(), # PCGrad manipulation norm
                             (pcgrad_out['dot_product'].item() if pcgrad_out["dot_product"] is not None else float("nan")), # PCGrad dot product
@@ -1003,6 +1048,8 @@ if __name__ == "__main__":
     parser.add_argument("--nav_horizon", type=int, default=10) ### ADDED for Parallel Action Head implementation, for setting the navigation action head horizon
     parser.add_argument("--manip_horizon", type=int, default=50) ### ADDED for Parallel Action Head implementation for setting the manipulation action head horizon
     parser.add_argument("--num_layers", type=int, default=8)
+    parser.add_argument("--nav_num_layers", type=int, default=18) ### ADDED for Parallel Action Head implementation, for setting the navigation action head layer depth
+    parser.add_argument("--manip_num_layers", type=int, default=8) ### ADDED for Parallel Action Head implementation, for setting the manipulation action ohead layer depth
     parser.add_argument("--num_workers", type=int, default=4)
     # dropout
     parser.add_argument("--dropout", type=float, default=0.0)

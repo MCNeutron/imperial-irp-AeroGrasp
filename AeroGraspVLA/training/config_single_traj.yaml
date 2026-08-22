@@ -155,8 +155,20 @@ data_groups:
     #     image_1: observation.images.image
     #     image_2: observation.images.ref_image
     
-    indooruav-vla_habitatsim_hm3d_4_vla_ins_1:
-      path: /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_single_traj_lerobot/hm3d_4
+    # indooruav-vla_habitatsim_hm3d_4_vla_ins_1:
+    #   path: /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_single_traj_lerobot/hm3d_4
+    #   view_map:
+    #     image_1: observation.images.image
+    #     image_2: observation.images.ref_image
+    
+    indooruav-vla_habitatsim_hm3d_4_vla_ins_1_coord_frame_test_new_new:
+      path: /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_coord_test_lerobot/hm3d_4
+      view_map:
+        image_1: observation.images.image
+        image_2: observation.images.ref_image
+    
+    indooruav-vla_habitatsim_hm3d_2_vla_ins_1-5_coord_frame_test:
+      path: /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_coord_test_lerobot/hm3d_2
       view_map:
         image_1: observation.images.image
         image_2: observation.images.ref_image

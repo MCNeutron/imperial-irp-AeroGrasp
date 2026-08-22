@@ -205,13 +205,26 @@ data_groups:
     #     image_2: observation.images.ref_image
 
     ### TRAJECTORY-RELATIVE STATES
-    indooruav-vla_habitatsim_hm3d_1_rel_full:
+    # indooruav-vla_habitatsim_hm3d_1_rel_full:
+    #   path: /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot/hm3d_1
+    #   view_map:
+    #     image_1: observation.images.image
+    #     image_2: observation.images.ref_image
+
+    # indooruav-vla_habitatsim_hm3d_2_rel_full:
+    #   path: /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot/hm3d_2
+    #   view_map:
+    #     image_1: observation.images.image
+    #     image_2: observation.images.ref_image
+    
+    ### BODY-FRAME RELATIVE STATES AND ACTIONS
+    indooruav-vla_habitatsim_hm3d_1_body_rel_full:
       path: /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot/hm3d_1
       view_map:
         image_1: observation.images.image
         image_2: observation.images.ref_image
 
-    indooruav-vla_habitatsim_hm3d_2_rel_full:
+    indooruav-vla_habitatsim_hm3d_2_body_rel_full:
       path: /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot/hm3d_2
       view_map:
         image_1: observation.images.image

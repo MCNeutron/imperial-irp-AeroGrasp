@@ -21,10 +21,12 @@ class ParallelActionHead(nn.Module): # Create new PyTorch module
         nav_config = deepcopy(config) # Copy the input configs
         nav_config.horizon = config.nav_horizon # Set the horizon length specifically for this action head
         nav_config.action_dim = config.nav_horizon * config.per_action_dim # Calculate the action dimension specifically for this action head
+        nav_config.num_layers = config.nav_num_layers # Set the number of transformer layers specifically for this action head
 
         manip_config = deepcopy(config) # Copy the input configs
         manip_config.horizon = config.manip_horizon # Set the horizon length specifically for this action head
         manip_config.action_dim = config.manip_horizon * config.per_action_dim # Calculate the action dimension specifically for this action head
+        manip_config.num_layers = config.manip_num_layers # Set the number of transformer layers specifically for this action head
 
         # Define parallel action heads, creating two independent copies of the flow matching action head
         self.nav_head = FlowmatchingActionHead(nav_config) # NAVIGATION HEAD, for HabitatSim dataset

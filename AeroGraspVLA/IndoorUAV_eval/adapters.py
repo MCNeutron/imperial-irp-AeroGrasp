@@ -41,7 +41,26 @@ def compute_rel_states(original_state):
         _START_STATE = original_state.copy() # Set the starting state to current state (COPY to prevent accidentally modifying original variable)
 
     rel_state = original_state.copy() # Make a copy of current original state, to prevent accidentally modifying the original variable
-    rel_state -= _START_STATE # Compute trajectory-relative states, i.e. Relative state = Current state - Starting state
+    # rel_state -= _START_STATE # Compute trajectory-relative states, i.e. Relative state = Current state - Starting state
+
+    ### Construct relative states w.r.t. the starting frame coordinate frame ###
+    # Calculate position difference (x, y, z) in the WORLD coordinate frame
+    delta_pos = original_state[:3] - _START_STATE[:3]
+
+    # Get the starting frame yaw value
+    start_yaw = _START_STATE[3]
+
+    # Calculate transformation values
+    cos_yaw = np.cos(start_yaw)
+    sin_yaw = np.sin(start_yaw)
+
+    # Rotate the world-frame displacement (currently delta_pos) into the STARTING FRAME coordinate frame
+    #   +x = Forward
+    #   +y = Right
+    rel_state[0] = sin_yaw * delta_pos[0] - cos_yaw * delta_pos[1]
+    rel_state[1] = cos_yaw * delta_pos[0] + sin_yaw * delta_pos[1]
+    rel_state[2] = delta_pos[2] # Relative z is unchanged, still just pure current_z - starting_z
+    rel_state[3] = original_state[3] - _START_STATE[3] # Relative z is unchanged, still just current yaw - starting yaw
 
     # Wrap yaw angles
     rel_state[3] = (rel_state[3] + np.pi) % (2*np.pi) - np.pi
@@ -167,7 +186,7 @@ def evo1_out_to_habitatsim_in(evo1_out, habitatsim_out):
     # Get the last action from Evo1 output horizon
     # NOTE that these actions are already denormalised from infer_from_json_dict(), so these outputs should be real-world deltas (not normalised deltas), and can be directly added to HabitatSim states
     final_evo1_out = evo1_out[0]#[-1] # NOTE: VARIABLE NAME INCORRECT, SHOULD BE first_action, BUT NOT CHANGED YET FOR DEBUGGING
-    # final_evo1_out = np.sum(evo1_out[:5], axis=0) # TEST: Using a 50-step rollout sum for getting the final HabitatSim coordinate
+    # final_evo1_out = np.sum(evo1_out[:2], axis=0) # TEST: Using a 50-step rollout sum for getting the final HabitatSim coordinate
     # TODO: Check if final_evo1_out (evo1 output) is a list of numpy arrays, and if this type of indexing is allowed
     # evo1_out = np.asarray(evo1_out)
     # final_evo1_out = np.array([
@@ -193,6 +212,19 @@ def evo1_out_to_habitatsim_in(evo1_out, habitatsim_out):
     # print(f"adapters output deltas: [{evo1_dx:.4f}, {evo1_dy:.4f}, {evo1_dz:.4f}, {evo1_dyaw:.4f}]", flush=True) # DEBUGGING
     # print(f"adapters output deltas: [{evo1_dx:.4f}, {evo1_dy:.4f}, {evo1_dz:.4f}, {final_evo1_out[3]:.4f}, {final_evo1_out[4]:.4f}, {evo1_dyaw:.4f}, {final_evo1_out[6]:.4f}]", flush=True) # DEBUGGING
     # evo1_dz = 0 # NOTE: DEBUGGING, comment out for real use
+
+    ### Convert actions relative to current drone body frame to w.r.t HabitatSim WORLD FRAME ###
+    current_yaw = hs_yaw # Get the current yaw angle relative to the HABITATSIM WORLD FRAME
+    
+    # Calculate transformation values
+    cos_yaw = np.cos(current_yaw)
+    sin_yaw = np.sin(current_yaw)
+
+    # Calculate the delta actions in the world coordinate frame
+    body_dx = evo1_dx # delta_x in body coordinate frame
+    body_dy = evo1_dy # delta_y in body coordinate frame
+    evo1_dx = sin_yaw * body_dx + cos_yaw * body_dy # Now evo1_dx value is in the world coordinate frame
+    evo1_dy = -1 * cos_yaw * body_dx + sin_yaw * body_dy # evo1_dy value is in the world coordinate frame
 
     print(f"hs_yaw: {hs_yaw}", flush=True)
     print(f"evo1_dyaw: {evo1_dyaw}", flush=True)

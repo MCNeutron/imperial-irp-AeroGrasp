@@ -47,16 +47,16 @@ print("PROJECT_ROOT: ", PROJECT_ROOT, flush=True) # DEBUGGING: Print project roo
 import IndoorUAV_eval.adapters as adapters
 
 ### Script definitions ###
-DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted" # Dataset directory
-VLA_INS_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted/vla_ins" # vla_ins directory
-CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot" # Converted dataset directory
-DEBUG_LOG_PATH = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/dataset_conversion/dataset_converter.log" # DEBUG text file directory
+# DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted" # Dataset directory
+# VLA_INS_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted/vla_ins" # vla_ins directory
+# CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot" # Converted dataset directory
+# DEBUG_LOG_PATH = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/dataset_conversion/dataset_converter.log" # DEBUG text file directory
 
 # FOR single trajectory testing (i.e. converting a single trajectory)
-# DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_rel_pos_test" # Dataset directory
-# VLA_INS_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted/vla_ins" # vla_ins directory
-# CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_rel_pos_test_lerobot_rel" # Converted dataset directory
-# DEBUG_LOG_PATH = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/dataset_converter_single_hm3d_2.log" # DEBUG text file directory
+DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_single_traj" # Dataset directory
+VLA_INS_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted/vla_ins" # vla_ins directory
+CONVERTED_DATASET_DIR = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_coord_test_lerobot" # Converted dataset directory
+DEBUG_LOG_PATH = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/debug/dataset_converter_single_hm3d_2.log" # DEBUG text file directory
 
 #########################
 ### Class definitions ###
@@ -156,26 +156,55 @@ def load_states(posture_path):
 
 ### Helper function for converting absolute coordinate states to trajectory-relative coordinate states ###
 # This function converts the absolute world coordinates states for each vla_ins trajectory segment to coordinates relative to the segment's starting position
-# i.e. Converts [x, y, z, ..., yaw, ...] to [x-x_start, y-y_start, z-z_start, ..., yaw-yaw_start, ...]
+# i.e. Converts [x, y, z, ..., yaw, ...] to [x-x_start, y-y_start, z-z_start, ..., yaw-yaw_start, ...], defined relative to the starting frame's coordinate frame
 # INPUTS:
 #   States for current vla_ins trajectory segment, as a list of np arrays
 # OUTPUTS:
 #   Relative states for current vla_ins trajectory segment, as a list of np arrays
+# NOTE: The starting frame coordinate convention used here is:
+#   +x = Forward
+#   +y = Right
+#   +z = Up
+#   For yaw:
+#       0 deg/rad = Starting-frame FORWARD direction
+#       +yaw = Clockwise rotation
 def convert_to_relative_states(abs_states):
     # Convert input states to np array for processing
     abs_states = np.asarray(abs_states, dtype=np.float32)
 
     # Get the reference pose, which is the first timestep state of current vla_ins trajectory segment
     start_state = abs_states[0].copy()
+    start_yaw = start_state[5] # Get the starting position's yaw angle, for converting subsequent states to be relative to the starting frame's direction/yaw heading
 
     # Copy so original absolute states are not modified
     rel_states = abs_states.copy()
 
+    ### For x/y/z positions ###
     # Compute relative states (relative position to start)
-    rel_states[:, :] -= start_state[:] # state - state_start
+    delta_pos = abs_states[:, :3] - start_state[:3] # state - state_start, for just x, y, and z
 
-    # Wrap yaw difference, to ensure shortest yaw change is recorded
-    rel_states[:, 5] = (rel_states[:, 5] + np.pi) % (2*np.pi) - np.pi
+    # Rotate x and y delta positions into the STARTING coordinate frame
+    #   The starting-frame axes are rotated by start_yaw relative to the world frame
+    # Equations are:
+    #   x_rotated = delta_x * sin(delta_yaw) - delta_y * cos(delta_yaw)
+    #   y_rotated = delta_x * cos(delta_yaw) + delta_y * sin(delta_yaw)
+    cos_yaw = np.cos(start_yaw)
+    sin_yaw = np.sin(start_yaw)
+
+    # Calculate the delta x and y positions relative to the starting frame coordinates
+    x_rel = sin_yaw * delta_pos[:, 0] - cos_yaw * delta_pos[:, 1]
+    y_rel = cos_yaw * delta_pos[:, 0] + sin_yaw * delta_pos[:, 1]
+
+    # Place the final values into rel_states
+    rel_states[:, 0] = x_rel
+    rel_states[:, 1] = y_rel
+    rel_states[:, 2] = delta_pos[:, 2]
+
+    ### For yaw ###
+    # First do np.unwrap() for yaw, to prevent artificial jumps such as 179 deg --> -179 deg from being interpreted as a -358 deg rotation
+    #   In this case, sequence instead becomes 179 deg --> 181 deg, if the agent genuinely continues rotating in the same direction
+    unwrapped_yaw = np.unwrap(abs_states[:, 5]) # Unwrap the absolute yaw values
+    rel_states[:, 5] = unwrapped_yaw - start_yaw # Calculate the delta yaw values
 
     # Return list of np arrays of relative states
     return [ rel_states[i].astype(np.float32) for i in range(len(rel_states)) ]
@@ -194,13 +223,14 @@ def format_libero_states(states):
 
 ### Compute actions corresponding to current trajectory segment (a vla_ins) ###
 # Function converts states of trajectory segment into actions taken, via: action[t] = state[t+1] - state[t]
-# This conversion changes ABSOLUTE TRAJECTORY into RELATIVE MOTION
+# This conversion changes ABSOLUTE TRAJECTORY into RELATIVE MOTION, w.r.t THE AGENT'S CURRENT HEADING/YAW (body frame)
 # Inputs: States throughout current trajectory segment - Input is a list of state vectors, state = [s0, s1, s2, ..., sT], where each state is something like [x, y, z, angle1, angle2, angle3, gripper1, gripper2]
 #   NOTE States are NOT [x, y, z, yaw] as the states fed into this function have already been converted to LIBERO 8D states (and angles from deg to rad) in load_states().
 # Outputs: Actions taken between each trajectory segment timestep - Is a list of numpy arrays, [(s1-s0), (s2-s1), ..., 0]
 # NOTE that outputs are also converted to LIBERO outputs format, i.e. [delta_x, delta_y, delta_z, delta_angle1, delta_angle2, delta_angle3, delta_gripper]
 # ALTHOUGH delta_angle1, delta_angle2, and delta_gripper will always be 0 as HabitatSim agent is always flat against horizontal (no pitch/roll), and it doesn't use gripper during navigation
 # ALSO HabitatSim angles are in degrees, but LIBERO uses radian angles
+# NOTE: The translational delta action is rotated form the STARTING coordinate frame into the agent's CURRENT body frame here!!
 def compute_delta_actions(states_raw):
     actions = [] # Initialise empty list to store computed delta actions for current trajectory segment
 
@@ -209,9 +239,45 @@ def compute_delta_actions(states_raw):
 
     # Loop over all timesteps/frames EXCEPT last frame (as each step needs a next state to compute delta actions)
     for t in range(len(states) - 1):
-        delta = states[t+1] - states[t] # Calculate movement in x, y, z, and changes in yaw (like a velocity signal). Here, two numpy arrays are subtracted
-        delta[5] = (delta[5] + np.pi) % (2*np.pi) - np.pi # Wrap delta yaw changes, to ensure that shortest delta yaw change is recorded (e.g. 0.1 rad --> 6.1 rad is recorded as ~-0.28 rad, NOT +6 rad)
-        actions.append(delta) # Store calculated delta action to total list of actions
+        # Calculate the position delta in the STARTING coordinate frame
+        delta_start = states[t+1][:3] - states[t][:3]
+
+        # Get the drone yaw relative to the STARTING coordinate frame
+        current_yaw = states[t][5]
+        cos_yaw = np.cos(current_yaw)
+        sin_yaw = np.sin(current_yaw)
+
+        # Rotate displacement in STARTING coordinate frame into CURRENT BODY FRAME
+        # NOTE:
+        #   Positive x direction in body frame is the FORWARD direction
+        #   Positve y direction in body frame is the RIGHT direction
+        # Equations are:
+        #   delta_x_body = delta_x_start * cos(delta_yaw_start) + delta_y_start * sin(delta_yaw_start)
+        #   delta_y_body = -delta_x_start * sin(delta_yaw_start) + delta_y_start * cos(delta_yaw_start)
+        delta_forward = cos_yaw * delta_start[0] + sin_yaw * delta_start[1]
+        delta_right = -1 * sin_yaw * delta_start[0] + cos_yaw * delta_start[1]
+        delta_up = delta_start[2]
+
+        # Construct current action
+        action = np.zeros(7, dtype=np.float32)
+
+        action[0] = delta_forward
+        action[1] = delta_right
+        action[2] = delta_up
+
+        # Roll/pitch remain zero for HabitatSim
+        action[3] = 0.0
+        action[4] = 0.0
+
+        # Yaw delta
+        #   Because yaw from state has already been unwrapped (in function convert_to_relative_states()), can simply subtract to give the true local angular change.
+        #   So no need to do a separate yaw wrapping
+        action[5] = states[t+1][5] - states[t][5]
+
+        # Gripper remains zero
+        action[6] = 0.0
+        
+        actions.append(action) # Store calculated delta action to total list of actions
         
         ### DEBUGGING
         # print(f">> Timestep {t} <<", flush=True)
@@ -221,7 +287,7 @@ def compute_delta_actions(states_raw):
         # print("--------------------")
         ###
     
-    actions.append(np.zeros_like(states[0])) # Last frame has no next state, so assign a zero action (as can't compute a real delta)
+    actions.append(np.zeros(7, dtype=np.float32)) # Last frame has no next state, so assign a zero action (as can't compute a real delta)
 
     return actions
 
@@ -659,7 +725,7 @@ def main(scene_group_to_convert):
     global DEBUG_LOG_PATH # Ensure the module/script-level DEBUG_LOG_PATH variable is being modified (not a new local variable)
     DEBUG_LOG_PATH = Path(DEBUG_LOG_PATH) # Convert DEBUG_LOG_PATH to Path object
     debug_log_path_parent = DEBUG_LOG_PATH.parent # Obtain parent directory of DEBUG_LOG_PATH (i.e. the directory without last directory section)
-    DEBUG_LOG_PATH = debug_log_path_parent / f"dataset_converter_{scene_group_to_convert}.log" # Construct new DEBUG_LOG_PATH specific for current scene group
+    DEBUG_LOG_PATH = debug_log_path_parent / f"dataset_conversion_rel_yaw_{scene_group_to_convert}.log" # Construct new DEBUG_LOG_PATH specific for current scene group
 ###
 
     # Initialisations

@@ -107,6 +107,8 @@ class AGVLA(nn.Module):
                 state_hidden_dim=config.get("state_hidden_dim", 1024), # Internally projected state dim
                 num_heads=config.get("num_heads", 8), # Num transformer head
                 num_layers=config.get("num_layers", 8), # Num transformer layers
+                nav_num_layers=config.get("nav_num_layers", 18), # Num navigation action head transformer layers
+                manip_num_layers=config.get("manip_num_layers", 8), # Num manipulation action head transformer layers
                 dropout=config.get("dropout", 0.0), # (Optional) transformer dropout
                 num_inference_timesteps=config.get("num_inference_timesteps", 50), # Inference steps for flow matching iterative refinement
                 num_categories=config.get("num_categories", 1) # Flow matching num categories (1 means continuous output vals, not discrete vals)

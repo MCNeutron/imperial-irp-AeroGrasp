@@ -771,6 +771,8 @@ if __name__ == "__main__":
     parser.add_argument("--nav_horizon", type=int, default=10) ### ADDED for Parallel Action Head implementation, for setting the navigation action head horizon
     parser.add_argument("--manip_horizon", type=int, default=50) ### ADDED for Parallel Action Head implementation for setting the manipulation action head horizon
     parser.add_argument("--num_layers", type=int, default=8)
+    parser.add_argument("--nav_num_layers", type=int, default=18) ### ADDED for Parallel Action Head implementation, for setting the navigation action head layer depth
+    parser.add_argument("--manip_num_layers", type=int, default=8) ### ADDED for Parallel Action Head implementation, for setting the manipulation action ohead layer depth
     parser.add_argument("--num_workers", type=int, default=4)
     # dropout
     parser.add_argument("--dropout", type=float, default=0.0)
