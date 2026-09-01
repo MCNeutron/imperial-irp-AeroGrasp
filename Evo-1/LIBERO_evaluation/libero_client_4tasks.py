@@ -23,10 +23,10 @@ class Args():
     #SERVER_URL = "ws://0.0.0.0:9000"
     SERVER_URL = "ws://127.0.0.1:9000" ### ADDED
     #ckpt_name = f"Evo1_libero_all"  
-    ckpt_name = f"AGVLA_libero_spatial_test_4aug"#all_test_19june" ### ADDED
-    task_suites = ["libero_spatial", "libero_object", "libero_goal", "libero_10"] 
+    ckpt_name = f"AGVLA_libero_final_eval_test_30aug"#all_test_19june" ### ADDED
+    task_suites = ["libero_spatial", "libero_object", "libero_goal"]#, "libero_10"] ### EDITED
     log_file = f"./log_file/{ckpt_name}.txt"
-    num_episodes = 10
+    num_episodes = 10#4 ### CHANGED
     SEED = 42
     
     
@@ -127,6 +127,11 @@ async def run(SERVER_URL: str, max_steps: int = None, num_episodes: int = None, 
             print(f"task_id{task_id}")
             #if task_id+1 not in [1,5,7,9] :
              #   continue
+            
+            ### ADDED for testing only set tasks
+            # if task_id+1 not in [1,2] :
+            #     continue
+            ###
 
             task = task_suite.get_task(task_id)
             initial_states = task_suite.get_task_init_states(task_id)

@@ -1,0 +1,6842 @@
+{
+  "/hm3d_3/kdw2Uapns3b/traj_3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/kdw2Uapns3b/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/kdw2Uapns3b/traj_3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/kdw2Uapns3b/traj_3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/kdw2Uapns3b/traj_3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/kdw2Uapns3b/traj_3/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/z9w4aD7JsiQ/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/z9w4aD7JsiQ/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/z9w4aD7JsiQ/traj_2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/TZ2jsvNG2nt/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/TZ2jsvNG2nt/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/TZ2jsvNG2nt/traj_-2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/TZ2jsvNG2nt/traj_-2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/t8wCA6Qe8uT/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/CETmJJqkhcK/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/CETmJJqkhcK/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/28FFMGySc6D/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/7CXbc73tDRf/traj_-3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/p53SfW6mjZe/traj_4/vla_ins_11.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/p53SfW6mjZe/traj_4/vla_ins_12.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/p53SfW6mjZe/traj_4/vla_ins_13.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/p53SfW6mjZe/traj_4/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/p53SfW6mjZe/traj_4/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/p53SfW6mjZe/traj_4/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bHKTDQFJxTw/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bHKTDQFJxTw/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bHKTDQFJxTw/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bHKTDQFJxTw/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/ziup5kvtCCR/traj_3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/ziup5kvtCCR/traj_3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/ziup5kvtCCR/traj_3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/2NwLiyeKcrK/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/2NwLiyeKcrK/traj_3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2NwLiyeKcrK/traj_3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yr17PDCnDDW/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/zepmXAdrpjR/traj_-3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/kfPV7w3FaU5/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/kfPV7w3FaU5/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/rPwrKEnR3fk/traj_3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/rPwrKEnR3fk/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/rPwrKEnR3fk/traj_3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/rPwrKEnR3fk/traj_3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/rPwrKEnR3fk/traj_3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/rPwrKEnR3fk/traj_3/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/KHhgcNqsc9h/traj_5/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/KHhgcNqsc9h/traj_5/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/KHhgcNqsc9h/traj_5/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/KHhgcNqsc9h/traj_5/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/RJaJt8UjXav/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/XYyR54sxe6b/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/XYyR54sxe6b/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/XYyR54sxe6b/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/XYyR54sxe6b/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/XYyR54sxe6b/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/6imZUJGRUq4/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/6imZUJGRUq4/traj_-3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/6imZUJGRUq4/traj_-3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/Nfvxx8J5NCo/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/Nfvxx8J5NCo/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/Nfvxx8J5NCo/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/gQgtJ9Stk5s/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/n8AnEznQQpv/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/n8AnEznQQpv/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/U8F9SkAsqbJ/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/U8F9SkAsqbJ/traj_2/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/U8F9SkAsqbJ/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/U8F9SkAsqbJ/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/U8F9SkAsqbJ/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/U8F9SkAsqbJ/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/U8F9SkAsqbJ/traj_2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/6BReaxZUoMg/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/6BReaxZUoMg/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/nd6Vw5SHCoy/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/AMEM2eWycTq/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/mWqBmEyXcXN/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/mWqBmEyXcXN/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/mWqBmEyXcXN/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/HY1NcmCgn3n/traj_2/vla_ins_13.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/HY1NcmCgn3n/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/HY1NcmCgn3n/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/HY1NcmCgn3n/traj_2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/P3kZKzwnEbM/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/P3kZKzwnEbM/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/P3kZKzwnEbM/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/P3kZKzwnEbM/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/P3kZKzwnEbM/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/iQPq34e8hJX/traj_-3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/oStKKWkQ1id/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/oStKKWkQ1id/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/1mCzDx3EMom/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/1mCzDx3EMom/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/1mCzDx3EMom/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/1mCzDx3EMom/traj_-1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/NjyeoK5BLx3/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/NjyeoK5BLx3/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/NjyeoK5BLx3/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/NjyeoK5BLx3/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/zepmXAdrpjR/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/zepmXAdrpjR/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/zepmXAdrpjR/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uHnM1oqv2JL/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uHnM1oqv2JL/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uHnM1oqv2JL/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/UuwwmrTsfBN/traj_-4/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/UuwwmrTsfBN/traj_-4/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/3t8DB4Uzvkt/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/u1bkiGRVyu9/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/u1bkiGRVyu9/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/TPhiubUHKcP/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/RaYrxWt5pR1/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/RaYrxWt5pR1/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/SByzJLxpRGn/traj_4/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/ZB8o8rMmPdB/traj_4/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/ZB8o8rMmPdB/traj_4/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/ZB8o8rMmPdB/traj_4/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/ZB8o8rMmPdB/traj_4/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2ihrkjrbHVf/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2ihrkjrbHVf/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2ihrkjrbHVf/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2ihrkjrbHVf/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2ihrkjrbHVf/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/eZrc5fLTCmi/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/eZrc5fLTCmi/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/eZrc5fLTCmi/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/eZrc5fLTCmi/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/eZrc5fLTCmi/traj_2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/41FNXLAZZgC/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/41FNXLAZZgC/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/q3hn1WQ12rz/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/q3hn1WQ12rz/traj_-1/vla_ins_12.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/q3hn1WQ12rz/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/q3hn1WQ12rz/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/q3hn1WQ12rz/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/q3hn1WQ12rz/traj_-1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/DfUQLukPMPc/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/DfUQLukPMPc/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/auFeVz9Go4m/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/KsD3yx9nZCv/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/KsD3yx9nZCv/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/KsD3yx9nZCv/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/gUqgeUmUagL/traj_-3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/gUqgeUmUagL/traj_-3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/KWoYKrff5L4/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/KWoYKrff5L4/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/KWoYKrff5L4/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/KWoYKrff5L4/traj_2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/u3zrj4Nojev/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/u3zrj4Nojev/traj_-1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bCFcvb4zc3N/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/gmuS7Wgsbrx/traj_3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/gmuS7Wgsbrx/traj_3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/gmuS7Wgsbrx/traj_3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/gmuS7Wgsbrx/traj_3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/yZME6UR9dUN/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/auFeVz9Go4m/traj_-2/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/auFeVz9Go4m/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/auFeVz9Go4m/traj_-2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/cYkrGrCg2kB/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/cYkrGrCg2kB/traj_-3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/cYkrGrCg2kB/traj_-3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cYkrGrCg2kB/traj_-3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/XNoaAZwsWKk/traj_3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/VSxVP19Cdyw/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/Dj6sJyU7qmd/traj_5/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/Dj6sJyU7qmd/traj_5/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/kdw2Uapns3b/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/kdw2Uapns3b/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/kdw2Uapns3b/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/kdw2Uapns3b/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/Dd4bFSTQ8gi/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/4ok3usBNeis/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/4ok3usBNeis/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/zt1RVoi7PcG/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/zt1RVoi7PcG/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/zt1RVoi7PcG/traj_2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/zt1RVoi7PcG/traj_2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/gQgtJ9Stk5s/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/gUqgeUmUagL/traj_-4/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/gUqgeUmUagL/traj_-4/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/gUqgeUmUagL/traj_-4/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/gUqgeUmUagL/traj_-4/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/XMHNu9rRQ1y/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/XMHNu9rRQ1y/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/ANmWrL7Kz7h/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/ANmWrL7Kz7h/traj_-3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/ANmWrL7Kz7h/traj_-3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/ANmWrL7Kz7h/traj_-3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/ANmWrL7Kz7h/traj_-3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/ANmWrL7Kz7h/traj_-3/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/XB4GS9ShBRE/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/XB4GS9ShBRE/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/XB4GS9ShBRE/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/mv2HUxq3B53/traj_3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/3XYAD64HpDr/traj_-1/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/3XYAD64HpDr/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/3XYAD64HpDr/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/3XYAD64HpDr/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/3XYAD64HpDr/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/GZRLndzSrdn/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/GZRLndzSrdn/traj_-3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/GZRLndzSrdn/traj_-3/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/r77mpaAYUEc/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/r77mpaAYUEc/traj_2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/u9LiqMn6kA6/traj_1/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/u9LiqMn6kA6/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/u9LiqMn6kA6/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/u9LiqMn6kA6/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/u9LiqMn6kA6/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/u9LiqMn6kA6/traj_1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bxsVRursffK/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/5Kw4nGdqYtS/traj_1/vla_ins_11.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/5Kw4nGdqYtS/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/5Kw4nGdqYtS/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/5Kw4nGdqYtS/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/5Kw4nGdqYtS/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/5Kw4nGdqYtS/traj_1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/Wo6kuutE9i7/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/q5QZSEeHe5g/traj_3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/q5QZSEeHe5g/traj_3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/UQ5EhY5wve1/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/UQ5EhY5wve1/traj_3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/7MXmsvcQjpJ/traj_4/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/7MXmsvcQjpJ/traj_4/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uFCiZVVks57/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uFCiZVVks57/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uFCiZVVks57/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/nd6Vw5SHCoy/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/hyFzGGJCSYs/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/H1D2FZ8TAv1/traj_4/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/H1D2FZ8TAv1/traj_4/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/H1D2FZ8TAv1/traj_4/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/HeSYRw7eMtG/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/HeSYRw7eMtG/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/HeSYRw7eMtG/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/HeSYRw7eMtG/traj_-1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/kuxpR2xHUBa/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/kuxpR2xHUBa/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/kuxpR2xHUBa/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/kuxpR2xHUBa/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/kuxpR2xHUBa/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/kuxpR2xHUBa/traj_-1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/kuxpR2xHUBa/traj_-1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/LPwS1aEGXBb/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/LPwS1aEGXBb/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LPwS1aEGXBb/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/LPwS1aEGXBb/traj_-2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/NkvRYHk72vA/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/NkvRYHk72vA/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/NkvRYHk72vA/traj_2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/xGnehmjiCSA/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/X4qjx5vquwH/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/X4qjx5vquwH/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/X4qjx5vquwH/traj_-2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/X4qjx5vquwH/traj_-2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/X4qjx5vquwH/traj_-2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/X4qjx5vquwH/traj_-2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/enfahKs8XHw/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/enfahKs8XHw/traj_-3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/oPj9qMxrDEa/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/QKfBMSSy7Hy/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/QKfBMSSy7Hy/traj_-3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/QKfBMSSy7Hy/traj_-3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/mL8ThkuaVTM/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/mL8ThkuaVTM/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/t8wCA6Qe8uT/traj_-4/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/t8wCA6Qe8uT/traj_-4/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/mma8eWq3nNQ/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/5jp3fCRSRjc/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/5jp3fCRSRjc/traj_-1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/XfUxBGTFQQb/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/xp4FyfQ6Wr5/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/xp4FyfQ6Wr5/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/xp4FyfQ6Wr5/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/xp4FyfQ6Wr5/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/xp4FyfQ6Wr5/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/xp4FyfQ6Wr5/traj_-1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/xp4FyfQ6Wr5/traj_-1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/7CXbc73tDRf/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/7CXbc73tDRf/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/7CXbc73tDRf/traj_-2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/7CXbc73tDRf/traj_-2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/NtVbfPCkBFy/traj_4/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/NtVbfPCkBFy/traj_4/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/NtVbfPCkBFy/traj_4/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/NtVbfPCkBFy/traj_4/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bB6nKqfsb1z/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2dZ1Jivh5if/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2dZ1Jivh5if/traj_-2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2dZ1Jivh5if/traj_-2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/JY8e73x9ubE/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/JY8e73x9ubE/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/JY8e73x9ubE/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/nW7z5USWzWo/traj_3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/YV9M9gZG3YJ/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/NjyeoK5BLx3/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/NjyeoK5BLx3/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/NjyeoK5BLx3/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/NjyeoK5BLx3/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/NjyeoK5BLx3/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/kAMF2R7PCqX/traj_4/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/kAMF2R7PCqX/traj_4/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/nzuiinFMXvf/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/nzuiinFMXvf/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/nzuiinFMXvf/traj_-1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/w7QyjJ3H9Bp/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/w7QyjJ3H9Bp/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/w7QyjJ3H9Bp/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/w7QyjJ3H9Bp/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/SByzJLxpRGn/traj_5/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/WT4QWwXrMzs/traj_5/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/oStKKWkQ1id/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/oStKKWkQ1id/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/ixTj1aTMup2/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/ixTj1aTMup2/traj_3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/ixTj1aTMup2/traj_3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/ixTj1aTMup2/traj_3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/ixTj1aTMup2/traj_3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/ixTj1aTMup2/traj_3/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/BHXhpBwSMLh/traj_-3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VqCaAuuoeWk/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/n8AnEznQQpv/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/n8AnEznQQpv/traj_3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/n8AnEznQQpv/traj_3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/z9VLaZqCsW5/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/z9VLaZqCsW5/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/xGnehmjiCSA/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/xGnehmjiCSA/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/xGnehmjiCSA/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/xGnehmjiCSA/traj_-2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/sCCThjhioJC/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/sCCThjhioJC/traj_-3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bzCsHPLDztK/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bzCsHPLDztK/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/dKySjDYsya1/traj_-3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/dKySjDYsya1/traj_-3/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/TgWKHxhJAng/traj_-4/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qZ4B7U6XE5Y/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y3K5dmhuukt/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/y3K5dmhuukt/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y3K5dmhuukt/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/vLpv2VX547B/traj_-4/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/L53DsRRk4Ch/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/L53DsRRk4Ch/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/L53DsRRk4Ch/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/DfUQLukPMPc/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/DfUQLukPMPc/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/HaxA7YrQdEC/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/HaxA7YrQdEC/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/nYYcLpSzihC/traj_3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/nYYcLpSzihC/traj_3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/nYYcLpSzihC/traj_3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/nYYcLpSzihC/traj_3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/nYYcLpSzihC/traj_3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/Y8Y6ukxGMvn/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/Y8Y6ukxGMvn/traj_-2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/xp4FyfQ6Wr5/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/xp4FyfQ6Wr5/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/xp4FyfQ6Wr5/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/xp4FyfQ6Wr5/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/xp4FyfQ6Wr5/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/xp4FyfQ6Wr5/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/a8BtkwhxdRV/traj_3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/a8BtkwhxdRV/traj_3/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/c5eTyR3Rxyh/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/F7EAMsdDASd/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/F7EAMsdDASd/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/c3WKCnkEdha/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/c3WKCnkEdha/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/c3WKCnkEdha/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/c3WKCnkEdha/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/c3WKCnkEdha/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/oKFJo8jpzRW/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/oKFJo8jpzRW/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/Nfvxx8J5NCo/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/Nfvxx8J5NCo/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/HMkoS756sz6/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/kHvNo8x6Qoe/traj_-4/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/kHvNo8x6Qoe/traj_-4/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/kHvNo8x6Qoe/traj_-4/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/kHvNo8x6Qoe/traj_-4/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/jTTGECZYKRA/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/jTTGECZYKRA/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/jTTGECZYKRA/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/jTTGECZYKRA/traj_1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/4wCTuaUNWEd/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/6s7QHgap2fW/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/6s7QHgap2fW/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/6s7QHgap2fW/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/XNoaAZwsWKk/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/XNoaAZwsWKk/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/XNoaAZwsWKk/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/XNoaAZwsWKk/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/AWUFxHEyV3T/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/AWUFxHEyV3T/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/D8bT1ambLFc/traj_4/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/D8bT1ambLFc/traj_4/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/D8bT1ambLFc/traj_4/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y9hTuugGdiq/traj_-5/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y9hTuugGdiq/traj_-5/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y9hTuugGdiq/traj_-5/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y9hTuugGdiq/traj_-5/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/CtZLhCbWFm7/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/CtZLhCbWFm7/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/CtZLhCbWFm7/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/CtZLhCbWFm7/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/T6nG3E2Uui9/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/T6nG3E2Uui9/traj_-3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/nrA1tAA17Yp/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/nrA1tAA17Yp/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/nrA1tAA17Yp/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/nrA1tAA17Yp/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/nrA1tAA17Yp/traj_-2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/nrA1tAA17Yp/traj_-2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qWb4MVxqCW7/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/z8SrvZ4eyqV/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/z8SrvZ4eyqV/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/z8SrvZ4eyqV/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/3t8DB4Uzvkt/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/3t8DB4Uzvkt/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/3t8DB4Uzvkt/traj_1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/dHwjuKfkRUR/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/dHwjuKfkRUR/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/EgzWe8N3jZG/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/EgzWe8N3jZG/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/EgzWe8N3jZG/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/5hGmubEE6ZF/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/EN7GiDgxdQ2/traj_3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/EN7GiDgxdQ2/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/EN7GiDgxdQ2/traj_3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/EN7GiDgxdQ2/traj_3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/HaxA7YrQdEC/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/HaxA7YrQdEC/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/HaxA7YrQdEC/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/HaxA7YrQdEC/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/HaxA7YrQdEC/traj_-1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/W7k2QWzBrFY/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/W7k2QWzBrFY/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/GLAQ4DNUx5U/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/GLAQ4DNUx5U/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/MLVm7dZk7dp/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/MLVm7dZk7dp/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/MLVm7dZk7dp/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/MLVm7dZk7dp/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/1hovphK64XQ/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/1hovphK64XQ/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/vBMLrTe4uLA/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/vBMLrTe4uLA/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/vBMLrTe4uLA/traj_-2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/xWvSkKiWQpC/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/xWvSkKiWQpC/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/xWvSkKiWQpC/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/xWvSkKiWQpC/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/xWvSkKiWQpC/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/ACZZiU6BXLz/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/ACZZiU6BXLz/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/1W61QJVDBqe/traj_-4/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/1W61QJVDBqe/traj_-4/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/1W61QJVDBqe/traj_-4/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/1W61QJVDBqe/traj_-4/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LT9Jq6dN3Ea/traj_1/vla_ins_11.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LT9Jq6dN3Ea/traj_1/vla_ins_15.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/LT9Jq6dN3Ea/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LT9Jq6dN3Ea/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/LT9Jq6dN3Ea/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/LT9Jq6dN3Ea/traj_1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2ihrkjrbHVf/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2ihrkjrbHVf/traj_2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/aJg466zMSNt/traj_3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/aJg466zMSNt/traj_3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/aJg466zMSNt/traj_3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/aJg466zMSNt/traj_3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/aJg466zMSNt/traj_3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/aJg466zMSNt/traj_3/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/kZhZfAhdnNN/traj_1/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/kZhZfAhdnNN/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/kZhZfAhdnNN/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/kZhZfAhdnNN/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/kZhZfAhdnNN/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/kZhZfAhdnNN/traj_1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/ZB8o8rMmPdB/traj_6/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/ZB8o8rMmPdB/traj_6/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/ZB8o8rMmPdB/traj_6/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/ZB8o8rMmPdB/traj_6/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/HsYeeztxPG6/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/HsYeeztxPG6/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/HsYeeztxPG6/traj_1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/sWAdxSLVPQC/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/AfKhsVmG8L4/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/AfKhsVmG8L4/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/AfKhsVmG8L4/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/AfKhsVmG8L4/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/AfKhsVmG8L4/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/KJxdMPgweZG/traj_4/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qkkRnWghK8e/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qkkRnWghK8e/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qkkRnWghK8e/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/6D36GQHuP8H/traj_3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/6D36GQHuP8H/traj_3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/HneuS3CYDFG/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/41FNXLAZZgC/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/41FNXLAZZgC/traj_-3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/nrA1tAA17Yp/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/nrA1tAA17Yp/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/nrA1tAA17Yp/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/nrA1tAA17Yp/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/nrA1tAA17Yp/traj_2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/nrA1tAA17Yp/traj_2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/NBWrHFXBF5p/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/NBWrHFXBF5p/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/nJTPfwbAj4S/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/nJTPfwbAj4S/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/nJTPfwbAj4S/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/TEEsavR23oF/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/TEEsavR23oF/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/TEEsavR23oF/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/TEEsavR23oF/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/LEFTm3JecaC/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/dVW2D7TDctW/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/dVW2D7TDctW/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/dVW2D7TDctW/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/EN7GiDgxdQ2/traj_2/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/EN7GiDgxdQ2/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/EN7GiDgxdQ2/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/EN7GiDgxdQ2/traj_2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/Qpor2mEya8F/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/Qpor2mEya8F/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/Qpor2mEya8F/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/Qpor2mEya8F/traj_-2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/kZhZfAhdnNN/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/kZhZfAhdnNN/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/4wCTuaUNWEd/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/4wCTuaUNWEd/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/4wCTuaUNWEd/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/QDtpZSqaeyW/traj_-3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/mv2HUxq3B53/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/mv2HUxq3B53/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/mv2HUxq3B53/traj_2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/hkr2MGpHD6B/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/hkr2MGpHD6B/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/FnSn2KSrALj/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/Wo6kuutE9i7/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/Wo6kuutE9i7/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/F7EAMsdDASd/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/F7EAMsdDASd/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/F7EAMsdDASd/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/F7EAMsdDASd/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/AYpsNQsWncn/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/AYpsNQsWncn/traj_-2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/u8ug2rtNARf/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/MjzBosUX3WW/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/MjzBosUX3WW/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/MjzBosUX3WW/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/MjzBosUX3WW/traj_-2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/MjzBosUX3WW/traj_-2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/MjzBosUX3WW/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/MjzBosUX3WW/traj_-3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/MjzBosUX3WW/traj_-3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/MjzBosUX3WW/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/MjzBosUX3WW/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/MjzBosUX3WW/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/MjzBosUX3WW/traj_2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/MjzBosUX3WW/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/MjzBosUX3WW/traj_3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/MjzBosUX3WW/traj_3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_-2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_-3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_-3/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_-4/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_-4/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_-4/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_3/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_4/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_4/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_4/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_4/LcAd9dhvVwh/traj_4/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_-3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_-3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uSKXQ5fFg6u/traj_3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/qk9eeNeR4vw/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qk9eeNeR4vw/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qk9eeNeR4vw/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/qk9eeNeR4vw/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qk9eeNeR4vw/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qk9eeNeR4vw/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qk9eeNeR4vw/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qk9eeNeR4vw/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qk9eeNeR4vw/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qk9eeNeR4vw/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qk9eeNeR4vw/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/qk9eeNeR4vw/traj_3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/MVVzj944atG/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/MVVzj944atG/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/MVVzj944atG/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/MVVzj944atG/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/MVVzj944atG/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/MVVzj944atG/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_-1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_-2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_-2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_-3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_-3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/226REUyJh2K/traj_3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/uLz9jNga3kC/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uLz9jNga3kC/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/uLz9jNga3kC/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/uLz9jNga3kC/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uLz9jNga3kC/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uLz9jNga3kC/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uLz9jNga3kC/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_-3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_-3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_-4/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_-4/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bZsfeA9uRk7/traj_4/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/qWP3MMQM3eJ/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qWP3MMQM3eJ/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/qWP3MMQM3eJ/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qWP3MMQM3eJ/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qWP3MMQM3eJ/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qWP3MMQM3eJ/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qWP3MMQM3eJ/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qWP3MMQM3eJ/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qWP3MMQM3eJ/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qWP3MMQM3eJ/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_-3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_-3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/2tqbn5VLQoq/traj_3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_-1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_-2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_-2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_-4/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_1/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/bCPU9suPUw9/traj_4/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/rJhMRvNn4DS/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/rJhMRvNn4DS/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/rJhMRvNn4DS/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/rJhMRvNn4DS/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/rJhMRvNn4DS/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/rJhMRvNn4DS/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/rJhMRvNn4DS/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/rJhMRvNn4DS/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/svBbv1Pavdk/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/svBbv1Pavdk/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/svBbv1Pavdk/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/svBbv1Pavdk/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/svBbv1Pavdk/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/svBbv1Pavdk/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/svBbv1Pavdk/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/svBbv1Pavdk/traj_1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/svBbv1Pavdk/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/pAjDzi9kWjE/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_4/pAjDzi9kWjE/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/pAjDzi9kWjE/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "right_left"
+    ]
+  },
+  "/hm3d_4/pAjDzi9kWjE/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_4/pAjDzi9kWjE/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_-1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_-1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/UQuchpekHRJ/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_-1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_-3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_1/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/iLDo95ZbDJq/traj_3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/6HRFAUDqpTb/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/6HRFAUDqpTb/traj_-2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/6HRFAUDqpTb/traj_-2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/6HRFAUDqpTb/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/6HRFAUDqpTb/traj_-3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/6HRFAUDqpTb/traj_-4/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/6HRFAUDqpTb/traj_-4/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/6HRFAUDqpTb/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/6HRFAUDqpTb/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/6HRFAUDqpTb/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/6HRFAUDqpTb/traj_4/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/6HRFAUDqpTb/traj_4/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_-2/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_-2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_-2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_-3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_-3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_2/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/GTV2Y73Sn5t/traj_3/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/YY8rqV6L6rf/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/YY8rqV6L6rf/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/YY8rqV6L6rf/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/YY8rqV6L6rf/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/YY8rqV6L6rf/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/YY8rqV6L6rf/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_-2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_-3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/gPf8XzHACGn/traj_3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_-2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/y4YiUQwvWGH/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_-1/vla_ins_12.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_-2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_-3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_-4/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_-5/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_-5/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_-5/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_-5/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_4/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_4/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_5/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_5/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_5/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/yqNxxJnA3iL/traj_5/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_-1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_-3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_-3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/qyAac8rV8Zk/traj_3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_-3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_-3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_-3/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/3KZbo846fxq/traj_3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/aKwZ7VJDAjr/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_1/aKwZ7VJDAjr/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/aKwZ7VJDAjr/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/aKwZ7VJDAjr/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/aKwZ7VJDAjr/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-1/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-1/vla_ins_12.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-1/vla_ins_13.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-4/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-4/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-4/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-4/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-5/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-5/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_-5/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_1/vla_ins_12.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_4/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_4/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_4/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_4/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_5/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_5/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_6/VYnUX657cVo/traj_5/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_-1/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_-1/vla_ins_11.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_-4/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_1/vla_ins_11.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_1/vla_ins_13.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_1/vla_ins_14.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_1/vla_ins_16.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_1/vla_ins_17.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_4/vla_ins_14.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/uXh7Yr7x12L/traj_4/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "right_left"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_-2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_-3/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_2/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "right_left"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/C3ifY177Ldq/traj_3/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_-1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_-3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_-3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_-4/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_-4/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_-4/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_-4/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_2/vla_ins_11.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_4/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_4/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_4/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/cvZr5TUy5C5/traj_4/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/tQ5s4ShP627/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/tQ5s4ShP627/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/tQ5s4ShP627/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/tQ5s4ShP627/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/tQ5s4ShP627/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/tQ5s4ShP627/traj_1/vla_ins_10.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/tQ5s4ShP627/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/tQ5s4ShP627/traj_1/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/tQ5s4ShP627/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/tQ5s4ShP627/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/tQ5s4ShP627/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/tQ5s4ShP627/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/ikChNYDHtRf/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/ikChNYDHtRf/traj_-1/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/ikChNYDHtRf/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/ikChNYDHtRf/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/ikChNYDHtRf/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/ikChNYDHtRf/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/ikChNYDHtRf/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/ikChNYDHtRf/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/ikChNYDHtRf/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/ikChNYDHtRf/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_3/ikChNYDHtRf/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/ikChNYDHtRf/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_3/ikChNYDHtRf/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_3/ikChNYDHtRf/traj_3/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_-1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_-1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_-2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_1/vla_ins_11.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_2/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_5/r38SGhq8aJr/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-1/vla_ins_11.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-1/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-1/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-2/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-4/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-4/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-4/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-4/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-5/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_-5/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_1/vla_ins_11.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_1/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_1/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_1/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_2/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_2/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_2/vla_ins_7.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_2/vla_ins_9.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_4/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_4/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "turn"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_4/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_4/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_5/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_2/eF36g7L6Z9M/traj_5/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/7dmR22gwQpH/traj_-1/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/7dmR22gwQpH/traj_-2/vla_ins_3.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/7dmR22gwQpH/traj_-2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/7dmR22gwQpH/traj_-2/vla_ins_8.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/7dmR22gwQpH/traj_-3/vla_ins_1.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/7dmR22gwQpH/traj_-3/vla_ins_2.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/7dmR22gwQpH/traj_-3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/7dmR22gwQpH/traj_1/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  },
+  "/hm3d_1/7dmR22gwQpH/traj_2/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/7dmR22gwQpH/traj_3/vla_ins_4.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/7dmR22gwQpH/traj_3/vla_ins_5.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "forward"
+    ]
+  },
+  "/hm3d_1/7dmR22gwQpH/traj_3/vla_ins_6.json": {
+    "difficulty": "easy",
+    "action_type": [
+      "up_down"
+    ]
+  }
+}

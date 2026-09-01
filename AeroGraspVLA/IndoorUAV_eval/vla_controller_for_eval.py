@@ -3,9 +3,10 @@ import json
 import time
 import shutil
 from utils import get_glb_path, is_success, load_posture
+import numpy as np ### ADDED for evaluation
 
 # 配置参数
-MAX_INFERENCE_STEPS = 12
+MAX_INFERENCE_STEPS = 20#12 ### EDITED
 #SHARED_FOLDER = "shared_folder"
 SHARED_FOLDER = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/shared_folder" ### ADDED
 #TEST_VLA_FILE = "test_vla.json"
@@ -14,9 +15,14 @@ SHARED_FOLDER = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/shared
 # TEST_VLA_FILE = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/AeroGraspVLA/IndoorUAV_eval/test_vla_hm3d_8_only.json" ### ADDED for HPC
 # TEST_VLA_FILE = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/AeroGraspVLA/IndoorUAV_eval/test_vla_easy.json" ### ADDED for HPC
 # TEST_VLA_FILE = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/AeroGraspVLA/IndoorUAV_eval/test_vla_hm3d_1_rel_state_test.json" ### ADDED for HPC for trajectory-relative state test
-TEST_VLA_FILE = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/AeroGraspVLA/IndoorUAV_eval/test_vla_hm3d_1-6.json" ### ADDED for HPC for training samples eval
+# TEST_VLA_FILE = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/AeroGraspVLA/IndoorUAV_eval/test_vla_hm3d_1-6.json" ### ADDED for HPC for training samples eval
 # TEST_VLA_FILE = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/AeroGraspVLA/IndoorUAV_eval/test_vla_hm3d_7-10_easy.json" ### ADDED for HPC for unseen test eval
 # TEST_VLA_FILE = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/AeroGraspVLA/IndoorUAV_eval/test_vla_hm3d_7-10_easy_only_turn.json" ### ADDED for HPC for unseen only turn test eval
+### For final evaluation
+TEST_VLA_FILE = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/AeroGraspVLA/IndoorUAV_eval/test_vla_hm3d_7-10_easy_100.json" ### Unseen EASY trajectories
+# TEST_VLA_FILE = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/AeroGraspVLA/IndoorUAV_eval/test_vla_hm3d_7-10_medium_100.json" ### Unseen MEDIUM trajectories
+# TEST_VLA_FILE = "/rds/general/user/ll1225/home/imperial_irp/extended_evo1/AeroGraspVLA/IndoorUAV_eval/test_vla_hm3d_7-10_hard_100.json" ### Unseen HARD trajectories
+###
 #VLA_INS_BASE = "./vla_ins"
 #VLA_INS_BASE = "/rds/general/user/ll1225/home/.cache/modelscope/hub/datasets/valyentine/Indoor_UAV/vla_ins" ### ADDED
 VLA_INS_BASE = "/rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_ALL_extracted/vla_ins" ### ADDED for HPC
@@ -54,6 +60,9 @@ class EpisodeController:
         self.glb_path = None
         self.instruction = None
         self.start_image_path = None
+        ### ADDED for metric logging
+        self.reference_trajectory = None
+        ###
 
         # 解析路径
         path_parts = episode_key.rsplit('/', 1)[0]
@@ -83,6 +92,16 @@ class EpisodeController:
         # 加载posture数据
         posture_path = os.path.join(POSTURE_BASE, self.group, self.scene, self.traj, "posture.json")
         self.start_coords, self.end_coords = load_posture(posture_path, start_idx, end_idx)
+
+        ### ADDED for metric logging
+        # Load reference trajectory for later metric calculation
+        with open(posture_path, 'r') as f:
+            posture_data = json.load(f)
+
+        self.reference_trajectory = [
+            frame.copy() for frame in posture_data[start_idx:end_idx + 1]
+        ]
+        ###
 
         # 添加起始坐标到轨迹
         self.trajectory.append(self.start_coords)
@@ -160,7 +179,8 @@ class EpisodeController:
         self.trajectory.append(current_coords)
 
         # 检查是否成功
-        self.success = is_success(current_coords, self.end_coords)
+        # self.success = is_success(current_coords, self.end_coords)
+        self.success = is_success(current_coords, self.end_coords, pos_threshold=0.5, angle_threshold=np.pi/4) ### EDITED for evaluation
 
         if self.success:
             print(f"成功! 在步骤 {self.step_count} 达到目标位置")
@@ -200,8 +220,23 @@ class EpisodeController:
                 "episode_key": self.episode_key,
                 "success": self.success,
                 "steps": self.step_count,
-                "trajectory": self.trajectory
+                "trajectory": self.trajectory,
+                "target_coords": self.end_coords ### ADDED for metric logging
             }, f, indent=2)
+
+        ### ADDED for metric logging
+        # Save reference trajectory for later NDTW calculation
+        reference_file = os.path.join(
+            TRAJECTORY_OUTPUT,
+            f"{safe_episode_key}_reference.json"
+        )
+
+        with open(reference_file, 'w') as f:
+            json.dump({
+                "episode_key": self.episode_key,
+                "reference_trajectory": self.reference_trajectory
+            }, f, indent=2)
+        ###
 
         print(f"测试完成. 成功: {self.success}, 步数: {self.step_count}")
 

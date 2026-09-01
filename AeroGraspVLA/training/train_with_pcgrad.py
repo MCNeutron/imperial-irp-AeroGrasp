@@ -591,12 +591,12 @@ def train(config):
 
                 ### Dimensions-specific loss weighting
                 # Set the loss weightings
-                w_forward_loss = 3
-                w_yaw_loss = 2
+                w_forward_loss = 16
+                w_yaw_loss = 6
 
                 # Calculate values for forward loss weighting
                 # NOTE: CHECK THESE VALUES ARE CORRECT FROM NORMALISATION STATS OF CHECKPOINT!!
-                forward_min = -1.773238182067871e-05
+                forward_min = -8.918624371290207e-05
                 forward_max = 0.5600090622901917
                 forward_thresh = 0.05 # Forward threshold in raw action units to penalise the model
                 forward_thresh_norm_pos = 2 * (forward_thresh - forward_min) / (forward_max - forward_min) - 1 # Upper bound of normalised forward threshold
@@ -605,10 +605,13 @@ def train(config):
                 # Unflatten nav_pred and nav_target to [batch, horizon, dim] for applying weighting
                 nav_pred = nav_pred.view(nav_pred.shape[0], -1, actions_gt.shape[-1])
                 nav_target = nav_target.view(nav_target.shape[0], -1, actions_gt.shape[-1])
+
+                # Unflatten actions_gt specifically for navigation, for logic comparison when choosing forward loss weights
+                nav_actions_gt = actions_gt[nav_mask].view(actions_gt[nav_mask].shape[0], -1, actions_gt.shape[-1])
                 
                 # Create weighting vector
                 nav_dim_weights = torch.ones_like(nav_pred) # Initialise nav_dim_weights to be all ones
-                nav_dim_weights[..., 0] = torch.where((nav_target[..., 0] >= forward_thresh_norm_neg) & (nav_target[..., 0] <= forward_thresh_norm_pos), w_forward_loss**0.5, 1.0) # Set the forward dim loss weighting to x3 IF its corresponding ground truth action is very small (norm < forward_thresh_norm)
+                nav_dim_weights[..., 0] = torch.where((nav_actions_gt[..., 0] >= forward_thresh_norm_neg) & (nav_actions_gt[..., 0] <= forward_thresh_norm_pos), w_forward_loss**0.5, 1.0) # Set the forward dim loss weighting to x3 IF its corresponding ground truth action is very small (norm < forward_thresh_norm)
                 nav_dim_weights[..., 5] = w_yaw_loss**0.5 # Set the yaw dim loss weighting to x2
 
                 # Scale nav_pred and nav_target by loss weighting

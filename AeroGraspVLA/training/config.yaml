@@ -38,19 +38,19 @@ data_groups:
         image_1: observation.images.image
         image_2: observation.images.wrist_image
 
-  #   libero_object_no_noops_1.0.0_lerobot:
-  #     # path: /share/taolin/datasets/libero/libero_object_no_noops_1.0.0_lerobot
-  #     path: /rds/general/user/ll1225/home/datasets/evo1_libero_datasets/libero_object ### ADDED
-  #     view_map:
-  #       image_1: observation.images.image
-  #       image_2: observation.images.wrist_image
+    libero_object_no_noops_1.0.0_lerobot:
+      # path: /share/taolin/datasets/libero/libero_object_no_noops_1.0.0_lerobot
+      path: /rds/general/user/ll1225/home/datasets/evo1_libero_datasets/libero_object ### ADDED
+      view_map:
+        image_1: observation.images.image
+        image_2: observation.images.wrist_image
 
-  #   libero_goal_no_noops_1.0.0_lerobot:
-  #     # path: /share/taolin/datasets/libero/libero_goal_no_noops_1.0.0_lerobot
-  #     path: /rds/general/user/ll1225/home/datasets/evo1_libero_datasets/libero_goal ### ADDED
-  #     view_map:
-  #       image_1: observation.images.image
-  #       image_2: observation.images.wrist_image
+    libero_goal_no_noops_1.0.0_lerobot:
+      # path: /share/taolin/datasets/libero/libero_goal_no_noops_1.0.0_lerobot
+      path: /rds/general/user/ll1225/home/datasets/evo1_libero_datasets/libero_goal ### ADDED
+      view_map:
+        image_1: observation.images.image
+        image_2: observation.images.wrist_image
 
   #   libero_10_no_noops_1.0.0_lerobot:
   #     # path: /share/taolin/datasets/libero/libero_10_no_noops_1.0.0_lerobot
@@ -226,6 +226,30 @@ data_groups:
 
     indooruav-vla_habitatsim_hm3d_2_body_rel_full:
       path: /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot/hm3d_2
+      view_map:
+        image_1: observation.images.image
+        image_2: observation.images.ref_image
+    
+    indooruav-vla_habitatsim_hm3d_3_body_rel_full:
+      path: /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot/hm3d_3
+      view_map:
+        image_1: observation.images.image
+        image_2: observation.images.ref_image
+    
+    indooruav-vla_habitatsim_hm3d_4_body_rel_full:
+      path: /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot/hm3d_4
+      view_map:
+        image_1: observation.images.image
+        image_2: observation.images.ref_image
+    
+    indooruav-vla_habitatsim_hm3d_5_body_rel_full:
+      path: /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot/hm3d_5
+      view_map:
+        image_1: observation.images.image
+        image_2: observation.images.ref_image
+    
+    indooruav-vla_habitatsim_hm3d_6_body_rel_full:
+      path: /rds/general/user/ll1225/ephemeral/imperial_irp/extended_evo1/datasets/IndoorUAV_lerobot/hm3d_6
       view_map:
         image_1: observation.images.image
         image_2: observation.images.ref_image
